@@ -16,59 +16,59 @@ const industries = [
   },
   {
     icon: HardHat,
-    title: "Infrastructure Inspection",
+    title: "Infrastructure",
     description: "Autonomous navigation in silos, tunnels, and industrial sites for zero-downtime inspections.",
     tags: ["Pipeline", "Bridge", "Powerline"],
   },
   {
     icon: Landmark,
     title: "Research & Creative",
-    description: "Enabling exploration with precision mapping, aerial cinematography, and environmental sensing.",
+    description: "Precision mapping, aerial cinematography, and environmental sensing for exploration.",
     tags: ["GIS Mapping", "Cinematography", "AgriTech"],
   },
 ];
 
 const IndustriesServed = () => (
-  <section id="industries" className="section-padding bg-navy text-primary-foreground relative overflow-hidden">
-    <div className="absolute inset-0 grid-overlay opacity-20" />
-    <div className="absolute top-0 left-0 w-full h-px neon-line opacity-40" />
+  <section id="industries" className="section-spacing relative overflow-hidden bg-slate-elevated">
+    <div className="absolute top-0 left-0 w-full h-px accent-line" />
+    <div className="absolute inset-0 grid-bg opacity-30" />
 
-    <div className="max-w-7xl mx-auto relative z-10">
+    <div className="section-container relative z-10">
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-16"
+        className="mb-20"
       >
-        <span className="text-xs font-semibold tracking-[0.2em] uppercase text-glow-green mb-3 block">Sectors</span>
-        <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-          Industries We <span className="neon-text">Serve</span>
+        <span className="text-xs tracking-[0.2em] uppercase text-emerald font-semibold">Sectors</span>
+        <h2 className="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
+          Industries We <span className="accent-text">Serve</span>
         </h2>
-        <p className="text-primary-foreground/60 max-w-2xl mx-auto">
+        <p className="text-muted-foreground max-w-xl text-sm">
           From battlefield to boardroom — our modular stack adapts to every mission profile.
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-2 gap-5">
         {industries.map((ind, i) => (
           <motion.div
             key={ind.title}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="group rounded-2xl border border-primary-foreground/10 bg-primary-foreground/5 backdrop-blur-sm p-8 hover:border-glow-blue/40 transition-all duration-500"
+            transition={{ delay: i * 0.08 }}
+            className="group glass-panel-hover rounded-xl p-7"
           >
             <div className="flex items-start gap-5">
-              <div className="w-12 h-12 rounded-xl bg-glow-blue/15 text-glow-blue flex items-center justify-center shrink-0">
-                <ind.icon size={24} />
+              <div className="w-10 h-10 rounded-lg bg-cyan/8 text-cyan flex items-center justify-center shrink-0 mt-0.5">
+                <ind.icon size={20} strokeWidth={1.5} />
               </div>
-              <div>
-                <h3 className="font-display font-bold text-xl mb-2">{ind.title}</h3>
-                <p className="text-sm text-primary-foreground/60 leading-relaxed mb-4">{ind.description}</p>
+              <div className="min-w-0">
+                <h3 className="font-display font-bold text-lg mb-1.5 text-foreground">{ind.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{ind.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {ind.tags.map((t) => (
-                    <span key={t} className="text-xs px-3 py-1 rounded-full border border-primary-foreground/15 text-primary-foreground/50">
+                    <span key={t} className="text-[10px] px-2.5 py-1 rounded border border-border/60 text-muted-foreground tracking-wide uppercase">
                       {t}
                     </span>
                   ))}

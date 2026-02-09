@@ -2,82 +2,107 @@ import { motion } from "framer-motion";
 import heroDrone from "@/assets/hero-drone.png";
 
 const HeroSection = () => (
-  <section className="relative min-h-screen flex items-center section-padding pt-32 overflow-hidden grid-overlay">
-    {/* Decorative elements */}
-    <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-glow-blue/5 blur-3xl" />
-    <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-glow-green/5 blur-3xl" />
+  <section className="relative min-h-screen flex items-center pt-24 pb-20 overflow-hidden">
+    {/* Background effects */}
+    <div className="absolute inset-0 grid-bg" />
+    <div className="absolute top-0 left-0 w-full h-px accent-line" />
+    <div className="absolute top-40 -left-40 w-[500px] h-[500px] rounded-full bg-cyan/3 blur-[120px]" />
+    <div className="absolute bottom-20 -right-40 w-[400px] h-[400px] rounded-full bg-emerald/3 blur-[100px]" />
 
-    <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
-      {/* Text */}
-      <motion.div
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card mb-6">
-          <span className="w-2 h-2 rounded-full bg-glow-green animate-pulse-glow" />
-          <span className="text-xs font-medium text-muted-foreground tracking-wide uppercase">Modular UAV Ecosystem</span>
-        </div>
-
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] mb-6">
-          Breathing{" "}
-          <span className="neon-text">Intelligence</span>{" "}
-          into Autonomy.
-        </h1>
-
-        <p className="text-lg text-muted-foreground max-w-lg mb-10 leading-relaxed">
-          Advanced plugin ecosystems engineered to push the boundaries of UAV performance and robotic versatility.
-        </p>
-
-        <div className="flex flex-wrap gap-4">
-          <button
-            onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-3.5 rounded-lg bg-gradient-to-r from-glow-blue to-glow-green text-primary-foreground font-display font-semibold glow-blue hover:scale-105 transition-transform"
-          >
-            Explore Plugins
-          </button>
-          <button
-            onClick={() => document.getElementById("technology")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-3.5 rounded-lg glass-card font-display font-semibold text-foreground hover:border-primary/40 transition-colors"
-          >
-            Our Technology
-          </button>
-        </div>
-      </motion.div>
-
-      {/* Hero image */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1, delay: 0.3 }}
-        className="relative flex items-center justify-center"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-glow-blue/10 to-glow-green/10 rounded-3xl blur-2xl" />
-        <img
-          src={heroDrone}
-          alt="Prana Technologies modular drone with glowing plugin nodes"
-          className="relative z-10 w-full max-w-xl animate-float drop-shadow-2xl"
-        />
-        {/* Floating stat badges */}
+    <div className="section-container w-full relative z-10">
+      <div className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* Left — Copy */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-4 left-4 glass-card rounded-xl px-4 py-3 z-20"
+          transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <p className="text-xs text-muted-foreground">Latency</p>
-          <p className="font-display font-bold text-lg neon-text">&lt;5ms</p>
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-border/60 bg-muted/30 mb-8">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald animate-pulse-dot" />
+            <span className="text-xs font-body tracking-[0.15em] uppercase text-muted-foreground">Autonomous Systems</span>
+          </div>
+
+          <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-display font-bold leading-[1.05] mb-7 tracking-tight">
+            Breathing
+            <br />
+            <span className="accent-text">Intelligence</span>
+            <br />
+            into Autonomy.
+          </h1>
+
+          <p className="text-base text-muted-foreground max-w-md mb-10 leading-relaxed font-light">
+            Advanced plugin ecosystems engineered to push the boundaries of UAV performance and robotic versatility.
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            <button
+              onClick={() => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" })}
+              className="px-7 py-3 rounded accent-gradient text-primary-foreground font-display font-semibold tracking-wider uppercase text-sm accent-glow hover:scale-[1.03] transition-transform"
+            >
+              Explore Plugins
+            </button>
+            <button
+              onClick={() => document.getElementById("technology")?.scrollIntoView({ behavior: "smooth" })}
+              className="px-7 py-3 rounded border border-border/60 text-foreground font-display font-semibold tracking-wider uppercase text-sm hover:border-cyan/30 transition-colors"
+            >
+              Our Technology
+            </button>
+          </div>
+
+          {/* Inline stats */}
+          <div className="flex gap-8 mt-14 pt-8 border-t border-border/30">
+            {[
+              { value: "<5ms", label: "Response Latency" },
+              { value: "L5", label: "Autonomy Level" },
+              { value: "99.97%", label: "Uptime" },
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="font-display text-2xl font-bold accent-text">{s.value}</p>
+                <p className="text-xs text-muted-foreground tracking-wide mt-1">{s.label}</p>
+              </div>
+            ))}
+          </div>
         </motion.div>
+
+        {/* Right — Image */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4 }}
-          className="absolute top-8 right-4 glass-card rounded-xl px-4 py-3 z-20"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+          className="relative"
         >
-          <p className="text-xs text-muted-foreground">Autonomy</p>
-          <p className="font-display font-bold text-lg neon-text">Level 5</p>
+          <div className="relative rounded-xl overflow-hidden border border-border/30">
+            <img
+              src={heroDrone}
+              alt="Stealth UAV with cyan running lights over dark terrain"
+              className="w-full object-cover"
+            />
+            {/* Scan overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/20 pointer-events-none" />
+            <div className="absolute inset-0 scan-line pointer-events-none" />
+          </div>
+
+          {/* Corner data overlays */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+            className="absolute -bottom-4 -left-4 stat-box z-20"
+          >
+            <p className="text-[10px] text-muted-foreground tracking-widest uppercase">Status</p>
+            <p className="font-display font-bold text-sm text-foreground">Mission Active</p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4 }}
+            className="absolute -top-4 -right-4 stat-box z-20"
+          >
+            <p className="text-[10px] text-muted-foreground tracking-widest uppercase">Payload</p>
+            <p className="font-display font-bold text-sm text-foreground">LiDAR + Thermal</p>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   </section>
 );
