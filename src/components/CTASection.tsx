@@ -2,35 +2,35 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const CTASection = () => (
-  <section id="contact" className="section-padding relative overflow-hidden">
-    <div className="absolute inset-0 grid-overlay opacity-30" />
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-glow-blue/5 blur-3xl" />
+  <section id="contact" className="section-spacing relative overflow-hidden">
+    <div className="absolute top-0 left-0 w-full h-px accent-line" />
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-cyan/3 blur-[120px]" />
 
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="max-w-3xl mx-auto text-center relative z-10"
+      className="section-container text-center relative z-10"
     >
-      <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">
-        Elevate Your <span className="neon-text">Fleet</span>.
+      <h2 className="text-4xl md:text-6xl font-display font-bold mb-5">
+        Elevate Your <span className="accent-text">Fleet</span>.
       </h2>
-      <p className="text-lg text-muted-foreground mb-10 max-w-xl mx-auto">
-        Contact our engineering team for custom integration. We'll design, test, and deploy modular solutions tailored to your mission.
+      <p className="text-sm text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed">
+        Contact our engineering team for custom integration. We design, test, and deploy modular solutions tailored to your mission.
       </p>
 
       <motion.button
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.98 }}
-        className="inline-flex items-center gap-3 px-10 py-4 rounded-xl bg-gradient-to-r from-glow-blue to-glow-green text-primary-foreground font-display font-bold text-lg glow-blue transition-shadow hover:shadow-[0_0_40px_hsl(207_90%_54%/0.4)]"
+        className="inline-flex items-center gap-3 px-8 py-3.5 rounded accent-gradient text-primary-foreground font-display font-bold tracking-wider uppercase text-sm accent-glow"
       >
         Get in Touch
-        <ArrowRight size={20} />
+        <ArrowRight size={18} />
       </motion.button>
 
-      <p className="mt-6 text-sm text-muted-foreground">
-        Or reach us at{" "}
-        <a href="mailto:contact@pranatech.com" className="text-primary hover:underline">
+      <p className="mt-8 text-xs text-muted-foreground">
+        or email{" "}
+        <a href="mailto:contact@pranatech.com" className="text-cyan hover:underline">
           contact@pranatech.com
         </a>
       </p>
