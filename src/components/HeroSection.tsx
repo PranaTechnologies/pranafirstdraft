@@ -24,7 +24,7 @@ const HeroSection = () =>
 
           <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-display font-bold leading-[1.05] mb-7 tracking-tight">Redefining
 ​Navigation
-beyond Satellites.<br />
+into Autonomy.<br />
             <span className="accent-text">​Navigation</span>
             <br />
             into Autonomy.
@@ -34,19 +34,19 @@ beyond Satellites.<br />
 
           <div className="flex flex-wrap gap-2.5 mb-10 max-w-md">
             {[
-              { label: "Defense", id: "industry-defense" },
-              { label: "Internal Security", id: "industry-internal-security" },
-              { label: "Infrastructure", id: "industry-infrastructure" },
-              { label: "Research & Creative", id: "industry-research-creative" },
-            ].map((industry) => (
-              <button
-                key={industry.id}
-                onClick={() => document.getElementById(industry.id)?.scrollIntoView({ behavior: "smooth", block: "center" })}
-                className="text-[11px] px-3 py-1.5 rounded-full border border-cyan/20 bg-cyan/5 text-cyan tracking-wide uppercase font-semibold hover:bg-cyan/10 hover:border-cyan/40 transition-colors cursor-pointer"
-              >
+          { label: "Defense", id: "industry-defense" },
+          { label: "Internal Security", id: "industry-internal-security" },
+          { label: "Infrastructure", id: "industry-infrastructure" },
+          { label: "Research & Creative", id: "industry-research-creative" }].
+          map((industry) =>
+          <button
+            key={industry.id}
+            onClick={() => document.getElementById(industry.id)?.scrollIntoView({ behavior: "smooth", block: "center" })}
+            className="text-[11px] px-3 py-1.5 rounded-full border border-cyan/20 bg-cyan/5 text-cyan tracking-wide uppercase font-semibold hover:bg-cyan/10 hover:border-cyan/40 transition-colors cursor-pointer">
+
                 {industry.label}
               </button>
-            ))}
+          )}
           </div>
 
           <div className="flex flex-wrap gap-4">
