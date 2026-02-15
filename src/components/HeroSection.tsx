@@ -30,7 +30,7 @@ beyond Sattelites.<br />
             into Autonomy.
           </h1>
 
-          <p className="text-base text-muted-foreground max-w-md mb-10 leading-relaxed font-light">Prana is building the universal operating system for GPS-free autonomy across industries and defense.
+          <p className="text-base text-muted-foreground max-w-md mb-10 leading-relaxed font-light">Prana is building the universal operating suite for GPS-free autonomy across industries and defense.
 
         </p>
 
