@@ -25,7 +25,7 @@ const HeroSection = () =>
           <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-display font-bold leading-[1.05] mb-7 tracking-tight">Redefining
 Navigation
 beyond Sattelites.<br />
-            <span className="accent-text">Intelligence</span>
+            <span className="accent-text">​Navigation</span>
             <br />
             into Autonomy.
           </h1>
