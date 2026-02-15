@@ -30,9 +30,18 @@ beyond Satellites.<br />
             into Autonomy.
           </h1>
 
-          <p className="text-base text-muted-foreground max-w-md mb-10 leading-relaxed font-light">Prana builds assorted hardware plugins for GPS-free navigation autonomy for contested environments.
+          <p className="text-base text-muted-foreground max-w-md mb-5 leading-relaxed font-light">Prana builds assorted hardware plugins for GPS-free navigation autonomy for contested environments.</p>
 
-        </p>
+          <div className="flex flex-wrap gap-2.5 mb-10 max-w-md">
+            {["Defense", "Internal Security", "Infrastructure", "Research & Creative"].map((industry) => (
+              <span
+                key={industry}
+                className="text-[11px] px-3 py-1.5 rounded-full border border-cyan/20 bg-cyan/5 text-cyan tracking-wide uppercase font-semibold"
+              >
+                {industry}
+              </span>
+            ))}
+          </div>
 
           <div className="flex flex-wrap gap-4">
             <button
