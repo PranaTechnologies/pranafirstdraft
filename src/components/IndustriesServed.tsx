@@ -3,24 +3,28 @@ import { ShieldCheck, Landmark, HardHat, ScanEye } from "lucide-react";
 
 const industries = [
   {
+    id: "industry-defense",
     icon: ShieldCheck,
     title: "Defense",
     description: "Tactical UAV intelligence for mission-critical operations in contested environments.",
     tags: ["ISR", "Electronic Warfare", "Swarm Ops"],
   },
   {
+    id: "industry-internal-security",
     icon: ScanEye,
     title: "Internal Security",
     description: "Periphery monitoring, crowd analytics, and disaster rescue operations at scale.",
     tags: ["Surveillance", "SAR", "Perimeter Defense"],
   },
   {
+    id: "industry-infrastructure",
     icon: HardHat,
     title: "Infrastructure",
     description: "Autonomous navigation in silos, tunnels, and industrial sites for zero-downtime inspections.",
     tags: ["Pipeline", "Bridge", "Powerline"],
   },
   {
+    id: "industry-research-creative",
     icon: Landmark,
     title: "Research & Creative",
     description: "Precision mapping, aerial cinematography, and environmental sensing for exploration.",
@@ -53,6 +57,7 @@ const IndustriesServed = () => (
         {industries.map((ind, i) => (
           <motion.div
             key={ind.title}
+            id={ind.id}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

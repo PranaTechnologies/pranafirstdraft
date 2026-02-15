@@ -33,13 +33,19 @@ beyond Satellites.<br />
           <p className="text-base text-muted-foreground max-w-md mb-5 leading-relaxed font-light">Prana builds assorted hardware plugins for GPS-free navigation autonomy for contested environments.</p>
 
           <div className="flex flex-wrap gap-2.5 mb-10 max-w-md">
-            {["Defense", "Internal Security", "Infrastructure", "Research & Creative"].map((industry) => (
-              <span
-                key={industry}
-                className="text-[11px] px-3 py-1.5 rounded-full border border-cyan/20 bg-cyan/5 text-cyan tracking-wide uppercase font-semibold"
+            {[
+              { label: "Defense", id: "industry-defense" },
+              { label: "Internal Security", id: "industry-internal-security" },
+              { label: "Infrastructure", id: "industry-infrastructure" },
+              { label: "Research & Creative", id: "industry-research-creative" },
+            ].map((industry) => (
+              <button
+                key={industry.id}
+                onClick={() => document.getElementById(industry.id)?.scrollIntoView({ behavior: "smooth", block: "center" })}
+                className="text-[11px] px-3 py-1.5 rounded-full border border-cyan/20 bg-cyan/5 text-cyan tracking-wide uppercase font-semibold hover:bg-cyan/10 hover:border-cyan/40 transition-colors cursor-pointer"
               >
-                {industry}
-              </span>
+                {industry.label}
+              </button>
             ))}
           </div>
 
