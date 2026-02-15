@@ -22,13 +22,7 @@ const HeroSection = () =>
             <span className="text-xs font-body tracking-[0.15em] uppercase text-muted-foreground">Autonomous Systems</span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-display font-bold leading-[1.05] mb-7 tracking-tight">Redefining
-​Navigation
-beyond Satellites<br />
-            <span className="accent-text">​Navigation</span>
-            <br />
-            into Autonomy.
-          </h1>
+          <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-display font-bold leading-[1.05] mb-7 tracking-tight">Redefining <span className="accent-text">Navigation</span> beyond Satellites.</h1>
 
           <p className="text-base text-muted-foreground max-w-md mb-5 leading-relaxed font-light">Prana builds assorted hardware plugins for GPS-free navigation autonomy for contested environments.</p>
 
