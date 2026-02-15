@@ -30,7 +30,7 @@ beyond Satellites.<br />
             into Autonomy.
           </h1>
 
-          <p className="text-base text-muted-foreground max-w-md mb-10 leading-relaxed font-light">Prana is builds assorted plugin products for GPS-free navigation autonomy across industries, defense, & contested environments.
+          <p className="text-base text-muted-foreground max-w-md mb-10 leading-relaxed font-light">Prana builds assorted hardware plugins for GPS-free navigation autonomy for contested environments.
 
         </p>
 
