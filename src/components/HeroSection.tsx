@@ -59,15 +59,16 @@ const HeroSection = () =>
           </div>
 
           {/* Inline stats */}
-          <div className="flex gap-8 mt-14 pt-8 border-t border-border/30">
+          <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 mt-14 pt-8 border-t border-border/30">
             {[
-          { value: "<5ms", label: "Response Latency" },
-          { value: "L5", label: "Autonomy Level" },
-          { value: "99.97%", label: "Uptime" }].
+          { value: "<5ms", label: "Response Latency", desc: "Instant reaction to commands & sensor inputs for real-time obstacle avoidance." },
+          { value: "L5", label: "Full Autonomy", desc: "GPS-denied navigation without human intervention — across silos, tunnels & warehouses." },
+          { value: "99.97%", label: "Uptime", desc: "Mission-critical reliability with less than 2.5 hours downtime per year." }].
           map((s) =>
-          <div key={s.label}>
+          <div key={s.label} className="flex-1 min-w-0">
                 <p className="font-display text-2xl font-bold accent-text">{s.value}</p>
-                <p className="text-xs text-muted-foreground tracking-wide mt-1">{s.label}</p>
+                <p className="text-xs text-foreground/80 tracking-wide mt-1 font-semibold">{s.label}</p>
+                <p className="text-[11px] text-muted-foreground leading-relaxed mt-1.5">{s.desc}</p>
               </div>
           )}
           </div>
