@@ -4,24 +4,36 @@ import { Radar, Eye, Cpu, ChevronRight } from "lucide-react";
 const products = [
   {
     icon: Radar,
-    title: "Sensor Enhancement",
+    title: "Sensor Fusion & Advancement",
     subtitle: "LiDAR · Thermal · Multispectral",
-    description: "Plug-and-play sensor modules delivering real-time 3D mapping, thermal imaging, and multispectral analysis for unmatched situational awareness.",
-    specs: ["360° LiDAR coverage", "IR thermal overlay", "Multispectral bands"],
+    description: "Integrated sensor fusion modules that combine LiDAR, thermal, and multispectral inputs into a single intelligence layer. Delivering real-time 3D mapping, anomaly detection, and material insights for superior situational awareness.",
+    specs: [
+      "360° LiDAR mapping fused with vision → centimeter-level spatial accuracy",
+      "Thermal-visual overlays → detect heat signatures with contextual clarity",
+      "Multispectral integration → uncover hidden patterns and material properties",
+    ],
   },
   {
     icon: Eye,
     title: "AI-Driven Navigation",
     subtitle: "Computer Vision · GPS-Denied Autonomy",
-    description: "Vision-first autonomy stack enabling obstacle avoidance, terrain recognition, and GPS-denied navigation in contested environments.",
-    specs: ["Visual SLAM", "Deep learning path planning", "GNSS fallback"],
+    description: "A vision-first autonomy stack that enables drones and robots to navigate contested, GPS-denied environments with confidence. Powered by deep learning and adaptive path planning for resilient operations.",
+    specs: [
+      "Visual SLAM → real-time localization and mapping without GPS",
+      "Deep learning path planning → intelligent obstacle avoidance and terrain recognition",
+      "GNSS fallback → seamless transition when satellite signals are available",
+    ],
   },
   {
     icon: Cpu,
     title: "Companion Computer",
-    subtitle: "Tactical & Long-Range Missions",
-    description: "Edge-compute modules with AI inference capability, supporting real-time decision-making for tactical and long-endurance missions.",
-    specs: ["Edge AI inference", "Encrypted comms", "Mission autonomy"],
+    subtitle: "Fleet Control · Collective Autonomy",
+    description: "Edge-compute modules designed for fleet-level intelligence. Each unit processes AI locally while sharing perceptions across the fleet, enabling collaborative decision-making in GPS-denied missions.",
+    specs: [
+      "Edge AI inference → real-time onboard decision-making",
+      "Fleet coordination → drones build a unified situational map",
+      "Intra-fleet communication → secure, low-latency data exchange",
+    ],
   },
 ];
 
