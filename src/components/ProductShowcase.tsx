@@ -78,10 +78,10 @@ const ProductShowcase = () => (
             <div className="space-y-3 mb-6">
               {p.specs.map((s) => (
                 <div key={s.capability} className="flex items-start gap-2.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-cyan/70 mt-1.5 shrink-0" />
-                  <div>
-                    <span className="text-xs font-semibold text-foreground/90">{s.capability}</span>
-                    <span className="text-xs text-muted-foreground"> — {s.detail}</span>
+                  <div className="w-1.5 h-1.5 rounded-full bg-cyan/70 mt-2 shrink-0" />
+                  <div className="flex flex-col">
+                    <span className="text-xs font-semibold text-foreground/90 leading-snug">{s.capability}</span>
+                    <span className="text-[11px] text-muted-foreground leading-relaxed mt-0.5">{s.detail}</span>
                   </div>
                 </div>
               ))}
