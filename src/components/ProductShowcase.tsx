@@ -1,14 +1,11 @@
 import { motion } from "framer-motion";
 import { Radar, Eye, Cpu, ChevronRight } from "lucide-react";
-import sensorFusionImg from "@/assets/sensor-fusion.png";
-import aiNavigationImg from "@/assets/ai-navigation.png";
-import companionComputerImg from "@/assets/companion-computer.png";
 
 const products = [
   {
     icon: Radar,
-    image: sensorFusionImg,
     title: "Sensor Fusion & Advancement",
+    subtitle: "LiDAR · Thermal · Multispectral",
     description: "Integrated sensor fusion modules that combine LiDAR, thermal, and multispectral inputs into a single intelligence layer. Delivering real-time 3D mapping, anomaly detection, and material insights for superior situational awareness.",
     specs: [
       { capability: "360° LiDAR + Vision Fusion", detail: "Centimeter-level spatial accuracy" },
@@ -18,8 +15,8 @@ const products = [
   },
   {
     icon: Eye,
-    image: aiNavigationImg,
     title: "AI-Driven Navigation",
+    subtitle: "Computer Vision · GPS-Denied Autonomy",
     description: "A vision-first autonomy stack that enables drones and robots to navigate contested, GPS-denied environments with confidence. Powered by deep learning and adaptive path planning for resilient operations.",
     specs: [
       { capability: "Visual SLAM", detail: "Real-time localization & mapping without GPS" },
@@ -29,8 +26,8 @@ const products = [
   },
   {
     icon: Cpu,
-    image: companionComputerImg,
     title: "Companion Computer",
+    subtitle: "Fleet Control · Collective Autonomy",
     description: "Edge-compute modules designed for fleet-level intelligence. Each unit processes AI locally while sharing perceptions across the fleet, enabling collaborative decision-making in GPS-denied missions.",
     specs: [
       { capability: "Edge AI Inference", detail: "Real-time onboard decision-making" },
@@ -70,15 +67,12 @@ const ProductShowcase = () => (
             transition={{ delay: i * 0.12 }}
             className="group glass-panel-hover rounded-xl p-7 flex flex-col"
           >
-            <div className="relative w-full h-40 rounded-lg overflow-hidden mb-6">
-              <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-              <div className="absolute bottom-3 left-3 w-9 h-9 rounded-lg bg-cyan/10 backdrop-blur-sm text-cyan flex items-center justify-center">
-                <p.icon size={18} strokeWidth={1.5} />
-              </div>
+            <div className="w-11 h-11 rounded-lg bg-cyan/8 text-cyan flex items-center justify-center mb-6">
+              <p.icon size={22} strokeWidth={1.5} />
             </div>
 
-            <h3 className="font-display font-bold text-xl mb-1 text-foreground">{p.title}</h3>
+            <h3 className="font-display font-bold text-xl mb-0.5 text-foreground">{p.title}</h3>
+            <p className="text-[11px] text-muted-foreground tracking-[0.12em] uppercase mb-4">{p.subtitle}</p>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">{p.description}</p>
 
             <div className="space-y-3 mb-6">
