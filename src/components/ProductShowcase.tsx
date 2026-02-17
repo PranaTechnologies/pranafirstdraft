@@ -8,9 +8,9 @@ const products = [
     subtitle: "LiDAR · Thermal · Multispectral",
     description: "Integrated sensor fusion modules that combine LiDAR, thermal, and multispectral inputs into a single intelligence layer. Delivering real-time 3D mapping, anomaly detection, and material insights for superior situational awareness.",
     specs: [
-      "360° LiDAR mapping fused with vision → centimeter-level spatial accuracy",
-      "Thermal-visual overlays → detect heat signatures with contextual clarity",
-      "Multispectral integration → uncover hidden patterns and material properties",
+      { capability: "360° LiDAR + Vision Fusion", detail: "Centimeter-level spatial accuracy" },
+      { capability: "Thermal-Visual Overlays", detail: "Detect heat signatures with contextual clarity" },
+      { capability: "Multispectral Integration", detail: "Uncover hidden patterns & material properties" },
     ],
   },
   {
@@ -19,9 +19,9 @@ const products = [
     subtitle: "Computer Vision · GPS-Denied Autonomy",
     description: "A vision-first autonomy stack that enables drones and robots to navigate contested, GPS-denied environments with confidence. Powered by deep learning and adaptive path planning for resilient operations.",
     specs: [
-      "Visual SLAM → real-time localization and mapping without GPS",
-      "Deep learning path planning → intelligent obstacle avoidance and terrain recognition",
-      "GNSS fallback → seamless transition when satellite signals are available",
+      { capability: "Visual SLAM", detail: "Real-time localization & mapping without GPS" },
+      { capability: "Deep Learning Path Planning", detail: "Intelligent obstacle avoidance & terrain recognition" },
+      { capability: "GNSS Fallback", detail: "Seamless transition when satellite signals are available" },
     ],
   },
   {
@@ -30,9 +30,9 @@ const products = [
     subtitle: "Fleet Control · Collective Autonomy",
     description: "Edge-compute modules designed for fleet-level intelligence. Each unit processes AI locally while sharing perceptions across the fleet, enabling collaborative decision-making in GPS-denied missions.",
     specs: [
-      "Edge AI inference → real-time onboard decision-making",
-      "Fleet coordination → drones build a unified situational map",
-      "Intra-fleet communication → secure, low-latency data exchange",
+      { capability: "Edge AI Inference", detail: "Real-time onboard decision-making" },
+      { capability: "Fleet Coordination", detail: "Drones build a unified situational map" },
+      { capability: "Intra-Fleet Comms", detail: "Secure, low-latency data exchange" },
     ],
   },
 ];
@@ -75,11 +75,14 @@ const ProductShowcase = () => (
             <p className="text-[11px] text-muted-foreground tracking-[0.12em] uppercase mb-4">{p.subtitle}</p>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">{p.description}</p>
 
-            <div className="space-y-2 mb-6">
+            <div className="space-y-3 mb-6">
               {p.specs.map((s) => (
-                <div key={s} className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <div className="w-1 h-1 rounded-full bg-cyan/60" />
-                  {s}
+                <div key={s.capability} className="flex items-start gap-2.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-cyan/70 mt-1.5 shrink-0" />
+                  <div>
+                    <span className="text-xs font-semibold text-foreground/90">{s.capability}</span>
+                    <span className="text-xs text-muted-foreground"> — {s.detail}</span>
+                  </div>
                 </div>
               ))}
             </div>
