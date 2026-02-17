@@ -66,9 +66,9 @@ const HeroSection = () =>
           { value: "99.97%", label: "Uptime", desc: "Mission-critical reliability with less than 2.5 hours downtime per year." }].
           map((s) =>
           <div key={s.label} className="flex-1 min-w-0">
-                <p className="font-display text-2xl font-bold accent-text">{s.value}</p>
-                <p className="text-xs text-foreground/80 tracking-wide mt-1 font-semibold">{s.label}</p>
-                <p className="text-[11px] text-muted-foreground leading-relaxed mt-1.5">{s.desc}</p>
+                <p className="font-display text-3xl sm:text-4xl font-bold accent-text">{s.value}</p>
+                <p className="text-sm text-foreground/80 tracking-wide mt-1.5 font-semibold">{s.label}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">{s.desc}</p>
               </div>
           )}
           </div>
