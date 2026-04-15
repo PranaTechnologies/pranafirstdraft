@@ -1,7 +1,9 @@
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Mail, Phone, X } from "lucide-react";
+import { useState } from "react";
 
 const CTASection = () => {
+  const [showContact, setShowContact] = useState(false);
   const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSda_XI8n_Why7Bb0ISG3kd0vG2EHEMOAcq1GkcoLdHicvT7TA/viewform";
 
   return (
@@ -35,12 +37,64 @@ const CTASection = () => {
         </motion.a>
 
         <p className="mt-8 text-xs text-muted-foreground">
-          or email{" "}
-          <a href="mailto:contact@pranatech.com" className="text-cyan hover:underline">
-            contact@pranatech.com
-          </a>
+          or{" "}
+          <button
+            onClick={() => setShowContact(true)}
+            className="text-cyan hover:underline cursor-pointer"
+          >
+            Directly Reach Us Out
+          </button>
         </p>
       </motion.div>
+
+      <AnimatePresence>
+        {showContact && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+            onClick={() => setShowContact(false)}
+          >
+            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-sm glass-panel border border-border/60 rounded-lg p-8 z-10"
+            >
+              <button
+                onClick={() => setShowContact(false)}
+                className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X size={20} />
+              </button>
+
+              <h3 className="text-xl font-display font-bold mb-6 text-foreground">Contact Details</h3>
+
+              <div className="space-y-5">
+                <a
+                  href="mailto:pranatechnologies15@gmail.com"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-cyan transition-colors group"
+                >
+                  <Mail size={20} className="text-cyan shrink-0" />
+                  <span className="text-sm group-hover:underline">pranatechnologies15@gmail.com</span>
+                </a>
+
+                <a
+                  href="tel:9090741357"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-cyan transition-colors group"
+                >
+                  <Phone size={20} className="text-cyan shrink-0" />
+                  <span className="text-sm group-hover:underline">9090741357</span>
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
