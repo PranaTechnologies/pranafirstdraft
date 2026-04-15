@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import ContactFormDialog from "./ContactFormDialog";
 
 const CTASection = () => {
-  const [formOpen, setFormOpen] = useState(false);
+  const googleFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSda_XI8n_Why7Bb0ISG3kd0vG2EHEMOAcq1GkcoLdHicvT7TA/viewform";
 
   return (
     <section id="contact" className="section-spacing relative overflow-hidden">
@@ -24,15 +22,17 @@ const CTASection = () => {
           Contact our engineering team for custom integration. We design, test, and deploy modular solutions tailored to your mission.
         </p>
 
-        <motion.button
+        <motion.a
+          href={googleFormUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => setFormOpen(true)}
           className="inline-flex items-center gap-3 px-8 py-3.5 rounded accent-gradient text-primary-foreground font-display font-bold tracking-wider uppercase text-sm accent-glow"
         >
           Get in Touch
           <ArrowRight size={18} />
-        </motion.button>
+        </motion.a>
 
         <p className="mt-8 text-xs text-muted-foreground">
           or email{" "}
@@ -41,8 +41,6 @@ const CTASection = () => {
           </a>
         </p>
       </motion.div>
-
-      <ContactFormDialog open={formOpen} onClose={() => setFormOpen(false)} />
     </section>
   );
 };
