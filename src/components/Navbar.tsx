@@ -8,8 +8,10 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const scrollTo = (id: string) => {
-    document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
     setOpen(false);
+    setTimeout(() => {
+      document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
+    }, 300);
   };
 
   return (
