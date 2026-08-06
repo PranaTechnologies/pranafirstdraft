@@ -24,7 +24,7 @@ const HeroSection = () =>
 
           <h1 className="text-5xl sm:text-6xl lg:text-[4.5rem] font-display font-bold leading-[1.05] mb-7 tracking-tight">Redefining <span className="accent-text">Navigation</span> beyond Satellites.</h1>
 
-          <p className="text-base text-muted-foreground max-w-md mb-5 leading-relaxed font-light">Prana builds assorted hardware plugins for GPS-free navigation autonomy for contested environments.</p>
+          <p className="text-base text-muted-foreground max-w-md mb-5 leading-relaxed font-light">Perception Labs builds assorted hardware plugins for GPS-free navigation autonomy for contested environments.</p>
 
           <div className="flex flex-wrap gap-2.5 mb-10 max-w-md">
             {[

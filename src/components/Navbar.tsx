@@ -19,11 +19,11 @@ const Navbar = () => {
       <div className="section-container flex items-center justify-between py-4">
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3">
           <div className="w-8 h-8 rounded accent-gradient flex items-center justify-center">
-            <span className="font-display font-bold text-primary-foreground text-sm">P</span>
+            <span className="font-display font-bold text-primary-foreground text-[11px]">PL</span>
           </div>
           <div className="font-display font-bold text-lg tracking-widest uppercase">
-            <span className="text-foreground">Prana</span>
-            <span className="accent-text ml-0.5">Tech</span>
+            <span className="text-foreground">Perception</span>
+            <span className="accent-text ml-1.5">Labs</span>
           </div>
         </button>
 

@@ -12,8 +12,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Rajdhani", "sans-serif"],
-        body: ["Space Grotesk", "sans-serif"],
+        display: ["Sora", "sans-serif"],
+        body: ["Manrope", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

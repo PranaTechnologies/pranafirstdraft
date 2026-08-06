@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,59 +6,59 @@
 
 @layer base {
   :root {
-    --background: 220 18% 7%;
+    --background: 236 30% 6%;
     --foreground: 210 20% 92%;
 
-    --card: 220 16% 10%;
+    --card: 236 26% 10%;
     --card-foreground: 210 20% 92%;
 
-    --popover: 220 16% 10%;
+    --popover: 236 26% 10%;
     --popover-foreground: 210 20% 92%;
 
-    --primary: 190 95% 50%;
-    --primary-foreground: 220 18% 7%;
+    --primary: 258 90% 66%;
+    --primary-foreground: 236 30% 6%;
 
-    --secondary: 160 70% 45%;
-    --secondary-foreground: 220 18% 7%;
+    --secondary: 192 100% 55%;
+    --secondary-foreground: 236 30% 6%;
 
-    --muted: 220 14% 15%;
-    --muted-foreground: 215 15% 55%;
+    --muted: 236 20% 15%;
+    --muted-foreground: 232 14% 60%;
 
-    --accent: 190 95% 50%;
-    --accent-foreground: 220 18% 7%;
+    --accent: 192 100% 55%;
+    --accent-foreground: 236 30% 6%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 12% 18%;
-    --input: 220 12% 18%;
-    --ring: 190 95% 50%;
+    --border: 236 18% 19%;
+    --input: 236 18% 19%;
+    --ring: 258 90% 66%;
 
     --radius: 0.5rem;
 
     /* Custom tokens */
-    --cyan: 190 95% 50%;
-    --cyan-dim: 190 60% 30%;
-    --emerald: 160 70% 45%;
-    --slate-deep: 220 18% 7%;
-    --slate-card: 220 16% 10%;
-    --slate-elevated: 220 14% 13%;
-    --slate-border: 220 12% 18%;
+    --cyan: 258 90% 66%;
+    --cyan-dim: 258 50% 38%;
+    --emerald: 192 100% 55%;
+    --slate-deep: 236 30% 6%;
+    --slate-card: 236 26% 10%;
+    --slate-elevated: 236 22% 13%;
+    --slate-border: 236 18% 19%;
     --text-bright: 210 20% 92%;
     --text-mid: 215 15% 65%;
     --text-dim: 215 12% 40%;
 
-    --font-display: 'Rajdhani', sans-serif;
-    --font-body: 'Space Grotesk', sans-serif;
+    --font-display: 'Sora', sans-serif;
+    --font-body: 'Manrope', sans-serif;
 
-    --sidebar-background: 220 16% 10%;
+    --sidebar-background: 236 26% 10%;
     --sidebar-foreground: 210 20% 92%;
-    --sidebar-primary: 190 95% 50%;
-    --sidebar-primary-foreground: 220 18% 7%;
-    --sidebar-accent: 220 14% 15%;
+    --sidebar-primary: 258 90% 66%;
+    --sidebar-primary-foreground: 236 30% 6%;
+    --sidebar-accent: 236 20% 15%;
     --sidebar-accent-foreground: 210 20% 92%;
-    --sidebar-border: 220 12% 18%;
-    --sidebar-ring: 190 95% 50%;
+    --sidebar-border: 236 18% 19%;
+    --sidebar-ring: 258 90% 66%;
   }
 }
 
