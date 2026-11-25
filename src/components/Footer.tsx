@@ -22,10 +22,10 @@ export function Footer() {
 
           <nav aria-label="Footer navigation" className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link
-              href="/systems/pivo"
+              href="/solutions/cortex"
               className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted transition-colors hover:text-signal"
             >
-              PIVO
+              Cortex
             </Link>
             {NAV_LINKS.map((item) => (
               <Link
@@ -36,6 +36,14 @@ export function Footer() {
                 {item.label}
               </Link>
             ))}
+            <a
+              href={CONTACT_INFO.companyLinkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted transition-colors hover:text-signal"
+            >
+              LinkedIn
+            </a>
             <Link
               href="/contact"
               className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted transition-colors hover:text-signal"

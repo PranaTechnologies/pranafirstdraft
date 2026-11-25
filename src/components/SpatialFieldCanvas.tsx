@@ -42,7 +42,7 @@ function SpatialFieldFallback({ isBackground = false }: { isBackground?: boolean
   return (
     <svg
       role="img"
-      aria-label="Illustrative three-dimensional spatial reconstruction grid and visual-inertial trajectory"
+      aria-label="Illustrative three-dimensional spatial perception field and autonomous trajectory"
       viewBox="0 0 800 480"
       className="h-full w-full"
       preserveAspectRatio="xMidYMid slice"
@@ -479,7 +479,7 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
       <div
         ref={mountRef}
         className="relative aspect-[4/3] w-full cursor-crosshair bg-deep-field sm:aspect-[16/11]"
-        aria-label="Interactive illustrative three-dimensional spatial reconstruction and visual-inertial trajectory"
+        aria-label="Interactive illustrative three-dimensional perception field and autonomous trajectory"
       >
         <SpatialFieldFallback />
 
@@ -492,15 +492,15 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
       <div className="grid grid-cols-1 divide-y divide-deep-border border-t border-deep-border bg-deep-surface sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         <div className="px-4 py-3.5 font-mono text-xs uppercase tracking-[0.11em]">
           <span className="text-deep-muted">INPUT</span>
-          <p className="mt-1 text-field">CAMERA + IMU</p>
+          <p className="mt-1 text-field">CAMERA + IMU + DEPTH</p>
         </div>
         <div className="px-4 py-3.5 font-mono text-xs uppercase tracking-[0.11em]">
-          <span className="text-deep-muted">ESTIMATION</span>
-          <p className="mt-1 text-field">VISUAL-INERTIAL</p>
+          <span className="text-deep-muted">ENGINE</span>
+          <p className="mt-1 text-field">CORTEX PERCEPTION</p>
         </div>
         <div className="px-4 py-3.5 font-mono text-xs uppercase tracking-[0.11em]">
-          <span className="text-deep-muted">CADENCE</span>
-          <p className="mt-1 text-field">~30 HZ LOCAL / ~1 HZ GLOBAL</p>
+          <span className="text-deep-muted">EXECUTION</span>
+          <p className="mt-1 text-field">ONBOARD EDGE AUTONOMY</p>
         </div>
       </div>
     </div>

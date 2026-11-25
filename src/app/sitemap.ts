@@ -11,9 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/technology",
-    "/systems",
-    "/systems/pivo",
-    "/applications",
+    "/solutions",
+    "/solutions/cortex",
     "/research",
     `/research/${FEATURED_BLOG_POST.slug}`,
     "/about",
@@ -27,6 +26,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_URL}${path}`,
     lastModified: now,
     changeFrequency: path === "" ? "weekly" : "monthly",
-    priority: path === "" ? 1.0 : path === "/systems/pivo" ? 0.9 : 0.8,
+    priority: path === "" ? 1.0 : path === "/solutions/cortex" ? 0.9 : 0.8,
   }));
 }

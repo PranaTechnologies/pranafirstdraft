@@ -12,12 +12,12 @@ import { ClosingBand } from "@/components/ClosingBand";
 export const metadata: Metadata = {
   title: "Research & Technical Blog",
   description:
-    "Engineering articles and technical notes from Perception Labs on visual-inertial odometry, camera–IMU synchronization, and onboard autonomy.",
+    "Engineering articles and technical notes from Perception Labs on machine perception, Cortex architecture, sensor synchronization, and onboard autonomy.",
   alternates: { canonical: "/research" },
   openGraph: {
     title: "Research & Technical Blog | Perception Labs",
     description:
-      "Technical blog posts and engineering deep-dives on visual-inertial navigation and spatial perception.",
+      "Technical blog posts and engineering deep-dives on perception, spatial understanding, and autonomous systems.",
     url: `${SITE_URL}/research`,
   },
 };

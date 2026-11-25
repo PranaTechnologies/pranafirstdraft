@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -57,6 +57,18 @@ export function DirectContactDialog({
             <span className="flex items-center gap-3">
               <Phone className="h-4 w-4 text-muted-ink" aria-hidden="true" />
               <span className="font-mono">{CONTACT_INFO.phone}</span>
+            </span>
+            <ArrowUpRight className="h-4 w-4 text-muted-ink" aria-hidden="true" />
+          </a>
+          <a
+            href={CONTACT_INFO.companyLinkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between gap-4 px-4 py-4 text-base text-graphite transition-colors hover:bg-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+          >
+            <span className="flex items-center gap-3">
+              <Linkedin className="h-4 w-4 text-muted-ink" aria-hidden="true" />
+              <span>Perception Labs on LinkedIn</span>
             </span>
             <ArrowUpRight className="h-4 w-4 text-muted-ink" aria-hidden="true" />
           </a>

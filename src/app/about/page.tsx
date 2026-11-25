@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Linkedin, Mail } from "lucide-react";
 import {
   BRAND,
   CONTACT_INFO,
@@ -12,12 +11,12 @@ import { ClosingBand } from "@/components/ClosingBand";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Perception Labs builds the onboard spatial intelligence layer for autonomous machines, founded by Ayushman Bansal and Lakshya Agrawal in Bhubaneswar, Odisha.",
+    "Perception Labs builds the onboard perception and autonomy intelligence layer for autonomous machines, founded by Ayushman Bansal and Lakshya Agrawal in Bhubaneswar, Odisha.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About | Perception Labs",
     description:
-      "Founding team and spatial intelligence engineering background at Perception Labs.",
+      "Founding team and perception-to-autonomy engineering background at Perception Labs.",
     url: `${SITE_URL}/about`,
   },
 };
@@ -35,11 +34,25 @@ export default function AboutPage() {
           </h1>
           <div className="mt-8 grid gap-8 lg:grid-cols-12">
             <p className="text-lg leading-[1.68] text-graphite sm:text-[19px] lg:col-span-6">
-              Headquartered in Bhubaneswar, Odisha, {BRAND.name} develops onboard perception, visual-inertial state estimation, and spatial mapping systems so UAVs and autonomous robots can operate reliably in complex environments.
+              Headquartered in Bhubaneswar, Odisha, {BRAND.name} develops onboard perception, spatial understanding, state estimation, and autonomy software so aerial platforms and robots can sense, reason, and operate reliably in complex environments.
             </p>
-            <p className="text-lg leading-[1.68] text-muted-ink sm:text-[19px] lg:col-span-6">
-              Our focus is building a foundational autonomy platform engineered for India&apos;s critical aerial and robotics industries—moving machines beyond scripted automation into perceptive, field-tested autonomy.
-            </p>
+            <div className="space-y-6 lg:col-span-6">
+              <p className="text-lg leading-[1.68] text-muted-ink sm:text-[19px]">
+                Our focus is building a foundational perception and autonomy platform engineered for critical aerial, industrial, and robotics missions—moving machines beyond scripted automation into perceptive autonomy.
+              </p>
+              <div>
+                <a
+                  href={CONTACT_INFO.companyLinkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-sm border border-border-grey bg-surface px-4 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-graphite transition-colors hover:border-graphite"
+                >
+                  <Linkedin className="h-3.5 w-3.5" aria-hidden="true" />
+                  <span>Perception Labs on LinkedIn</span>
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -84,14 +97,25 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                <div className="mt-8 border-t border-border-grey pt-5">
-                  <Link
-                    href="/contact"
+                <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border-grey pt-5">
+                  <a
+                    href={`mailto:${founder.email}`}
                     className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] text-graphite underline decoration-border-grey underline-offset-4 hover:decoration-graphite"
                   >
-                    <span>{CONTACT_INFO.email}</span>
+                    <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                    <span>{founder.email}</span>
+                  </a>
+
+                  <a
+                    href={founder.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.1em] text-graphite underline decoration-border-grey underline-offset-4 hover:decoration-graphite"
+                  >
+                    <Linkedin className="h-3.5 w-3.5" aria-hidden="true" />
+                    <span>LinkedIn</span>
                     <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
+                  </a>
                 </div>
               </article>
             ))}

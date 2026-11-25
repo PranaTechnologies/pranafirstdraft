@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT_INFO, SITE_URL } from "@/data/site-content";
 import { DirectContactDialog } from "@/components/DirectContactDialog";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Partner with Perception Labs on PIVO, onboard UAV navigation, and custom OEM integration. Located in Bhubaneswar, Odisha, India.",
+    "Partner with Perception Labs on Cortex, onboard perception, autonomous navigation, and custom OEM integration. Located in Bhubaneswar, Odisha, India.",
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Contact | Perception Labs",
@@ -89,6 +89,18 @@ export default function ContactPage() {
                   </span>
                   <ArrowUpRight className="h-4 w-4 text-muted-ink" aria-hidden="true" />
                 </a>
+                <a
+                  href={CONTACT_INFO.companyLinkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between gap-4 py-4 text-base text-graphite transition-colors hover:text-muted-ink"
+                >
+                  <span className="flex items-center gap-3">
+                    <Linkedin className="h-4 w-4 text-muted-ink" aria-hidden="true" />
+                    <span>Perception Labs on LinkedIn</span>
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 text-muted-ink" aria-hidden="true" />
+                </a>
                 <div className="flex items-center gap-3 py-4 text-base text-muted-ink">
                   <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>{CONTACT_INFO.location}</span>
@@ -96,7 +108,7 @@ export default function ContactPage() {
               </div>
 
               <p className="mt-6 font-mono text-[11px] uppercase leading-relaxed tracking-[0.1em] text-muted-ink">
-                INTEGRATION SCOPE: PIVO · NAVIGATION SYSTEMS · PERCEPTION MODULES · OEM ENGINEERING
+                INTEGRATION SCOPE: CORTEX · PERCEPTION &amp; MAPPING · ONBOARD AUTONOMY · OEM ENGINEERING
               </p>
             </div>
           </div>

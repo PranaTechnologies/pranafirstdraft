@@ -4,7 +4,7 @@ type SchematicVariant =
   | "perception"
   | "spatial"
   | "autonomy"
-  | "pivo"
+  | "cortex"
   | "uav"
   | "defence"
   | "robotics"
@@ -85,7 +85,7 @@ export function SpatialSchematic({
           </g>
         )}
 
-        {(variant === "estimation" || variant === "pivo") && (
+        {(variant === "estimation" || variant === "cortex") && (
           <g>
             {/* Inertial wave + pose trajectory graph */}
             <path

@@ -94,7 +94,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.45,
             }}
           >
-            Visual-inertial navigation, spatial perception, and onboard autonomy systems for UAVs and robotic platforms.
+            Onboard perception, spatial understanding, state estimation, and autonomous systems for UAVs and robotics.
           </div>
         </div>
 
@@ -110,7 +110,7 @@ export default function OpenGraphImage() {
             color: "#171C19",
           }}
         >
-          <span>PIVO CORE ENGINE · PX4 / ROS 2 READY</span>
+          <span>CORTEX UNIFIED ENGINE · PX4 / ROS 2 READY</span>
           <span
             style={{
               backgroundColor: "#0B1110",
