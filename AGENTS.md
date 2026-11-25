@@ -1,2 +1,0 @@
-# Project Architecture
-- Keep the public experience as a single anchored homepage with focused section components and shared semantic design tokens, so navigation and visual language remain consistent.

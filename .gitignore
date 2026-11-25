@@ -7,9 +7,15 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies & Build
 node_modules
+.next
+out
 dist
 dist-ssr
+coverage
+*.tsbuildinfo
+next-env.d.ts
 *.local
 
 # Editor directories and files

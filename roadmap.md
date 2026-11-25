@@ -1,4 +1,0 @@
-- [ ] Rebuild the single-page site around autonomy beyond GPS, with the four approved public systems and no unverified claims.
-- [ ] Create the graphite/cyan design system, responsive anchored navigation, custom navigation viewport, technical diagrams, engineering briefs, and accessible contact/research dialogs.
-- [ ] Refresh page metadata and the not-found view; remove obsolete form and visual styles.
-- [ ] Add interaction/rendering tests, run build/lint/test checks, inspect preview diagnostics, and commit. Do not publish.

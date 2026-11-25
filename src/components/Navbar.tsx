@@ -1,76 +1,132 @@
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import PLMark from "@/components/PLMark";
+"use client";
 
-const navItems = [
-  { label: "Technology", href: "#technology" },
-  { label: "Systems", href: "#systems" },
-  { label: "Applications", href: "#applications" },
-  { label: "Research", href: "#research" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
-];
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import { BRAND, NAV_LINKS } from "@/data/site-content";
+import { PerceptionMark } from "@/components/PerceptionMark";
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
+export function Navbar() {
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [openedPath, setOpenedPath] = useState<string | null>(null);
+  const mobileOpen = openedPath === pathname;
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenedPath(null);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [mobileOpen]);
+
+  const showSolidHeader = scrolled || mobileOpen || pathname !== "/";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background">
-      <nav aria-label="Main navigation" className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3.5 md:px-10">
-        <a href="#top" className="flex shrink-0 items-center gap-3 text-foreground" aria-label="Perception Labs home">
-          <span className="grid size-9 place-items-center border border-border text-accent">
-            <PLMark className="size-6" />
-          </span>
-          <span className="font-display text-sm font-semibold tracking-normal sm:text-base">Perception Labs</span>
-        </a>
-
-        <div className="hidden items-center gap-6 lg:flex">
-          {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-              {item.label}
-            </a>
-          ))}
-          <Button asChild size="sm" className="rounded-none px-4 font-semibold">
-            <a href="#contact">Partner With Us</a>
-          </Button>
-        </div>
-
-        <Button
-          type="button"
-          variant="outline"
-          size="icon"
-          className="size-10 rounded-none lg:hidden"
-          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={open}
-          aria-controls="mobile-navigation"
-          onClick={() => setOpen((isOpen) => !isOpen)}
+    <header
+      className={`fixed inset-x-0 top-0 z-40 transition-colors duration-200 ${
+        showSolidHeader
+          ? "border-b border-border-grey bg-field/95 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
+      <nav
+        aria-label="Primary navigation"
+        className="mx-auto flex h-16 max-w-editorial items-center justify-between gap-6 px-6 md:h-20 md:px-12 lg:px-16"
+      >
+        <Link
+          href="/"
+          className="inline-flex shrink-0 items-center gap-3 text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+          aria-label="Perception Labs home"
         >
-          {open ? <X aria-hidden="true" size={19} /> : <Menu aria-hidden="true" size={19} />}
-        </Button>
-      </nav>
+          <PerceptionMark className="h-7 w-7 text-graphite" />
+          <span className="font-sans text-[13px] font-medium uppercase tracking-[0.14em] text-graphite">
+            {BRAND.name}
+          </span>
+        </Link>
 
-      {open && (
-        <div id="mobile-navigation" className="border-t border-border bg-surface px-5 py-4 lg:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col items-stretch gap-1">
-            {navItems.map((item) => (
-              <a
+        <div className="hidden items-center gap-8 md:flex">
+          {NAV_LINKS.map((item) => {
+            const active =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
+              <Link
                 key={item.href}
                 href={item.href}
-                onClick={() => setOpen(false)}
-                className="border-b border-border py-3 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className={`font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite ${
+                  active
+                    ? "text-graphite underline decoration-signal decoration-2 underline-offset-8"
+                    : "text-muted-ink hover:text-graphite"
+                }`}
               >
                 {item.label}
-              </a>
+              </Link>
+            );
+          })}
+
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-1.5 rounded-sm border border-graphite bg-graphite px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-field transition-colors duration-150 hover:bg-signal hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+          >
+            <span>Contact</span>
+            <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border-grey bg-surface text-graphite transition-colors hover:border-graphite md:hidden"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav-drawer"
+          aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+          onClick={() => setOpenedPath((prev) => (prev === pathname ? null : pathname))}
+        >
+          {mobileOpen ? (
+            <X className="h-4 w-4" aria-hidden="true" />
+          ) : (
+            <Menu className="h-4 w-4" aria-hidden="true" />
+          )}
+        </button>
+      </nav>
+
+      {mobileOpen && (
+        <div
+          id="mobile-nav-drawer"
+          className="border-t border-border-grey bg-field px-6 py-6 md:hidden"
+        >
+          <div className="flex flex-col divide-y divide-border-grey">
+            {NAV_LINKS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpenedPath(null)}
+                className="py-3.5 font-mono text-xs uppercase tracking-[0.12em] text-graphite transition-colors hover:text-muted-ink"
+              >
+                {item.label}
+              </Link>
             ))}
-            <Button asChild className="mt-3 w-full rounded-none font-semibold">
-              <a href="#contact" onClick={() => setOpen(false)}>Partner With Us</a>
-            </Button>
+            <div className="pt-4">
+              <Link
+                href="/contact"
+                onClick={() => setOpenedPath(null)}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-graphite px-4 py-3 font-mono text-xs uppercase tracking-[0.12em] text-field"
+              >
+                <span>Contact</span>
+                <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
       )}
     </header>
   );
-};
-
-export default Navbar;
+}

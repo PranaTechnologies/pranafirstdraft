@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #F4F5F0;
+    color: #171C19;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: #F4F5F0;
+    color: #171C19;
+    font-family: var(--font-manrope), system-ui, sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: #B9E36A;
+    color: #171C19;
+  }
+}
+
+@layer utilities {
+  .field-grid-light {
+    background-image:
+      linear-gradient(rgba(23, 28, 25, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(23, 28, 25, 0.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .field-grid-dark {
+    background-image:
+      linear-gradient(rgba(244, 245, 240, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244, 245, 240, 0.045) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+}
