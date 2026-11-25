@@ -1,0 +1,3 @@
+- [ ] Reframe the site around Cortex research goals, clearly separated from available capabilities; retain the existing products, imagery, industries, and routes.
+- [ ] Refresh shared navigation, page layouts, typography, and accessibility while preserving the Google Form new-tab action and direct-contact dialog.
+- [ ] Update page metadata, verify desktop/mobile and contact behavior, check tests and preview logs, and commit the completed redesign.
