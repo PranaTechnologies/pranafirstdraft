@@ -1,54 +1,64 @@
-import { motion } from "framer-motion";
-import { Plug, Zap, Shield, BarChart3 } from "lucide-react";
+import FlowDiagram from "@/components/FlowDiagram";
 
-const steps = [
-  { icon: Plug, label: "Connect", desc: "Snap any plugin into the universal bay." },
-  { icon: Zap, label: "Activate", desc: "Auto-detection & firmware handshake in <2 s." },
-  { icon: Shield, label: "Validate", desc: "Built-in diagnostics confirm integrity." },
-  { icon: BarChart3, label: "Operate", desc: "Real-time telemetry streams to ground control." },
+const pillars = [
+  {
+    number: "01",
+    title: "Navigation — Visual-Inertial Odometry",
+    description: "Combining camera and inertial measurements to estimate motion and maintain navigation without relying exclusively on satellite positioning.",
+  },
+  {
+    number: "02",
+    title: "Perception — Spatial Understanding",
+    description: "Extracting meaningful information from the surrounding environment through cameras, depth sensors, and spatial perception.",
+  },
+  {
+    number: "03",
+    title: "Localization — Robust Position Estimation",
+    description: "Developing algorithms that improve motion estimation, localization, and trajectory consistency in challenging environments.",
+  },
+  {
+    number: "04",
+    title: "Edge Intelligence — Onboard Autonomy",
+    description: "Running computationally efficient perception and navigation systems directly on embedded platforms.",
+  },
 ];
 
 const TechEdge = () => (
-  <section id="technology" className="section-spacing relative overflow-hidden">
-    <div className="absolute inset-0 grid-bg opacity-50" />
-    <div className="absolute top-0 left-0 w-full h-px accent-line" />
-
-    <div className="section-container relative z-10">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-20"
-      >
-        <span className="text-xs tracking-[0.2em] uppercase text-emerald font-semibold">Technical Edge</span>
-        <h2 className="text-4xl md:text-5xl font-display font-bold mt-3 mb-4">
-          <span className="accent-text">Plug-and-Play</span> Architecture
-        </h2>
-        <p className="text-muted-foreground max-w-xl mx-auto text-sm">
-          From hardware handshake to mission-ready in seconds.
+  <section id="technology" className="scroll-mt-20 py-20 md:py-32">
+    <div className="mx-auto max-w-7xl px-5 md:px-10">
+      <div className="mb-14 grid gap-8 md:grid-cols-[0.72fr_1.28fr] md:items-end md:gap-16">
+        <div>
+          <p className="font-mono text-[10px] text-accent">02 / OUR TECHNOLOGY</p>
+          <h2 className="mt-5 font-display text-3xl font-semibold leading-tight text-foreground sm:text-4xl">A stack built around onboard sensing.</h2>
+        </div>
+        <p className="max-w-2xl text-base leading-7 text-muted-foreground">
+          We develop the building blocks that help autonomous machines estimate motion, interpret their surroundings, and make use of onboard computation when satellite positioning is not dependable.
         </p>
-      </motion.div>
+      </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {steps.map((s, i) => (
-          <motion.div
-            key={s.label}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="relative glass-panel-hover rounded-xl p-7"
-          >
-            <span className="absolute top-5 right-5 font-display text-4xl font-bold text-muted-foreground/10">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div className="w-10 h-10 rounded-lg bg-cyan/8 text-cyan flex items-center justify-center mb-5">
-              <s.icon size={20} strokeWidth={1.5} />
-            </div>
-            <h3 className="font-display font-bold text-lg mb-1.5 text-foreground">{s.label}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-          </motion.div>
-        ))}
+      <div className="grid gap-10 border-y border-border py-8 lg:grid-cols-[0.76fr_1.24fr] lg:gap-16">
+        <div className="flex flex-col justify-between gap-8">
+          <div>
+            <p className="font-mono text-[10px] text-muted-foreground">ONBOARD PERCEPTION PIPELINE</p>
+            <h3 className="mt-4 max-w-sm font-display text-2xl font-medium leading-snug text-foreground">From sensor observations to machine autonomy.</h3>
+          </div>
+          <FlowDiagram
+            label="Onboard sensing to embedded autonomy architecture"
+            steps={["Onboard sensing", "State estimation", "Embedded autonomy"]}
+          />
+        </div>
+
+        <div className="divide-y divide-border">
+          {pillars.map((pillar) => (
+            <article key={pillar.number} className="grid gap-3 py-5 sm:grid-cols-[44px_1fr] sm:gap-5">
+              <p className="pt-1 font-mono text-xs text-accent">{pillar.number}</p>
+              <div>
+                <h3 className="font-display text-base font-semibold text-foreground sm:text-lg">{pillar.title}</h3>
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">{pillar.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   </section>

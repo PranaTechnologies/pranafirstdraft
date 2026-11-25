@@ -1,74 +1,75 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import PLMark from "@/components/PLMark";
 
-const navItems = ["Products", "Technology", "Industries", "Contact"];
+const navItems = [
+  { label: "Technology", href: "#technology" },
+  { label: "Systems", href: "#systems" },
+  { label: "Applications", href: "#applications" },
+  { label: "Research", href: "#research" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
-  const scrollTo = (id: string) => {
-    setOpen(false);
-    setTimeout(() => {
-      document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
-    }, 300);
-  };
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-border/40">
-      <div className="section-container flex items-center justify-between py-4">
-        <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded accent-gradient flex items-center justify-center">
-            <span className="font-display font-bold text-primary-foreground text-[11px]">PL</span>
-          </div>
-          <div className="font-display font-bold text-lg tracking-widest uppercase">
-            <span className="text-foreground">Perception</span>
-            <span className="accent-text ml-1.5">Labs</span>
-          </div>
-        </button>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background">
+      <nav aria-label="Main navigation" className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3.5 md:px-10">
+        <a href="#top" className="flex shrink-0 items-center gap-3 text-foreground" aria-label="Perception Labs home">
+          <span className="grid size-9 place-items-center border border-border text-accent">
+            <PLMark className="size-6" />
+          </span>
+          <span className="font-display text-sm font-semibold tracking-normal sm:text-base">Perception Labs</span>
+        </a>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden items-center gap-6 lg:flex">
           {navItems.map((item) => (
-            <button
-              key={item}
-              onClick={() => scrollTo(item)}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors tracking-wide"
-            >
-              {item}
-            </button>
+            <a key={item.href} href={item.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              {item.label}
+            </a>
           ))}
-          <button
-            onClick={() => scrollTo("contact")}
-            className="px-5 py-2 rounded accent-gradient text-primary-foreground text-sm font-semibold tracking-wide accent-glow hover:scale-105 transition-transform"
-          >
-            Get Started
-          </button>
+          <Button asChild size="sm" className="rounded-none px-4 font-semibold">
+            <a href="#contact">Partner With Us</a>
+          </Button>
         </div>
 
-        <button className="md:hidden text-foreground" onClick={() => setOpen(!open)}>
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          className="size-10 rounded-none lg:hidden"
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          onClick={() => setOpen((isOpen) => !isOpen)}
+        >
+          {open ? <X aria-hidden="true" size={19} /> : <Menu aria-hidden="true" size={19} />}
+        </Button>
+      </nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden glass-panel border-t border-border/40 overflow-hidden"
-          >
-            <div className="flex flex-col gap-4 px-6 py-6">
-              {navItems.map((item) => (
-                <button key={item} onClick={() => scrollTo(item)} className="text-left text-muted-foreground hover:text-foreground transition-colors text-sm tracking-wide">
-                  {item}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+      {open && (
+        <div id="mobile-navigation" className="border-t border-border bg-surface px-5 py-4 lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col items-stretch gap-1">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="border-b border-border py-3 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                {item.label}
+              </a>
+            ))}
+            <Button asChild className="mt-3 w-full rounded-none font-semibold">
+              <a href="#contact" onClick={() => setOpen(false)}>Partner With Us</a>
+            </Button>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 
