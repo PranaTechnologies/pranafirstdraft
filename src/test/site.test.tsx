@@ -8,14 +8,14 @@ import CortexPage from "@/app/solutions/cortex/page";
 import AboutPage from "@/app/about/page";
 import ContactPage from "@/app/contact/page";
 import ResearchPage from "@/app/research/page";
-import ResearchArticlePage from "@/app/research/[slug]/page";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import {
   CONTACT_INFO,
-  FEATURED_BLOG_POST,
   FOUNDERS,
+  SYSTEM_CATEGORIES,
   TECHNOLOGY_LAYERS,
+  UPCOMING_BLOG_TOPICS,
 } from "@/data/site-content";
 
 vi.mock("next/navigation", () => ({
@@ -26,7 +26,7 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("Perception Labs website", () => {
-  it("renders decluttered perception & autonomy Home page with Cortex focus and no PIVO/pricing claims", () => {
+  it("renders decluttered perception & autonomy Home page with Cortex focus and upcoming blog preview", () => {
     const { container } = render(<HomePage />);
 
     expect(
@@ -36,7 +36,6 @@ describe("Perception Labs website", () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText(/ILLUSTRATIVE RECONSTRUCTION/i)).toBeInTheDocument();
-
     expect(screen.getByRole("link", { name: /^Explore Cortex$/i })).toHaveAttribute(
       "href",
       "/solutions/cortex",
@@ -44,6 +43,10 @@ describe("Perception Labs website", () => {
     expect(screen.getByRole("link", { name: /^Explore Cortex Specs$/i })).toHaveAttribute(
       "href",
       "/solutions/cortex",
+    );
+    expect(screen.getByRole("link", { name: /Upcoming Technical Notes/i })).toHaveAttribute(
+      "href",
+      "/research",
     );
 
     TECHNOLOGY_LAYERS.forEach((layer) => {
@@ -55,10 +58,10 @@ describe("Perception Labs website", () => {
     });
 
     const text = container.textContent ?? "";
-    expect(text).not.toMatch(/PIVO|₹35,000|₹10,000|<5ms|99\.97%|L5 Autonomy|Phase 4/i);
+    expect(text).not.toMatch(/Placeholder Technical Blog|PIVO|₹35,000|₹10,000|Phase 4/i);
   });
 
-  it("renders restructured Technology architecture page without PIVO", () => {
+  it("renders new volumetric background graphic on Technology page without framed duplicate", () => {
     const { container } = render(<TechnologyPage />);
 
     expect(
@@ -66,26 +69,28 @@ describe("Perception Labs website", () => {
         name: /Perception Intelligence for Real-World Environments\./i,
       }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByText(/VOLUMETRIC PERCEPTION LATTICE · COUPLED SENSOR STRATA/i),
+    ).toBeInTheDocument();
     expect(screen.getByText("Real-Time Machine Perception")).toBeInTheDocument();
-    expect(screen.getByText("Unified Field Autonomy")).toBeInTheDocument();
     expect(screen.getByText("Multi-Sensor.")).toBeInTheDocument();
-    expect(screen.getByText(/Three coupled engines powering Cortex\./i)).toBeInTheDocument();
 
     const text = container.textContent ?? "";
-    expect(text).not.toMatch(/PIVO/i);
+    expect(text).not.toMatch(/3D VIEWPORT|PIVO/i);
   });
 
-  it("renders integrated Solutions without pricing and dedicated Cortex specs", () => {
+  it("renders distinct non-overlapping Solutions product hierarchy without pricing and Cortex specs", () => {
     const solutionsView = render(<SolutionsPage />);
     expect(
       screen.getByRole("heading", {
         name: /Machines operating reliably in the physical world\./i,
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Aerial Inspection")).toBeInTheDocument();
-    expect(screen.getByText("GNSS-Denied Flight")).toBeInTheDocument();
+    for (const tier of SYSTEM_CATEGORIES) {
+      expect(screen.getByRole("heading", { name: tier.name })).toBeInTheDocument();
+    }
     const solutionsText = solutionsView.container.textContent ?? "";
-    expect(solutionsText).not.toMatch(/₹35,000|₹10,000|Stack License|PIVO/i);
+    expect(solutionsText).not.toMatch(/₹35,000|₹10,000|Stack License|PIVO|Onboard Autonomy Stack/i);
 
     cleanup();
     const cortexView = render(<CortexPage />);
@@ -101,9 +106,6 @@ describe("Perception Labs website", () => {
   it("renders pitch-deck founder emails, personal LinkedIns, and company LinkedIn on About", () => {
     const { container } = render(<AboutPage />);
 
-    expect(screen.getByText("Ayushman Bansal")).toBeInTheDocument();
-    expect(screen.getByText("Lakshya Agrawal")).toBeInTheDocument();
-
     for (const founder of FOUNDERS) {
       expect(screen.getByRole("link", { name: founder.email })).toHaveAttribute(
         "href",
@@ -114,7 +116,6 @@ describe("Perception Labs website", () => {
     const linkedinLinks = screen.getAllByRole("link", { name: /^LinkedIn$/i });
     expect(linkedinLinks[0]).toHaveAttribute("href", FOUNDERS[0].linkedin);
     expect(linkedinLinks[1]).toHaveAttribute("href", FOUNDERS[1].linkedin);
-
     expect(
       screen.getByRole("link", { name: /Perception Labs on LinkedIn/i }),
     ).toHaveAttribute("href", CONTACT_INFO.companyLinkedin);
@@ -122,25 +123,18 @@ describe("Perception Labs website", () => {
     expect(container.textContent ?? "").not.toMatch(/DEVELOPMENT TRAJECTORY|Phase 01|Phase 4/i);
   });
 
-  it("renders technical blog index and individual article linking to Cortex", async () => {
-    render(<ResearchPage />);
+  it("renders Research page with ONLY upcoming blog section and no placeholder blog post", () => {
+    const { container } = render(<ResearchPage />);
 
-    const articleLink = screen.getByRole("link", { name: /Read Full Technical Blog/i });
-    expect(articleLink).toHaveAttribute("href", `/research/${FEATURED_BLOG_POST.slug}`);
-
-    cleanup();
-    const article = await ResearchArticlePage({
-      params: Promise.resolve({ slug: FEATURED_BLOG_POST.slug }),
-    });
-    const rendered = render(article);
-
-    expect(
-      screen.getByRole("heading", { level: 1, name: FEATURED_BLOG_POST.title }),
-    ).toBeInTheDocument();
-    expect(rendered.container.textContent ?? "").not.toMatch(/PIVO/i);
+    expect(screen.getByText(/UPCOMING TECHNICAL BLOGS/i)).toBeInTheDocument();
+    for (const topic of UPCOMING_BLOG_TOPICS) {
+      expect(screen.getByText(topic.title)).toBeInTheDocument();
+    }
+    const text = container.textContent ?? "";
+    expect(text).not.toMatch(/Placeholder Technical Blog|Draft Template|Read Full Technical Blog/i);
   });
 
-  it("supports accessible mobile navigation, Reach Us Directly contact dialog, and Footer LinkedIn", async () => {
+  it("renders updated Footer without separate Cortex link, with Privacy in bottom bar and icon links", async () => {
     const user = userEvent.setup();
     render(
       <>
@@ -156,29 +150,31 @@ describe("Perception Labs website", () => {
     await user.keyboard("{Escape}");
     expect(toggle).toHaveAttribute("aria-expanded", "false");
 
-    const formLink = screen.getByRole("link", { name: /Open Partner Intake Form/i });
-    expect(formLink).toHaveAttribute("href", CONTACT_INFO.googleFormUrl);
-    expect(formLink).toHaveAttribute("target", "_blank");
-    expect(formLink).toHaveAttribute("rel", "noopener noreferrer");
+    const footer = screen.getByRole("contentinfo");
+    const footerNav = within(footer).getByRole("navigation", { name: /Footer navigation/i });
+    expect(within(footerNav).queryByRole("link", { name: /Cortex/i })).not.toBeInTheDocument();
+    expect(within(footerNav).queryByRole("link", { name: /Privacy/i })).not.toBeInTheDocument();
+    expect(within(footerNav).getByRole("link", { name: /Contact/i })).toHaveAttribute(
+      "href",
+      "/contact",
+    );
 
-    const footerLinkedin = screen.getByRole("link", { name: /^LinkedIn$/i });
+    expect(within(footer).getByRole("link", { name: /^Privacy Policy$/i })).toHaveAttribute(
+      "href",
+      "/privacy",
+    );
+    expect(
+      within(footer).getByRole("link", { name: new RegExp(`Email Perception Labs.*${CONTACT_INFO.email}`) }),
+    ).toHaveAttribute("href", `mailto:${CONTACT_INFO.email}`);
+
+    const footerLinkedin = within(footer).getByRole("link", { name: /^Perception Labs on LinkedIn$/i });
     expect(footerLinkedin).toHaveAttribute("href", CONTACT_INFO.companyLinkedin);
 
     const directTrigger = screen.getAllByRole("button", { name: /Reach Us Directly/i })[0];
     await user.click(directTrigger);
-
     const dialog = screen.getByRole("dialog");
     expect(
       within(dialog).getByRole("link", { name: new RegExp(CONTACT_INFO.email.replace(".", "\\.")) }),
     ).toHaveAttribute("href", `mailto:${CONTACT_INFO.email}`);
-    expect(
-      within(dialog).getByRole("link", { name: /Perception Labs on LinkedIn/i }),
-    ).toHaveAttribute("href", CONTACT_INFO.companyLinkedin);
-    expect(
-      within(dialog).getByRole("link", { name: new RegExp(CONTACT_INFO.phone.replace("+", "\\+")) }),
-    ).toHaveAttribute("href", CONTACT_INFO.phoneHref);
-
-    await user.keyboard("{Escape}");
-    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 });

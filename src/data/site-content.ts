@@ -377,50 +377,56 @@ export const TECHNOLOGY_LAYERS: TechnologySpec[] = [
   },
 ];
 
+// Clean non-overlapping 4-tier product hierarchy modeled on leading robotics providers:
+// 01 Core Runtime Software -> 02 Turnkey Edge Hardware -> 03 Autopilot & Mission Layer -> 04 Partner OEM Services
 export const SYSTEM_CATEGORIES = [
   {
-    id: "cortex",
-    code: "01 / CORE ENGINE",
-    name: "Cortex",
-    category: "Unified Perception & Navigation Engine",
-    maturity: "Core Autonomy Engine",
+    id: "cortex-runtime",
+    code: "01 / CORE AUTONOMY ENGINE",
+    name: "Cortex Core",
+    category: "Onboard Perception, Mapping & Navigation Runtime",
+    maturity: "Hardware-Agnostic Software Engine",
     summary:
-      "Unified onboard perception and navigation engine transforming synchronized camera, inertial, and auxiliary sensor streams into real-time situational awareness, spatial mapping, and 6-DoF state estimation.",
+      "Our primary onboard intelligence runtime ingesting synchronized camera, inertial, and depth/LiDAR streams to produce real-time ~30 Hz 6-DoF state estimation, local 3D environmental maps, and obstacle clearance cues.",
+    scopeNote: "Owns the core algorithms: Perception → Spatial Mapping → State Estimation.",
     href: "/solutions/cortex",
-    ctaLabel: "Explore Cortex Engine",
+    ctaLabel: "Explore Cortex Core Specs",
   },
   {
-    id: "perception-suite",
-    code: "02 / SPATIAL MODULES",
-    name: "Perception & Mapping Modules",
-    category: "Scene Understanding & Local Geometry",
-    maturity: "Modular Edge Capabilities",
+    id: "edge-hardware-kit",
+    code: "02 / SENSOR–COMPUTE PAYLOAD",
+    name: "Edge Perception Kit",
+    category: "Calibrated Drop-In Camera, IMU & Compute Module",
+    maturity: "Turnkey Payload Option",
     summary:
-      "Feature tracking, dynamic local mapping, obstacle clearance modeling, and visual map correspondence configurable for diverse aerial and mobile robotics payloads.",
-    href: "/solutions#capabilities",
-    ctaLabel: "View Capabilities",
+      "Factory-calibrated companion compute paired with hardware-synchronized optical/depth cameras and IMUs in a compact airframe-ready enclosure for teams that want verified sensor timing out of the box.",
+    scopeNote: "Owns physical sensing hardware, clock sync, and onboard edge compute packaging.",
+    href: "/contact",
+    ctaLabel: "Request Payload Specs",
   },
   {
-    id: "navigation-stack",
-    code: "03 / INTEGRATED AUTONOMY",
-    name: "Onboard Autonomy Stack",
-    category: "Perception-to-Flight Execution",
-    maturity: "PX4 & ROS 2 Ready",
+    id: "mission-supervisor",
+    code: "03 / AUTOPILOT & MISSION LAYER",
+    name: "Flight Bridge & Mission Console",
+    category: "PX4/ROS 2 Adapters, Map Alignment & Health Monitoring",
+    maturity: "Vehicle & Operator Interface",
     summary:
-      "End-to-end vehicle navigation combining ~30 Hz local state estimation, optional ~1 Hz geo-referenced visual matching, and health-monitored autopilot integration.",
-    href: "/solutions#capabilities",
-    ctaLabel: "View Autonomy Stack",
+      "Connects Cortex runtime outputs directly into vehicle autopilots and ground stations—providing PX4/ROS 2 message bridges, optional ~1 Hz geo-referenced site-map alignment (WGS84), and live estimator health fail-safes.",
+    scopeNote: "Owns autopilot handoff, optional global map anchoring, and GCS operator visibility.",
+    href: "/contact",
+    ctaLabel: "Discuss Autopilot Setup",
   },
   {
     id: "oem-engineering",
-    code: "04 / PARTNER INTEGRATION",
-    name: "Custom OEM Engineering",
-    category: "Hardware, Calibration & Airframe Integration",
-    maturity: "Partner Collaboration",
+    code: "04 / DEPLOYMENT & VALIDATION",
+    name: "OEM Integration & Qualification",
+    category: "Custom Calibration, HIL Simulation & Field Bring-Up",
+    maturity: "Partner Engineering Program",
     summary:
-      "Sensor payload selection, hardware time synchronization, edge companion bring-up, flight-stack integration, and operator telemetry tailored to partner vehicles.",
+      "Bespoke driver integration for proprietary thermal/LiDAR sensors, airframe vibration and extrinsic calibration, Hardware-in-the-Loop (HIL) evaluation, and closed-loop flight bring-up on partner platforms.",
+    scopeNote: "Owns custom vehicle bring-up, sensor qualification, and production testing.",
     href: "/contact",
-    ctaLabel: "Discuss Integration",
+    ctaLabel: "Start OEM Evaluation",
   },
 ] as const;
 
@@ -590,13 +596,13 @@ export const APPLICATION_MATRIX = [
       {
         problem: "Loss or multipath distortion of GNSS near structures",
         capability: "Onboard Cortex perception (~30 Hz) + optional global visual alignment",
-        system: "Cortex Unified Engine",
+        system: "Cortex Core + Flight Bridge",
         outcome: "Continuous pose, velocity, and AGL output during satellite outages",
       },
       {
         problem: "Tight size, weight, and power envelopes",
         capability: "Compute-efficient onboard execution without ground compute links",
-        system: "Cortex Companion Stack",
+        system: "Edge Perception Kit",
         outcome: "Self-contained autonomy integrated with PX4 / ROS 2 flight stacks",
       },
     ],
@@ -615,13 +621,13 @@ export const APPLICATION_MATRIX = [
       {
         problem: "Magnetic & GNSS interference near industrial steelwork",
         capability: "Health-monitored multi-sensor fusion prioritizing consistent visual cues",
-        system: "Cortex + Spatial Modules",
+        system: "Cortex Core + Mission Console",
         outcome: "Resilient onboard awareness unaffected by structural interference",
       },
       {
         problem: "Inspection corridors lacking permanent positioning beacons",
         capability: "Real-time local 3D mapping & terrain/corridor representation",
-        system: "Perception Modules",
+        system: "Cortex Core",
         outcome: "Infrastructure-independent trajectory and clearance tracking",
       },
     ],
@@ -640,13 +646,13 @@ export const APPLICATION_MATRIX = [
       {
         problem: "Zero satellite visibility inside enclosed facilities",
         capability: "Synchronized camera-IMU-depth perception & dynamic local mapping",
-        system: "Cortex Unified Engine",
+        system: "Cortex Core + Edge Perception Kit",
         outcome: "Continuous local positioning and obstacle geometry indoors",
       },
       {
         problem: "Diverse OEM sensor mounts and vehicle kinematics",
         capability: "Bespoke calibration & ROS 2 hardware abstraction",
-        system: "Custom OEM Engineering",
+        system: "OEM Integration & Qualification",
         outcome: "Reproducible perception pipeline tailored per chassis",
       },
     ],
@@ -665,13 +671,13 @@ export const APPLICATION_MATRIX = [
       {
         problem: "Denial or unreliability of external RF navigation signals",
         capability: "Onboard passive visual-inertial perception without ground emitters",
-        system: "Cortex Unified Engine",
+        system: "Cortex Core + Flight Bridge",
         outcome: "Autonomous local state estimation while scene features remain observable",
       },
       {
         problem: "Degraded visibility or multi-spectral mission requirements",
         capability: "Modular multi-sensor fusion supporting thermal or LiDAR integration",
-        system: "Custom OEM Engineering",
+        system: "OEM Integration & Qualification",
         outcome: "Qualified system configuration scoped to environmental visibility limits",
       },
     ],
@@ -688,77 +694,22 @@ export const ENGINEERING_DISCIPLINES = [
   "PX4 / ROS 2 Integration",
 ] as const;
 
-export interface BlogArticle {
-  slug: string;
-  code: string;
-  status: "Placeholder Technical Blog — Draft Template" | "Planned Technical Article";
-  publishedDate: string;
-  readingTime: string;
-  author: string;
-  discipline: string;
-  title: string;
-  summary: string;
-  sections: Array<{
-    heading: string;
-    body: string[];
-    equation?: string;
-  }>;
-  limitations: string[];
-  references: string[];
-}
-
-export const FEATURED_BLOG_POST: BlogArticle = {
-  slug: "camera-imu-synchronization-visual-inertial-navigation",
-  code: "BLOG / 01",
-  status: "Placeholder Technical Blog — Draft Template",
-  publishedDate: "2026-11-26",
-  readingTime: "6 min read",
-  author: "Ayushman Bansal · Perception Labs Engineering",
-  discipline: "Perception & Sensor Timing",
-  title: "Why Camera–IMU Synchronization Governs Onboard Perception Stability",
-  summary:
-    "Placeholder engineering blog post documenting sensor timing misalignment, temporal coupling equations inside Cortex, verification checklists, and open experimental slots for multi-trial evaluation.",
-  sections: [
-    {
-      heading: "1. The Engineering Problem",
-      body: [
-        "Onboard perception engines like Cortex fuse high-frequency inertial measurements (angular rates and linear acceleration) with optical camera and depth streams. While the IMU captures rapid rotational dynamics between exposures, visual observations anchor long-term estimation and spatial mapping.",
-        "If image midpoint timestamps and IMU sample clocks drift or carry an uncalibrated offset δt, aggressive maneuvers create apparent velocity errors, corrupted feature triangulation, and destabilized obstacle geometry.",
-      ],
-    },
-    {
-      heading: "2. Architecture & Temporal Coupling",
-      body: [
-        "Cortex aligns optical exposure midpoint timestamps with continuous IMU pre-integration windows before states enter sensor fusion and spatial mapping. Hardware-triggered rigs lock clocks directly; loosely coupled OEM payloads estimate residual time skew online.",
-        "This placeholder draft outlines the engineering framework; quantitative latency distributions and recorded multi-trial trajectories will be added once outdoor validation logs are finalized.",
-      ],
-      equation: "p_cam(t) = R_imu(t + δt) · p_ext + t_imu(t + δt)",
-    },
-    {
-      heading: "3. Verification & Evaluation Protocol (Placeholder)",
-      body: [
-        "Placeholder slot for recorded multirotor and ground-robot logs, IMU Allan-variance plots, and spatial reconstruction checks across indoor and outdoor test sequences.",
-        "Before publishing metrics, each entry enforces dataset provenance (sensor rig, sample rates, clock synchronization mode, and operating window) rather than synthetic approximations.",
-      ],
-    },
-  ],
-  limitations: [
-    "Note: This article is currently a structured placeholder draft demonstrating our technical blog format.",
-    "Measured benchmark figures and recorded evaluation curves will replace placeholder notes only after multi-trial validation.",
-  ],
-  references: [
-    "Cortex Unified Perception & Navigation Engine (/solutions/cortex)",
-    "Layer 01 Sensing & Layer 03 State Estimation Architecture (/technology/state-estimation)",
-  ],
-};
-
 export const UPCOMING_BLOG_TOPICS = [
+  {
+    code: "UPCOMING / 01",
+    discipline: "Perception & Sensor Timing",
+    title: "Why Camera–IMU Synchronization Governs Onboard Perception Stability",
+    summary:
+      "Examining clock skew δt across rolling/global shutter cameras and IMUs inside Cortex, pre-integration alignment, and flight-rig verification protocols.",
+    status: "In Preparation",
+  },
   {
     code: "UPCOMING / 02",
     discipline: "Spatial Understanding",
     title: "Coupling ~30 Hz Local Perception with ~1 Hz Global Map Alignment in Cortex",
     summary:
-      "Designing state fusion that preserves responsive onboard flight control while bounding long-horizon drift when geo-referenced maps exist.",
+      "Designing multi-rate state fusion that preserves responsive onboard flight control while bounding long-horizon drift when geo-referenced maps exist.",
+    status: "Planned",
   },
   {
     code: "UPCOMING / 03",
@@ -766,6 +717,15 @@ export const UPCOMING_BLOG_TOPICS = [
     title: "Running Real-Time Spatial Intelligence Inside Edge Companion Budgets",
     summary:
       "Memory layout, deterministic execution bounds, and health-monitoring diagnostics for PX4 and ROS 2 autonomous vehicles.",
+    status: "Planned",
+  },
+  {
+    code: "UPCOMING / 04",
+    discipline: "Field Validation",
+    title: "Evaluating Tracking Robustness Under Canopy, Industrial Steel, and Low Texture",
+    summary:
+      "Benchmarking failure detection, covariance calibration, and safe fallback transitions across real-world test sequences.",
+    status: "Planned",
   },
 ] as const;
 

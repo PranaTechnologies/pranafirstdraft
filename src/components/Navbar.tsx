@@ -29,8 +29,11 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [mobileOpen]);
 
-  // Over the dark full-bleed hero on `/` at top of page, keep navbar light-on-dark for clear contrast.
-  const isHeroOverlay = pathname === "/" && !scrolled && !mobileOpen;
+  // Over dark full-bleed heroes on `/`, `/technology`, and `/solutions`, keep navbar light-on-dark.
+  const isHeroOverlay =
+    (pathname === "/" || pathname === "/technology" || pathname === "/solutions") &&
+    !scrolled &&
+    !mobileOpen;
 
   return (
     <header

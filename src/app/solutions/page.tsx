@@ -90,17 +90,17 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      {/* 03 · Core Engine & Integrated Capabilities (No Pricing) */}
+      {/* 03 · Four-Tier Non-Overlapping Product Hierarchy (No Pricing) */}
       <section
         id="capabilities"
         className="border-b border-deep-border bg-deep-field py-20 text-field md:py-28"
       >
         <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-signal">
-            PL / SYSTEM CAPABILITIES
+            PL / PRODUCT HIERARCHY
           </p>
           <h2 className="mt-4 max-w-3xl font-display text-3xl font-normal tracking-[-0.02em] text-field sm:text-4xl">
-            From core onboard engine to complete partner integration
+            Four distinct layers—from onboard runtime software to vehicle bring-up
           </h2>
 
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
@@ -129,16 +129,17 @@ export default function SolutionsPage() {
                   <p className="mt-4 text-lg leading-relaxed text-[#C6D1CA]">
                     {sys.summary}
                   </p>
+                  <p className="mt-4 border-l-2 border-signal pl-3.5 font-mono text-xs uppercase leading-relaxed tracking-[0.08em] text-[#D8E0DA]">
+                    {sys.scopeNote}
+                  </p>
                 </div>
 
                 <div className="mt-8 border-t border-deep-border pt-5">
                   <Link
-                    href={sys.id === "cortex" ? "/solutions/cortex" : "/contact"}
+                    href={sys.href}
                     className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-signal underline decoration-deep-border underline-offset-4 transition-colors hover:text-field hover:decoration-signal"
                   >
-                    <span>
-                      {sys.id === "cortex" ? sys.ctaLabel : "Request Integration Scope"}
-                    </span>
+                    <span>{sys.ctaLabel}</span>
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>

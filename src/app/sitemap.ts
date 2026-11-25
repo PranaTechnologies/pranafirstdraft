@@ -1,9 +1,5 @@
 import type { MetadataRoute } from "next";
-import {
-  FEATURED_BLOG_POST,
-  SITE_URL,
-  TECHNOLOGY_LAYERS,
-} from "@/data/site-content";
+import { SITE_URL, TECHNOLOGY_LAYERS } from "@/data/site-content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -14,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/solutions",
     "/solutions/cortex",
     "/research",
-    `/research/${FEATURED_BLOG_POST.slug}`,
     "/about",
     "/contact",
     "/privacy",

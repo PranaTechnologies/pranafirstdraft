@@ -7,8 +7,8 @@ import { ClosingBand } from "@/components/ClosingBand";
 import {
   BRAND,
   CORTEX_SPEC,
-  FEATURED_BLOG_POST,
   SPATIAL_GAPS,
+  UPCOMING_BLOG_TOPICS,
 } from "@/data/site-content";
 
 export default function HomePage() {
@@ -229,32 +229,25 @@ export default function HomePage() {
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="font-mono text-xs uppercase tracking-[0.14em] text-signal">
-                    PL / TECHNICAL BLOG
+                    PL / UPCOMING TECHNICAL BLOG
                   </span>
                   <span className="rounded-sm border border-deep-border bg-deep-field px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-signal">
-                    {FEATURED_BLOG_POST.status}
+                    {UPCOMING_BLOG_TOPICS[0].status}
                   </span>
                 </div>
                 <h2 className="mt-4 font-display text-3xl font-normal leading-tight tracking-[-0.02em] text-field">
-                  {FEATURED_BLOG_POST.title}
+                  {UPCOMING_BLOG_TOPICS[0].title}
                 </h2>
                 <p className="mt-4 text-lg leading-relaxed text-[#BCC7C0]">
-                  {FEATURED_BLOG_POST.summary}
+                  {UPCOMING_BLOG_TOPICS[0].summary}
                 </p>
               </div>
               <div className="mt-8 flex flex-wrap gap-6 border-t border-deep-border pt-6">
                 <Link
-                  href={`/research/${FEATURED_BLOG_POST.slug}`}
+                  href="/research"
                   className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-field underline decoration-deep-border underline-offset-4 transition-colors hover:text-signal hover:decoration-signal"
                 >
-                  <span>Read Article</span>
-                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </Link>
-                <Link
-                  href="/research"
-                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-[#BCC7C0] underline decoration-deep-border underline-offset-4 transition-colors hover:text-signal hover:decoration-signal"
-                >
-                  <span>All Engineering Notes</span>
+                  <span>Upcoming Technical Notes</span>
                   <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
               </div>
