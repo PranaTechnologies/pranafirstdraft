@@ -21,7 +21,7 @@ function createSeededValue(seed: number): () => number {
   };
 }
 
-function SpatialFieldFallback() {
+function SpatialFieldFallback({ isBackground = false }: { isBackground?: boolean }) {
   const staticPoints = [
     [95, 340], [130, 315], [160, 290], [185, 355], [220, 265], [250, 325],
     [285, 240], [315, 295], [345, 215], [375, 270], [410, 195], [445, 250],
@@ -48,22 +48,26 @@ function SpatialFieldFallback() {
       preserveAspectRatio="xMidYMid slice"
     >
       <rect width="800" height="480" fill="#0B1110" />
-      <g stroke="#202A27" strokeWidth="1">
+      <g stroke={isBackground ? "#192521" : "#202A27"} strokeWidth="1">
         <path d="M0 390H800M0 340H800M0 290H800M0 240H800M0 190H800M0 140H800" />
         <path d="M90 480L400 100L710 480M210 480L400 100L590 480M320 480L400 100L480 480" />
       </g>
-      <g fill="#9AA59F" opacity="0.65">
+      <g
+        fill={isBackground ? "#3E6352" : "#9AA59F"}
+        opacity={isBackground ? "0.45" : "0.65"}
+      >
         {staticPoints.map(([x, y]) => (
           <circle key={`${x}-${y}`} cx={x} cy={y} r="1.8" />
         ))}
       </g>
       <path
         d="M175 340C245 305 310 272 385 240C455 210 530 182 605 155C655 136 690 130 735 115"
-        stroke="#F4F5F0"
+        stroke={isBackground ? "#7CA854" : "#F4F5F0"}
+        strokeOpacity={isBackground ? "0.7" : "1"}
         strokeWidth="1.75"
         fill="none"
       />
-      <g>
+      <g opacity={isBackground ? "0.8" : "1"}>
         {keyNodes.map(([x, y]) => (
           <g key={`k-${x}-${y}`}>
             <circle cx={x} cy={y} r="4.5" fill="#0B1110" stroke="#B9E36A" strokeWidth="1.5" />
@@ -121,18 +125,23 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     scene.fog = new THREE.Fog("#0B1110", 9.5, 21);
 
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 40);
-    // Shift look-at slightly left when used as hero background so trajectory centerpiece sits cleanly to the right of left-aligned copy
+    // Keep focal trajectory cluster shifted clearly into the right viewport zone when used as hero background
     const isBg = variant === "background";
-    camera.position.set(isBg ? -1.4 : 0.35, 2.25, isBg ? 8.3 : 8.1);
-    camera.lookAt(isBg ? -1.1 : 0, 0.05, 0);
+    camera.position.set(isBg ? -1.85 : 0.35, 2.2, isBg ? 8.6 : 8.1);
+    camera.lookAt(isBg ? -1.45 : 0, 0.05, 0);
 
     const worldGroup = new THREE.Group();
     if (isBg) {
-      worldGroup.position.x = 1.15;
+      worldGroup.position.x = 2.15;
     }
     scene.add(worldGroup);
 
-    const grid = new THREE.GridHelper(18, 24, 0x2c3a35, 0x1a2320);
+    const grid = new THREE.GridHelper(
+      18,
+      24,
+      isBg ? 0x22332c : 0x2c3a35,
+      isBg ? 0x131d19 : 0x1a2320,
+    );
     grid.position.y = -1.65;
     worldGroup.add(grid);
 
@@ -151,11 +160,17 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     axesGeometry.setAttribute(
       "color",
       new THREE.Float32BufferAttribute(
-        [
-          0.725, 0.89, 0.415, 0.725, 0.89, 0.415,
-          0.6, 0.67, 0.63, 0.6, 0.67, 0.63,
-          0.6, 0.67, 0.63, 0.6, 0.67, 0.63,
-        ],
+        isBg
+          ? [
+              0.52, 0.72, 0.34, 0.52, 0.72, 0.34,
+              0.24, 0.38, 0.31, 0.24, 0.38, 0.31,
+              0.24, 0.38, 0.31, 0.24, 0.38, 0.31,
+            ]
+          : [
+              0.725, 0.89, 0.415, 0.725, 0.89, 0.415,
+              0.6, 0.67, 0.63, 0.6, 0.67, 0.63,
+              0.6, 0.67, 0.63, 0.6, 0.67, 0.63,
+            ],
         3,
       ),
     );
@@ -173,9 +188,10 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     const curve = new THREE.CatmullRomCurve3(TRAJECTORY_WAYPOINTS);
     const landmarkTargets: THREE.Vector3[] = [];
 
-    const slateColor = new THREE.Color("#7D8A83");
-    const brightColor = new THREE.Color("#E8EBE4");
-    const signalColor = new THREE.Color("#B9E36A");
+    // Separate background cloud hues (deep teal-sage & olive-green) cleanly from bright white foreground typography
+    const slateColor = new THREE.Color(isBg ? "#294137" : "#7D8A83");
+    const brightColor = new THREE.Color(isBg ? "#446D59" : "#E8EBE4");
+    const signalColor = new THREE.Color(isBg ? "#7DAA4B" : "#B9E36A");
 
     for (let i = 0; i < pointCount; i++) {
       const t = i / pointCount;
@@ -224,10 +240,10 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     cloudGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
     const cloudMaterial = new THREE.PointsMaterial({
-      size: 0.085,
+      size: isBg ? 0.072 : 0.085,
       vertexColors: true,
       transparent: true,
-      opacity: 0.92,
+      opacity: isBg ? 0.62 : 0.92,
       sizeAttenuation: true,
     });
     worldGroup.add(new THREE.Points(cloudGeometry, cloudMaterial));
@@ -235,9 +251,9 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     const curvePoints = curve.getPoints(200);
     const referenceGeo = new THREE.BufferGeometry().setFromPoints(curvePoints);
     const referenceMat = new THREE.LineBasicMaterial({
-      color: new THREE.Color("#2D3A35"),
+      color: new THREE.Color(isBg ? "#21332C" : "#2D3A35"),
       transparent: true,
-      opacity: 0.9,
+      opacity: isBg ? 0.75 : 0.9,
     });
     worldGroup.add(new THREE.Line(referenceGeo, referenceMat));
 
@@ -247,9 +263,9 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     );
     trajectoryGeometry.setDrawRange(0, initialSegmentCount);
     const trajectoryMaterial = new THREE.LineBasicMaterial({
-      color: new THREE.Color("#F4F5F0"),
+      color: new THREE.Color(isBg ? "#84B354" : "#F4F5F0"),
       transparent: true,
-      opacity: 0.98,
+      opacity: isBg ? 0.78 : 0.98,
     });
     worldGroup.add(new THREE.Line(trajectoryGeometry, trajectoryMaterial));
 
@@ -440,9 +456,9 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
       <div
         ref={mountRef}
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full bg-deep-field"
+        className="absolute inset-0 h-full w-full bg-deep-field opacity-55 md:opacity-100"
       >
-        <SpatialFieldFallback />
+        <SpatialFieldFallback isBackground />
       </div>
     );
   }

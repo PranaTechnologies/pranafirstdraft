@@ -21,10 +21,18 @@ export default function HomePage() {
       <section className="relative flex min-h-[min(92vh,840px)] flex-col justify-center overflow-hidden border-b border-deep-border bg-deep-field pb-14 pt-28 text-field md:pb-20 md:pt-36">
         <SpatialFieldCanvas variant="background" />
 
-        {/* Layered scrims protect hero typography on the left while preserving 3D depth on the right */}
+        {/* Layered scrims isolate left editorial copy from 3D telemetry geometry */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-[2] bg-gradient-to-r from-deep-field/95 via-deep-field/90 to-deep-field/65 md:via-deep-field/80 md:to-deep-field/20"
+          className="pointer-events-none absolute inset-0 z-[2] bg-deep-field/70 md:hidden"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[2] hidden md:block"
+          style={{
+            background:
+              "linear-gradient(90deg, #0B1110 0%, rgba(11,17,16,0.97) 38%, rgba(11,17,16,0.62) 58%, rgba(11,17,16,0.12) 85%, rgba(11,17,16,0.18) 100%)",
+          }}
         />
         <div
           aria-hidden="true"
@@ -33,68 +41,68 @@ export default function HomePage() {
 
         <div className="relative z-10 mx-auto w-full max-w-editorial px-6 md:px-12 lg:px-16">
           <div className="max-w-2xl">
-            <p className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-[#C8D1CC]">
+            <p className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-[#D8E0DA]">
               <span
                 aria-hidden="true"
                 className="h-2 w-2 rounded-full bg-signal"
               />
               {BRAND.name} / {BRAND.tagline}
             </p>
-            <h1 className="mt-6 font-display text-[2.75rem] font-light leading-[1.04] tracking-[-0.03em] text-field sm:text-[4.1rem] lg:text-[4.85rem]">
+            <h1 className="mt-6 font-display text-[2.75rem] font-light leading-[1.04] tracking-[-0.03em] text-white sm:text-[4.1rem] lg:text-[4.85rem]">
               {BRAND.headline}
             </h1>
-            <p className="mt-7 max-w-[56ch] text-lg leading-[1.68] text-[#D3DCD6] sm:text-[19px]">
+            <p className="mt-7 max-w-[56ch] text-lg leading-[1.68] text-[#E3EAE5] sm:text-[19px]">
               {BRAND.heroSupporting}
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Link
                 href="/systems/pivo"
-                className="inline-flex items-center gap-2 rounded-sm bg-signal px-6 py-4 font-mono text-xs font-medium uppercase tracking-[0.12em] text-graphite transition-colors duration-150 hover:bg-field hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                className="inline-flex items-center gap-2 rounded-sm bg-signal px-6 py-4 font-mono text-xs font-medium uppercase tracking-[0.12em] text-graphite transition-colors duration-150 hover:bg-white hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
               >
                 <span>Explore PIVO</span>
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-sm border border-deep-border bg-deep-field/75 px-6 py-4 font-mono text-xs uppercase tracking-[0.12em] text-field backdrop-blur-sm transition-colors duration-150 hover:border-signal hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                className="inline-flex items-center gap-2 rounded-sm border border-[#34423D] bg-[#0B1110]/85 px-6 py-4 font-mono text-xs uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-colors duration-150 hover:border-signal hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
               >
                 <span>Discuss an Integration</span>
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
 
-            <div className="mt-14 grid grid-cols-1 gap-5 border-t border-deep-border/80 pt-5 sm:grid-cols-3 sm:gap-4">
+            <div className="mt-14 grid grid-cols-1 gap-5 border-t border-deep-border/90 pt-5 sm:grid-cols-3 sm:gap-4">
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-deep-muted">
+                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#BAC5BE]">
                   CORE ENGINE
                 </p>
-                <p className="mt-1.5 text-base text-field">
+                <p className="mt-1.5 text-base text-white">
                   PIVO (~30 Hz VIO)
                 </p>
               </div>
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-deep-muted">
+                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#BAC5BE]">
                   FLIGHT STACKS
                 </p>
-                <p className="mt-1.5 text-base text-field">
+                <p className="mt-1.5 text-base text-white">
                   PX4 &amp; ROS 2 Ready
                 </p>
               </div>
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-deep-muted">
+                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#BAC5BE]">
                   EXECUTION
                 </p>
-                <p className="mt-1.5 text-base text-field">
+                <p className="mt-1.5 text-base text-white">
                   Onboard Compute
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-deep-border/60 pt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-deep-muted">
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-deep-border/70 pt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-[#BAC5BE]">
             <span>THE PERCEPTION FIELD · 3D SPATIAL RECONSTRUCTION</span>
-            <span className="inline-flex items-center gap-2 text-field">
+            <span className="inline-flex items-center gap-2 text-white">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-signal" />
               ILLUSTRATIVE RECONSTRUCTION
             </span>
@@ -282,34 +290,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 05 — BEACHHEAD FOCUS & TECHNICAL JOURNAL (Pure White) */}
-      <section className="bg-surface py-24 md:py-32">
+      {/* SECTION 05 — BEACHHEAD FOCUS & TECHNICAL JOURNAL (Deep Field Dark Band) */}
+      <section className="border-b border-deep-border bg-deep-field py-24 text-field md:py-32">
         <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
           <div className="grid gap-10 lg:grid-cols-12">
             {/* UAV Beachhead & Team */}
-            <div className="flex min-w-0 flex-col justify-between rounded-card border border-border-grey bg-field p-8 lg:col-span-6">
+            <div className="flex min-w-0 flex-col justify-between rounded-card border border-deep-border bg-deep-surface p-8 lg:col-span-6">
               <div>
-                <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-ink">
+                <p className="font-mono text-xs uppercase tracking-[0.14em] text-signal">
                   PL / DEPLOYMENT FOCUS
                 </p>
-                <h2 className="mt-4 font-display text-3xl font-normal leading-tight tracking-[-0.02em] text-graphite">
+                <h2 className="mt-4 font-display text-3xl font-normal leading-tight tracking-[-0.02em] text-field">
                   Built first for UAV &amp; industrial drone platforms.
                 </h2>
-                <p className="mt-4 text-lg leading-relaxed text-muted-ink">
+                <p className="mt-4 text-lg leading-relaxed text-[#BCC7C0]">
                   Headquartered in Bhubaneswar, Odisha, we build onboard visual-inertial estimation designed for tight integration with PX4 and ROS 2 flight stacks across UAV and industrial drone platforms.
                 </p>
               </div>
-              <div className="mt-8 flex flex-wrap gap-6 border-t border-border-grey pt-6">
+              <div className="mt-8 flex flex-wrap gap-6 border-t border-deep-border pt-6">
                 <Link
                   href="/applications"
-                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-graphite underline decoration-border-grey underline-offset-4 hover:decoration-graphite"
+                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-field underline decoration-deep-border underline-offset-4 transition-colors hover:text-signal hover:decoration-signal"
                 >
                   <span>Applications Matrix</span>
                   <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-graphite underline decoration-border-grey underline-offset-4 hover:decoration-graphite"
+                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-field underline decoration-deep-border underline-offset-4 transition-colors hover:text-signal hover:decoration-signal"
                 >
                   <span>Meet the Founders</span>
                   <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -318,34 +326,34 @@ export default function HomePage() {
             </div>
 
             {/* Technical Blog Preview */}
-            <div className="flex min-w-0 flex-col justify-between rounded-card border border-border-grey bg-field p-8 lg:col-span-6">
+            <div className="flex min-w-0 flex-col justify-between rounded-card border border-deep-border bg-deep-surface p-8 lg:col-span-6">
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="font-mono text-xs uppercase tracking-[0.14em] text-muted-ink">
+                  <span className="font-mono text-xs uppercase tracking-[0.14em] text-signal">
                     PL / TECHNICAL BLOG
                   </span>
-                  <span className="rounded-sm border border-border-grey bg-surface px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-graphite">
+                  <span className="rounded-sm border border-deep-border bg-deep-field px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-signal">
                     {FEATURED_BLOG_POST.status}
                   </span>
                 </div>
-                <h2 className="mt-4 font-display text-3xl font-normal leading-tight tracking-[-0.02em] text-graphite">
+                <h2 className="mt-4 font-display text-3xl font-normal leading-tight tracking-[-0.02em] text-field">
                   {FEATURED_BLOG_POST.title}
                 </h2>
-                <p className="mt-4 text-lg leading-relaxed text-muted-ink">
+                <p className="mt-4 text-lg leading-relaxed text-[#BCC7C0]">
                   {FEATURED_BLOG_POST.summary}
                 </p>
               </div>
-              <div className="mt-8 flex flex-wrap gap-6 border-t border-border-grey pt-6">
+              <div className="mt-8 flex flex-wrap gap-6 border-t border-deep-border pt-6">
                 <Link
                   href={`/research/${FEATURED_BLOG_POST.slug}`}
-                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-graphite underline decoration-border-grey underline-offset-4 hover:decoration-graphite"
+                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-field underline decoration-deep-border underline-offset-4 transition-colors hover:text-signal hover:decoration-signal"
                 >
                   <span>Read Article</span>
                   <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
                 <Link
                   href="/research"
-                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-muted-ink underline decoration-border-grey underline-offset-4 hover:text-graphite"
+                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-[#BCC7C0] underline decoration-deep-border underline-offset-4 transition-colors hover:text-signal hover:decoration-signal"
                 >
                   <span>All Engineering Notes</span>
                   <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -356,8 +364,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 06 — CLOSING STATEMENT */}
-      <ClosingBand />
+      {/* SECTION 06 — CLOSING STATEMENT (Field White Contrast Band) */}
+      <ClosingBand tone="light" />
     </>
   );
 }
