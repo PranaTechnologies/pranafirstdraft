@@ -433,42 +433,42 @@ export function SpatialFieldCanvas() {
 
   return (
     <div className="w-full min-w-0 overflow-hidden rounded-card border border-deep-border bg-deep-field text-field">
-      <div className="flex items-center justify-between gap-3 border-b border-deep-border px-4 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-deep-muted sm:text-[11px]">
-        <span className="truncate">THE PERCEPTION FIELD · 3D RECONSTRUCTION</span>
+      <div className="flex items-center justify-between gap-3 border-b border-deep-border px-4 py-3 font-mono text-[11px] uppercase tracking-[0.12em] text-deep-muted sm:text-xs">
+        <span className="truncate">THE PERCEPTION FIELD · 3D VIEWPORT</span>
         <span className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-field">
           <span
             aria-hidden="true"
             className="h-2 w-2 rounded-full bg-signal"
           />
-          ACTIVE FIELD
+          ILLUSTRATIVE RECONSTRUCTION
         </span>
       </div>
 
       <div
         ref={mountRef}
         className="relative aspect-[4/3] w-full cursor-crosshair bg-deep-field sm:aspect-[16/11]"
-        aria-label="Interactive three-dimensional spatial reconstruction and visual-inertial trajectory visualization"
+        aria-label="Interactive illustrative three-dimensional spatial reconstruction and visual-inertial trajectory"
       >
         <SpatialFieldFallback />
 
-        <div className="pointer-events-none absolute inset-x-4 bottom-3 z-10 flex flex-wrap items-center justify-between gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-deep-muted">
-          <span>COORDINATES: LOCAL FRAME</span>
+        <div className="pointer-events-none absolute inset-x-4 bottom-3 z-10 flex flex-wrap items-center justify-between gap-2 font-mono text-[11px] uppercase tracking-[0.11em] text-deep-muted">
+          <span>ILLUSTRATIVE SPATIAL FIELD</span>
           <span>TRAJECTORY + SPARSE POINT CLOUD</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 divide-y divide-deep-border border-t border-deep-border bg-deep-surface sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-        <div className="px-4 py-3 font-mono text-[11px] uppercase tracking-[0.11em]">
+        <div className="px-4 py-3.5 font-mono text-xs uppercase tracking-[0.11em]">
           <span className="text-deep-muted">INPUT</span>
           <p className="mt-1 text-field">CAMERA + IMU</p>
         </div>
-        <div className="px-4 py-3 font-mono text-[11px] uppercase tracking-[0.11em]">
+        <div className="px-4 py-3.5 font-mono text-xs uppercase tracking-[0.11em]">
           <span className="text-deep-muted">ESTIMATION</span>
           <p className="mt-1 text-field">VISUAL-INERTIAL</p>
         </div>
-        <div className="px-4 py-3 font-mono text-[11px] uppercase tracking-[0.11em]">
-          <span className="text-deep-muted">ENVIRONMENT</span>
-          <p className="mt-1 text-field">GNSS-INDEPENDENT</p>
+        <div className="px-4 py-3.5 font-mono text-xs uppercase tracking-[0.11em]">
+          <span className="text-deep-muted">CADENCE</span>
+          <p className="mt-1 text-field">~30 HZ LOCAL / ~1 HZ GLOBAL</p>
         </div>
       </div>
     </div>

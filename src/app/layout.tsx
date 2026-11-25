@@ -3,7 +3,7 @@ import { Manrope, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { BRAND } from "@/data/site-content";
+import { BRAND, SITE_URL } from "@/data/site-content";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -20,17 +20,26 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: `${BRAND.name} | Autonomy Systems & Perception Engineering`,
+    default: `${BRAND.name} | ${BRAND.tagline}`,
     template: `%s | ${BRAND.name}`,
   },
-  description:
-    "Perception Labs builds perception, visual-inertial state estimation, localization, and onboard autonomy systems for machines operating in complex real-world environments.",
+  description: BRAND.heroSupporting,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: `${BRAND.name} | From Perception to Autonomy`,
-    description:
-      "Autonomy systems, visual-inertial navigation, and spatial intelligence engineered for real-world environments.",
+    title: `${BRAND.name} | ${BRAND.tagline}`,
+    description: BRAND.heroSupporting,
+    url: SITE_URL,
+    siteName: BRAND.name,
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${BRAND.name} | ${BRAND.tagline}`,
+    description: BRAND.heroSupporting,
   },
 };
 

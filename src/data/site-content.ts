@@ -1,21 +1,24 @@
+export const SITE_URL = "https://pranafirstdraft.vercel.app";
+
 export const BRAND = {
   name: "Perception Labs",
   shortCode: "PL",
-  tagline: "From perception to autonomy.",
+  tagline: "Intelligence for Autonomous Machines",
   concept: "The Perception Field",
-  centralIdea: "Making autonomy work in the real world",
-  promise: "Turning sensor data into actionable understanding",
-  statement:
-    "We develop the technologies that enable machines to understand their surroundings, determine where they are, and operate intelligently in complex real-world environments.",
-  scopeNote:
-    "Our work spans perception, state estimation, navigation, spatial intelligence, and onboard autonomy.",
+  headline: "Machines that understand the world they move through.",
+  heroSupporting:
+    "Perception Labs develops visual-inertial navigation, spatial perception and onboard autonomy systems for UAVs and robotic platforms. We connect sensing, state estimation and embedded intelligence to help autonomous machines operate in complex real-world environments.",
+  location: "Bhubaneswar, Odisha, India",
 } as const;
 
 export const CONTACT_INFO = {
   googleFormUrl:
     "https://docs.google.com/forms/d/e/1FAIpQLSda_XI8n_Why7Bb0ISG3kd0vG2EHEMOAcq1GkcoLdHicvT7TA/viewform",
-  email: "pranatechnologies15@gmail.com",
-  phone: "9090741357",
+  primaryEmail: "ayushman@perceptionlab.com",
+  secondaryEmail: "lakshya@perceptionlab.com",
+  phone: "+91-8280897228",
+  phoneHref: "tel:+918280897228",
+  location: "Bhubaneswar, Odisha, India",
 } as const;
 
 export const NAV_LINKS = [
@@ -26,75 +29,73 @@ export const NAV_LINKS = [
   { label: "About", href: "/about" },
 ] as const;
 
-export const BRAND_PRINCIPLES = [
+export const AUTOMATION_STAGES = [
   {
-    number: "01",
-    title: "Understand the physical world",
+    index: "01",
+    stage: "Scripted Automation",
     description:
-      "The real world is dynamic, uncertain and unstructured. Autonomous systems must make sense of it.",
+      "Machines execute predefined tasks and handle limited variations in controlled environments.",
   },
   {
-    number: "02",
-    title: "Intelligence at the edge",
+    index: "02",
+    stage: "Perceptive Automation",
     description:
-      "Autonomy should be capable of operating on the machine itself, using its own sensors and computational resources.",
+      "Machines perceive their surroundings, estimate their position, navigate dynamic environments, and adapt to changing conditions.",
   },
   {
-    number: "03",
-    title: "Engineering beyond the laboratory",
+    index: "03",
+    stage: "Generalized Automation",
     description:
-      "Technology must work under real-world constraints, not just controlled demonstrations.",
-  },
-] as const;
-
-export const PROBLEM_PILLARS = [
-  {
-    number: "01",
-    code: "PERCEIVE",
-    description:
-      "Extract meaningful information from the physical environment across varying illumination, geometry, and motion.",
-  },
-  {
-    number: "02",
-    code: "UNDERSTAND",
-    description:
-      "Estimate position, motion, geometry and environmental context continuously without depending on perfect satellite links.",
-  },
-  {
-    number: "03",
-    code: "ACT",
-    description:
-      "Translate spatial understanding into intelligent autonomous behaviour directly on the platform.",
+      "Machines generalize across tasks, handle unfamiliar environments, and perform complex physical actions in the real world.",
   },
 ] as const;
 
-export const PERCEPTION_CHAIN = [
-  "Physical World",
-  "Sensing",
-  "State Estimation",
-  "Spatial Understanding",
-  "Autonomy",
-  "Action",
+export const SPATIAL_GAPS = [
+  {
+    number: "01",
+    label: "POSITION",
+    question: "Where am I?",
+    description:
+      "Autonomous platforms require consistent local and global positioning in reference to their environment to operate reliably.",
+  },
+  {
+    number: "02",
+    label: "MOTION",
+    question: "How am I moving?",
+    description:
+      "Machines must continuously estimate velocity, orientation, and trajectory despite sensor noise, drift, and changing operating conditions.",
+  },
+  {
+    number: "03",
+    label: "ENVIRONMENT",
+    question: "What surrounds me?",
+    description:
+      "Raw sensor measurements must be transformed into a consistent spatial representation of obstacles, terrain, and structure.",
+  },
+] as const;
+
+export const LEGACY_LIMITATIONS = [
+  "GNSS-dependent positioning that fails under canopy, indoor structures, or interference",
+  "Offline mapping workflows with heavy post-processing computation loads",
+  "Limited onboard spatial understanding under tight size, weight, and power envelopes",
 ] as const;
 
 export type TechnologySlug =
   | "sensing"
-  | "state-estimation"
   | "perception"
+  | "state-estimation"
   | "spatial-intelligence"
   | "embedded-autonomy";
 
 export interface TechnologySpec {
   slug: TechnologySlug;
-  number: string;
-  stackIndex: string;
-  stackName: string;
-  stackSummary: string;
-  title: string;
+  layerNumber: string;
   shortTitle: string;
+  stackSummary: string;
   summary: string;
   overview: string;
-  graphic: "sensing" | "estimation" | "perception" | "spatial" | "autonomy";
+  feedbackNote: string;
+  graphic: "sensing" | "perception" | "estimation" | "spatial" | "autonomy";
   focusAreas: Array<{
     label: string;
     detail: string;
@@ -103,493 +104,641 @@ export interface TechnologySpec {
   outputs: string[];
 }
 
-export const TECHNOLOGY_ITEMS: TechnologySpec[] = [
+export const TECHNOLOGY_LAYERS: TechnologySpec[] = [
+  {
+    slug: "sensing",
+    layerNumber: "01",
+    shortTitle: "Sensing",
+    stackSummary: "Cameras, IMUs, LiDAR and sensor synchronization",
+    summary:
+      "Cameras, inertial sensors, optional depth/LiDAR payloads, and hardware-aware synchronization.",
+    overview:
+      "Every downstream estimation and autonomy capability depends on reliable physical measurements. We integrate onboard camera feeds, inertial measurement units, and optional auxiliary sensors with explicit timestamping and calibration.",
+    feedbackNote:
+      "Receives exposure, frame-rate, and sensor health directives from Autonomy and Estimation.",
+    graphic: "sensing",
+    focusAreas: [
+      {
+        label: "Camera & IMU Acquisition",
+        detail:
+          "Synchronized image streams paired with high-rate angular velocity and linear acceleration measurements.",
+      },
+      {
+        label: "Auxiliary Sensor Support",
+        detail:
+          "Optional integration of barometer, GNSS, LiDAR, and pre-recorded environmental reference maps when available.",
+      },
+      {
+        label: "Intrinsic & Extrinsic Calibration",
+        detail:
+          "Modeling lens geometry, sensor biases, and rigid airframe mounting transforms across platforms.",
+      },
+    ],
+    inputs: [
+      "Optical Camera Streams",
+      "High-Rate IMU Measurements",
+      "Optional Barometer, LiDAR, GNSS",
+    ],
+    outputs: [
+      "Timestamped Sensor Packets",
+      "Calibrated Frame Geometry",
+      "Exposure & Timing Metadata",
+    ],
+  },
   {
     slug: "perception",
-    number: "01",
-    stackIndex: "03",
-    stackName: "Perception",
-    stackSummary: "Detection, tracking and spatial understanding",
-    title: "01 — Perception",
+    layerNumber: "02",
     shortTitle: "Perception",
+    stackSummary: "Feature extraction, tracking and environmental observations",
     summary:
-      "Understanding the physical environment through sensing and computational vision.",
+      "Feature extraction, visual tracking, and environmental observations across dynamic lighting and motion.",
     overview:
-      "Autonomous platforms operate in cluttered, visually degraded, and rapidly changing environments. Our perception work extracts consistent geometric features, structure, and motion cues from camera, depth, thermal, and multi-sensor streams.",
+      "Perception extracts persistent geometric features and structural cues from onboard visual streams, enabling downstream estimators to track motion continuously across complex indoor and outdoor scenes.",
+    feedbackNote:
+      "Exchanges active keyframe priors with State Estimation and Spatial Intelligence.",
     graphic: "perception",
     focusAreas: [
       {
-        label: "Feature Correspondence & Tracking",
+        label: "Feature Extraction & Tracking",
         detail:
-          "Maintaining stable visual observations across frame sequences under rapid ego-motion and variable exposure.",
+          "Selecting and tracking stable visual landmarks across consecutive camera frames under agile UAV dynamics.",
       },
       {
-        label: "Multi-Modal Sensor Integration",
+        label: "Landscape & Map Correspondence",
         detail:
-          "Aligning monocular, stereo, depth, and auxiliary sensor measurements into coherent scene observations.",
+          "Matching live downward- or forward-looking imagery against reference site maps for global localization cues.",
       },
       {
-        label: "Environmental Robustness",
+        label: "Outlier & Quality Rejection",
         detail:
-          "Designing perceptual pipelines for low-texture interiors, shadows, canopy cover, and dust-impaired visibility.",
+          "Filtering transient motion, reflections, and unreliable visual observations before state updates.",
       },
     ],
-    inputs: ["Optical Camera Streams", "Depth / Auxiliary Sensors", "Exposure & Calibration Metadata"],
-    outputs: ["Tracked Visual Features", "Scene Structure Cues", "Temporal Correspondences"],
+    inputs: [
+      "Calibrated Image Frames",
+      "State Prediction Priors",
+      "Optional Reference Site Imagery",
+    ],
+    outputs: [
+      "Tracked Visual Features",
+      "Global Match Candidates",
+      "Visual Tracking Confidence",
+    ],
   },
   {
     slug: "state-estimation",
-    number: "02",
-    stackIndex: "02",
-    stackName: "Estimation",
-    stackSummary: "Sensor fusion, visual-inertial odometry and localization",
-    title: "02 — State Estimation",
+    layerNumber: "03",
     shortTitle: "State Estimation",
+    stackSummary: "Visual-inertial odometry, sensor fusion and localization",
     summary:
-      "Understanding position, motion and orientation through multi-sensor information.",
+      "Visual-inertial odometry, multi-sensor fusion, and consistent local or global localization.",
     overview:
-      "When GNSS signals are unavailable, degraded, or unreliable, onboard motion estimation must keep track of pose, velocity, and orientation. We combine high-rate inertial measurements with visual constraints for continuous trajectory estimation.",
+      "State Estimation fuses high-rate inertial kinematics with visual feature tracks—and optional global visual map matches or auxiliary sensors—to produce smooth 6-DoF pose, velocity, attitude, and uncertainty estimates.",
+    feedbackNote:
+      "Supplies motion priors back to Perception tracking and triggers fallback modes in Autonomy.",
     graphic: "estimation",
     focusAreas: [
       {
-        label: "Visual-Inertial Odometry",
+        label: "Local Visual-Inertial Odometry (~30 Hz)",
         detail:
-          "Fusing inertial kinematics with visual feature observations to estimate continuous 6-DoF ego-motion.",
+          "Continuous local pose and velocity estimation using onboard camera and IMU measurements without requiring prior maps.",
       },
       {
-        label: "Temporal Synchronization",
+        label: "Global Visual Localization (~1 Hz)",
         detail:
-          "Accounting for clock alignment, sensor latency, and extrinsic calibration across heterogeneous hardware.",
+          "Optional absolute position updates (WGS84) derived by matching camera observations against geo-referenced site maps.",
       },
       {
-        label: "Uncertainty-Aware Fusion",
+        label: "Health-Aware Multi-Source Fusion",
         detail:
-          "Propagating covariance and consistency bounds across estimation updates in demanding flight and ground profiles.",
+          "Monitoring sensor signal quality, prioritizing reliable inputs, and rejecting degraded measurements.",
       },
     ],
-    inputs: ["High-Rate IMU Measurements", "Synchronized Image Frames", "Kinematic Constraints"],
-    outputs: ["6-DoF Pose & Velocity", "Estimated Trajectory", "State Covariance"],
+    inputs: [
+      "IMU Kinematics",
+      "Tracked Visual Features",
+      "Optional Global Visual Pose & Barometer",
+    ],
+    outputs: [
+      "6-DoF Pose, Velocity & Heading",
+      "Relative Height / AGL",
+      "Localization Confidence & Health",
+    ],
   },
   {
     slug: "spatial-intelligence",
-    number: "03",
-    stackIndex: "04",
-    stackName: "Intelligence",
-    stackSummary: "Mapping, environmental interpretation and planning",
-    title: "03 — Spatial Intelligence",
+    layerNumber: "04",
     shortTitle: "Spatial Intelligence",
+    stackSummary: "Mapping, geometry and environmental representation",
     summary:
-      "Building meaningful representations of the environment.",
+      "Local spatial mapping, 3D geometry reconstruction, and environmental understanding.",
     overview:
-      "Navigation requires more than an instantaneous coordinate estimate. Spatial intelligence transforms raw sensor feeds and pose history into structured local representations—point clouds, traversal geometry, and spatial context.",
+      "Spatial Intelligence converts pose histories and sensor observations into structured representations of the surrounding environment—supporting obstacle awareness, corridor traversal, and consistent local reference frames.",
+    feedbackNote:
+      "Provides geometric constraints to State Estimation and navigable space models to Autonomy.",
     graphic: "spatial",
     focusAreas: [
       {
-        label: "Local Spatial Reconstruction",
+        label: "Dynamic Local Mapping",
         detail:
-          "Constructing sparse and semi-dense 3D representations around the vehicle for obstacle and corridor awareness.",
+          "Constructing and refining local geometric representations directly onboard without heavy offline post-processing.",
       },
       {
-        label: "Reference Frame Alignment",
+        label: "Coordinate Frame Coherence",
         detail:
-          "Maintaining coherent transformations between body, sensor, local navigation, and mission coordinate frames.",
+          "Maintaining consistent transformations across body, sensor, local navigation, and WGS84 reference frames.",
       },
       {
-        label: "Trajectory Consistency",
+        label: "Environmental Context",
         detail:
-          "Preserving geometric continuity across turns, altitude shifts, and changing surface structure.",
+          "Interpreting surface structure, elevation contours, and structural corridors around the vehicle.",
       },
     ],
-    inputs: ["Estimated Poses", "Depth & Triangulated Points", "Historical Keyframes"],
-    outputs: ["Local 3D Geometry", "Navigable Free Space", "Consistent Spatial Frame"],
+    inputs: [
+      "Estimated 6-DoF Trajectories",
+      "Triangulated Points & Depth Cues",
+      "Pre-Recorded Reference Maps",
+    ],
+    outputs: [
+      "Local 3D Spatial Maps",
+      "Obstacle & Corridor Geometry",
+      "Aligned Reference Frames",
+    ],
   },
   {
     slug: "embedded-autonomy",
-    number: "04",
-    stackIndex: "05",
-    stackName: "Autonomy",
-    stackSummary: "Navigation, decision-making and control",
-    title: "04 — Embedded Autonomy",
-    shortTitle: "Embedded Autonomy",
+    layerNumber: "05",
+    shortTitle: "Autonomy",
+    stackSummary: "Navigation, planning and onboard execution",
     summary:
-      "Bringing intelligent systems onto the machines themselves.",
+      "Onboard navigation integration, flight-stack interfaces, and deterministic edge execution.",
     overview:
-      "Real-world autonomy cannot rely on high-bandwidth links to offboard clusters. We engineer perception and state estimation software around strict onboard compute, memory, thermal, and power envelopes.",
+      "Autonomy brings perception and state estimation directly onto the machine itself—interfacing cleanly with flight controllers and ground control stations within strict onboard compute budgets.",
+    feedbackNote:
+      "Closes the loop with Sensing and Estimation via mission state, flight dynamics, and health monitoring.",
     graphic: "autonomy",
     focusAreas: [
       {
-        label: "Edge Execution",
+        label: "Flight-Stack & Middleware Integration",
         detail:
-          "Running deterministic, resource-bounded navigation and perception workloads directly on embedded companion compute.",
+          "Direct integration interfaces for PX4 and ROS 2 autopilot architectures used across multirotor UAS platforms.",
       },
       {
-        label: "Autopilot Integration",
+        label: "Resource-Constrained Edge Compute",
         detail:
-          "Providing clean, bounded navigation outputs compatible with standard flight controllers and robotic middleware.",
+          "Running onboard without ground infrastructure dependencies or continuous external compute links.",
       },
       {
-        label: "Degraded-Mode Awareness",
+        label: "Operator Telemetry & Health",
         detail:
-          "Explicit health monitoring and fallback signaling when sensor quality degrades in extreme operating conditions.",
+          "Reporting real-time localization confidence, tracking status, and fallback readiness to ground control displays.",
       },
     ],
-    inputs: ["Spatial Representations", "Vehicle State Estimates", "Mission Objectives"],
-    outputs: ["Navigation Setpoints", "Health & Confidence Status", "Autonomous Action"],
+    inputs: [
+      "Fused Pose & Velocity (~30 Hz)",
+      "Local Spatial Representations",
+      "Vehicle & Mission Objectives",
+    ],
+    outputs: [
+      "PX4 / ROS 2 Navigation Streams",
+      "GCS Tracking Health Telemetry",
+      "Autonomous Control Readiness",
+    ],
   },
 ];
 
-export const SENSING_LAYER: TechnologySpec = {
-  slug: "sensing",
-  number: "00",
-  stackIndex: "01",
-  stackName: "Sensing",
-  stackSummary: "Cameras, IMUs, LiDAR and other sensors",
-  title: "00 — Sensing",
-  shortTitle: "Sensing",
-  summary:
-    "Capturing deterministic multi-sensor observations from the physical environment.",
-  overview:
-    "Every downstream estimation and autonomy module is bounded by the quality and timing of its raw physical measurements. We design hardware-aware sensing pipelines uniting global-shutter cameras, inertial measurement units, and complementary payloads.",
-  graphic: "sensing",
-  focusAreas: [
-    {
-      label: "Synchronized Multi-Sensor Capture",
-      detail:
-        "Hardware-timed alignment between optical shutters and inertial sampling intervals to avoid time-offset drift.",
-    },
-    {
-      label: "Intrinsic & Extrinsic Calibration",
-      detail:
-        "Accurate modeling of lens geometry, IMU biases, and rigid transforms across custom airframes and chassis.",
-    },
-    {
-      label: "Sensor Payload Flexibility",
-      detail:
-        "Support for visible-spectrum, thermal, depth, and LiDAR payloads depending on platform mission constraints.",
-    },
-  ],
-  inputs: ["Optical Light & Motion", "Angular Rates & Accelerations", "Depth / Range Returns"],
-  outputs: ["Timestamped Sensor Packets", "Calibrated Rig Geometry", "Deterministic Data Streams"],
-};
-
-export const ALL_TECHNOLOGY_SPECS: TechnologySpec[] = [
-  ...TECHNOLOGY_ITEMS,
-  SENSING_LAYER,
-];
-
-export const AUTONOMY_STACK_LAYERS = [
-  {
-    index: "01",
-    name: "Sensing",
-    description: "Cameras, IMUs, LiDAR and other sensors",
-    href: "/technology/sensing",
-  },
-  {
-    index: "02",
-    name: "Estimation",
-    description: "Sensor fusion, visual-inertial odometry and localization",
-    href: "/technology/state-estimation",
-  },
-  {
-    index: "03",
-    name: "Perception",
-    description: "Detection, tracking and spatial understanding",
-    href: "/technology/perception",
-  },
-  {
-    index: "04",
-    name: "Intelligence",
-    description: "Mapping, environmental interpretation and planning",
-    href: "/technology/spatial-intelligence",
-  },
-  {
-    index: "05",
-    name: "Autonomy",
-    description: "Navigation, decision-making and control",
-    href: "/technology/embedded-autonomy",
-  },
-] as const;
-
-export interface SystemProgram {
-  id: string;
-  code: string;
-  name: string;
-  subtitle: string;
-  status: string;
-  description: string;
-  pipeline?: string[];
-  scope: string[];
-  graphic: "pivo" | "estimation" | "perception" | "autonomy";
-}
-
-export const SYSTEMS_PROGRAMS: SystemProgram[] = [
+export const SYSTEM_CATEGORIES = [
   {
     id: "pivo",
-    code: "SYS / 01",
+    code: "01 / CORE ENGINE",
     name: "PIVO",
-    subtitle: "Parallel Visual-Inertial Odometry",
-    status: "Active Core Engine",
-    description:
-      "A lightweight navigation engine designed for real-time motion estimation and onboard autonomy on resource-constrained aerial and robotic platforms.",
-    pipeline: ["Camera + IMU", "Motion Estimation", "Navigation Output"],
-    scope: [
-      "Real-time visual-inertial ego-motion estimation",
-      "Designed for embedded companion processors",
-      "Structured telemetry and clean state-output interfaces",
-    ],
-    graphic: "pivo",
+    category: "Core Visual-Inertial Navigation Engine",
+    maturity: "Core Engine · Pilot Preparation",
+    summary:
+      "Single-machine parallel visual-inertial odometry engine transforming synchronized camera and IMU measurements into real-time 6-DoF motion estimation on onboard compute.",
+    href: "/systems/pivo",
+    ctaLabel: "Explore PIVO Architecture",
   },
   {
-    id: "gps-denied-navigation",
-    code: "SYS / 02",
-    name: "GPS-Denied Navigation",
-    subtitle: "Integrated Localization & Navigation Stack",
-    status: "Integrated Stack Development",
-    description:
-      "An integrated navigation stack for autonomous platforms operating in environments where satellite positioning is unavailable, degraded, or compromised.",
-    scope: [
-      "Continuous localization across GNSS outage transitions",
-      "Consistent reference-frame management for flight & ground control",
-      "Trajectory monitoring and sensor-health reporting",
-    ],
-    graphic: "estimation",
+    id: "navigation-systems",
+    code: "02 / INTEGRATED STACK",
+    name: "Navigation Systems",
+    category: "Integrated Localization & Navigation Stack",
+    maturity: "Entering Phase 4 Pilot Integration",
+    summary:
+      "Integrated UAS navigation module combining local VIO (~30 Hz) with optional global visual map matching (~1 Hz WGS84) and health-monitored state fusion for PX4 and ROS 2 platforms.",
+    href: "/systems#navigation-systems",
+    ctaLabel: "View Navigation System",
   },
   {
     id: "perception-modules",
-    code: "SYS / 03",
+    code: "03 / MODULAR CAPABILITIES",
     name: "Perception Modules",
-    subtitle: "Modular Spatial & Sensor Capabilities",
-    status: "Modular Integration",
-    description:
-      "Modular perception capabilities designed for integration into robotic and UAV systems, bridging multi-sensor sensing with spatial awareness.",
-    scope: [
-      "Camera, depth, thermal, and LiDAR fusion interfaces",
-      "Local spatial mapping and obstacle representation",
-      "Adaptable software modules for custom platform architectures",
-    ],
-    graphic: "perception",
+    category: "Sensing, Tracking & Spatial Understanding",
+    maturity: "Active Development",
+    summary:
+      "Modular multi-sensor fusion, spatial mapping, and feature-tracking capabilities adaptable to multirotor UAVs and mobile robotics architectures.",
+    href: "/systems#perception-modules",
+    ctaLabel: "View Perception Modules",
   },
   {
-    id: "custom-integration",
-    code: "SYS / 04",
-    name: "Custom Integration",
-    subtitle: "OEM & Industrial Autonomy Engineering",
-    status: "Partner Engineering",
-    description:
-      "Hardware, software, sensor integration, and autonomy development tailored for OEMs, aerial platform builders, and industrial robotics teams.",
-    scope: [
-      "Sensor selection, timing synchronization, and rig calibration",
-      "Embedded compute bring-up and autopilot interface engineering",
-      "Field replay evaluation and platform-specific tuning",
-    ],
-    graphic: "autonomy",
+    id: "engineering-services",
+    code: "04 / PARTNER DELIVERY",
+    name: "Engineering Services",
+    category: "Custom Hardware, Software & OEM Integration",
+    maturity: "Available for OEM Partnerships",
+    summary:
+      "Bespoke camera-IMU payload selection, onboard compute bring-up, flight-stack integration, and operator dashboard integration tailored to OEM airframes and robotic chassis.",
+    href: "/systems#engineering-services",
+    ctaLabel: "Discuss Integration",
   },
-];
+] as const;
 
-export interface ApplicationDomain {
-  id: string;
-  index: string;
-  title: string;
-  environment: string;
-  summary: string;
-  constraints: string[];
-  graphic: "uav" | "defence" | "robotics" | "industrial";
-}
+export const PIVO_SPEC = {
+  pipeline: [
+    "Camera + IMU",
+    "Feature Tracking",
+    "State Estimation",
+    "Pose / Velocity / Covariance",
+    "PX4 / ROS 2 Integration",
+  ],
+  howItWorks: [
+    {
+      step: "01 / SENSE",
+      title: "Synchronized Visual & Inertial Capture",
+      detail:
+        "Onboard camera captures environmental visual features while the IMU measures high-rate angular velocity and linear acceleration.",
+    },
+    {
+      step: "02 / FUSE",
+      title: "Visual-Inertial State Estimation",
+      detail:
+        "Visual and inertial observations are fused to estimate motion, monitor signal quality, and constrain accumulated inertial drift.",
+    },
+    {
+      step: "03 / LOCALIZE",
+      title: "Continuous 6-DoF Navigation Output",
+      detail:
+        "Outputs position, velocity, attitude/heading, relative height (AGL), and tracking confidence in the vehicle reference frame.",
+    },
+  ],
+  modes: [
+    {
+      name: "Visual Simultaneous Localization & Mapping (VIO)",
+      cadence: "Local pose ~30 Hz",
+      detail:
+        "Continuous high-frequency relative pose estimation and local dynamic mapping without requiring pre-recorded site maps.",
+    },
+    {
+      name: "Visual Global Localization (System Extension)",
+      cadence: "Global pose ~1 Hz",
+      detail:
+        "Matches live downward-looking camera imagery against geo-referenced site maps (WGS84) to provide absolute position corrections when reference maps exist.",
+    },
+    {
+      name: "Fused State Estimation Output",
+      cadence: "Fused output ~30 Hz",
+      detail:
+        "Combines VIO, optional global map matches, and auxiliary sensors (barometer, GNSS, LiDAR) while filtering unreliable inputs.",
+    },
+  ],
+  verifiedSpecs: [
+    {
+      label: "Primary Inputs",
+      value: "Onboard camera feed + IMU (optional barometer, GNSS, LiDAR, pre-recorded site map)",
+    },
+    {
+      label: "Primary Outputs",
+      value: "Position, velocity, attitude & heading, relative height (AGL), confidence & tracking health",
+    },
+    {
+      label: "Estimation Cadence",
+      value: "~30 Hz local VIO & fused state output; ~1 Hz optional global visual map localization",
+    },
+    {
+      label: "Flight Stack Interfaces",
+      value: "PX4 and ROS 2 compatible interfaces; Ground Control Station / operator health display",
+    },
+    {
+      label: "Compute Architecture",
+      value: "Onboard edge companion compute module mounted directly on the vehicle",
+    },
+    {
+      label: "Sensor Mounting & Sync",
+      value: "Compatible with mounted downward-looking or forward camera + IMU payloads; requires calibrated timing and extrinsics",
+    },
+    {
+      label: "Hardware & Licensing Tiers",
+      value: "OEM Hardware Module (₹35,000 / unit), Software Stack License (₹10,000 / drone), Custom OEM Integration",
+    },
+    {
+      label: "Operating Limitations",
+      value: "Standalone VIO estimates relative local motion (accumulates drift over distance without global map matching or GNSS); relies on sufficient visual texture and synchronized sensor timestamps",
+    },
+  ],
+  maturityTiers: {
+    implemented: [
+      "Core visual-inertial odometry pipeline and multi-sensor state fusion architecture",
+      "PX4 / ROS 2 integration interfaces and operator navigation-health telemetry outputs",
+      "Simulation and controlled lab evaluation workflows",
+    ],
+    inDevelopment: [
+      "Phase 4 pilot deployments with initial drone service partners",
+      "Combined local VIO (~30 Hz) + global WGS84 visual localization (~1 Hz) field validation",
+      "Embedded compute profiling across partner OEM airframes",
+    ],
+    planned: [
+      "Expanded multi-rotor and ground robotics OEM platform profiles",
+      "Commercial fleet licensing and indoor logistics integration packages",
+    ],
+  },
+} as const;
 
-export const APPLICATION_DOMAINS: ApplicationDomain[] = [
+export const DEVELOPMENT_ROADMAP = [
   {
-    id: "uav-aerospace",
+    phase: "Phase 01",
+    window: "Months 0–2",
+    title: "Foundation Setup",
+    status: "Completed",
+    activities: [
+      "Finalized core estimation and software architecture",
+      "Established simulation and dataset replay environment",
+    ],
+    deliverable: "Core SDK structure & documentation",
+  },
+  {
+    phase: "Phase 02",
+    window: "Months 3–5",
+    title: "Prototype Development",
+    status: "Completed",
+    activities: [
+      "Built visual-inertial sensor fusion pipeline",
+      "Developed operator health monitoring and diagnostics",
+    ],
+    deliverable: "Working prototype in controlled lab environment",
+  },
+  {
+    phase: "Phase 03",
+    window: "Months 6–8",
+    title: "Field Testing & Iteration",
+    status: "Completed / Ongoing Refinement",
+    activities: [
+      "Tested pipelines in real-world outdoor and constrained environments",
+      "Refined state estimation and edge compute execution",
+    ],
+    deliverable: "Field-evaluated module with operator telemetry",
+  },
+  {
+    phase: "Phase 04",
+    window: "Months 9–12",
+    title: "Pilot Deployment",
+    status: "Starting Now",
+    activities: [
+      "Integrating onboard navigation modules with initial drone service partners",
+      "Evaluating closed-loop flight performance across partner inspection missions",
+    ],
+    deliverable: "Partner pilot evaluations & integration baselines",
+  },
+] as const;
+
+export const COMMERCIAL_TIERS = [
+  {
+    tier: "HARDWARE",
+    price: "₹35,000",
+    unit: "per unit · OEM Module",
+    detail:
+      "Pre-integrated onboard companion compute and calibrated camera-IMU hardware module for direct airframe mounting.",
+  },
+  {
+    tier: "SOFTWARE",
+    price: "₹10,000",
+    unit: "per platform · Stack License",
+    detail:
+      "Onboard visual-inertial navigation and spatial perception software license for compatible OEM compute.",
+  },
+  {
+    tier: "INTEGRATION",
+    price: "Custom",
+    unit: "per OEM · One-time Engineering",
+    detail:
+      "Custom payload integration, calibration workflows, PX4/ROS 2 bring-up, and pilot validation support.",
+  },
+] as const;
+
+export const APPLICATION_MATRIX = [
+  {
+    id: "uav-aerial-autonomy",
     index: "01",
+    badge: "Primary Beachhead Application",
     title: "UAV & Aerial Autonomy",
-    environment: "Low-Altitude Flight · Complex Airspace",
+    environment: "Multirotor Inspection · Low-Altitude Flight · GNSS-Degraded Airspace",
+    maturity: "Entering Phase 4 Partner Pilots",
     summary:
-      "Onboard visual-inertial state estimation and spatial awareness enabling unmanned aerial platforms to hold position, navigate corridors, and fly reliably beyond satellite coverage.",
-    constraints: [
-      "Strict size, weight, and power (SWaP) limits",
-      "High-vibration airframe dynamics and rapid attitude shifts",
-      "Transitions between open sky and cluttered terrain or structures",
+      "Built initially for multirotor UAV inspection, mapping, and industrial drone operations where GNSS is obstructed near structures or degraded at low altitude.",
+    rows: [
+      {
+        problem: "GNSS unavailable or degraded near structures",
+        capability: "Visual-inertial state estimation (~30 Hz) + optional global map matching",
+        system: "PIVO + Navigation Systems",
+        outcome: "Continuous onboard pose, velocity, and AGL output during outages",
+      },
+      {
+        problem: "Need for seamless autopilot & GCS compatibility",
+        capability: "PX4 / ROS 2 interfaces and tracking health signals",
+        system: "Navigation Systems",
+        outcome: "Drop-in primary or fallback navigation source for flight stacks",
+      },
+      {
+        problem: "Limited payload weight & onboard power budget",
+        capability: "Embedded edge execution without ground compute links",
+        system: "PIVO Core Engine",
+        outcome: "Fully onboard localization under UAV SWaP constraints",
+      },
     ],
-    graphic: "uav",
+    graphic: "uav" as const,
   },
   {
-    id: "defence-security",
+    id: "industrial-systems",
     index: "02",
-    title: "Defence & Security",
-    environment: "GNSS-Denied Operations · Contested RF",
+    badge: "Beachhead Expansion",
+    title: "Industrial Drones & Infrastructure",
+    environment: "Silos · Bridges · Industrial Plants · Forests & Terrain",
+    maturity: "Field Evaluation & OEM Integration",
     summary:
-      "Self-contained navigation and perception subsystems engineered to operate without external positioning broadcasts or continuous ground-station links.",
-    constraints: [
-      "Resilience under GNSS jamming or spoofing conditions",
-      "Fully onboard estimation without external infrastructure",
-      "Deterministic behavior under austere operating envelopes",
+      "Reliable navigation for aerial and mobile platforms inspecting industrial complexes, metallic structures, bridges, and vegetated sites where multipath distorts GNSS.",
+    rows: [
+      {
+        problem: "GNSS multipath near steel structures & towers",
+        capability: "Health-monitored fusion prioritizing visual-inertial cues",
+        system: "Navigation Systems",
+        outcome: "Reduced sensitivity to degraded satellite fixes",
+      },
+      {
+        problem: "Dynamic inspection corridors without ground beacons",
+        capability: "Local spatial mapping & landscape feature tracking",
+        system: "Perception Modules",
+        outcome: "Infrastructure-independent trajectory consistency",
+      },
     ],
-    graphic: "defence",
+    graphic: "industrial" as const,
   },
   {
     id: "autonomous-robotics",
     index: "03",
-    title: "Autonomous Robotics",
-    environment: "Indoor Facilities · Mixed Unstructured Terrain",
+    badge: "Expansion Market",
+    title: "Autonomous Robotics & Indoor Logistics",
+    environment: "Warehouses · Indoor Facilities · Mixed Perimeter Sites",
+    maturity: "Planned Platform Expansion",
     summary:
-      "Continuous localization and scene representation for ground, legged, and mobile platforms transitioning across indoor corridors, docks, and outdoor perimeters.",
-    constraints: [
-      "Repetitive geometry and dynamic human/machine traffic",
-      "Rapid lighting shifts between interior and exterior thresholds",
-      "Real-time spatial updates for local path planning",
+      "Extending onboard spatial intelligence from aerial vehicles to ground and mobile robotics operating in indoor logistics hubs and GPS-shielded facilities.",
+    rows: [
+      {
+        problem: "No GNSS penetration inside logistics centers",
+        capability: "Onboard camera-IMU odometry & local geometry mapping",
+        system: "PIVO + Perception Modules",
+        outcome: "Continuous local localization across indoor aisles",
+      },
+      {
+        problem: "Custom chassis & sensor layouts per robotics OEM",
+        capability: "Custom sensor calibration & middleware integration",
+        system: "Engineering Services",
+        outcome: "Tailored perception stack adapted to vehicle kinematics",
+      },
     ],
-    graphic: "robotics",
+    graphic: "robotics" as const,
   },
   {
-    id: "industrial-systems",
+    id: "defence-security",
     index: "04",
-    title: "Industrial Systems",
-    environment: "Infrastructure · Forests · Subterranean Sites",
+    badge: "Qualified Capability",
+    title: "Defence & Contested Operations",
+    environment: "GNSS-Denied Airspace · Independent Onboard Sensing",
+    maturity: "Under Evaluation · Strict Scope Qualifications",
     summary:
-      "Autonomous sensing and positioning inside industrial plants, silos, tunnels, bridges, and dense forest canopy where satellite geometry is occluded.",
-    constraints: [
-      "Multipath distortion near metallic structures and concrete",
-      "Overhead canopy, tunnel, and confined-space occlusion",
-      "Predictable inspection trajectories without manual piloting",
+      "Visual-inertial estimation provides an independent onboard motion-estimation source during GNSS outages without relying on external beacons or continuous ground links. Standalone VIO does not automatically detect RF spoofing or guarantee navigation across zero-visibility conditions without complementary sensors.",
+    rows: [
+      {
+        problem: "Loss of reliable GNSS positioning in denied airspace",
+        capability: "Onboard camera-IMU odometry independent of RF broadcasts",
+        system: "PIVO + Navigation Systems",
+        outcome: "Self-contained relative trajectory estimation when visual features are observable",
+      },
+      {
+        problem: "Requirement for mission-specific payloads (thermal/LiDAR)",
+        capability: "Multi-sensor state fusion & custom OEM engineering",
+        system: "Engineering Services",
+        outcome: "Evaluated per platform and operating visibility envelope",
+      },
     ],
-    graphic: "industrial",
+    graphic: "defence" as const,
   },
 ];
 
 export const ENGINEERING_DISCIPLINES = [
-  "Visual-Inertial Navigation",
-  "Sensor Fusion",
-  "State Estimation",
-  "Embedded AI",
-  "SLAM & Localization",
-  "Edge Computing",
+  "Visual-Inertial Odometry",
+  "Camera–IMU Synchronization",
+  "Multi-Sensor Fusion",
+  "Visual Global Localization",
+  "Embedded Edge Compute",
+  "PX4 / ROS 2 Integration",
 ] as const;
 
-export interface ResearchNote {
+export interface BlogArticle {
   slug: string;
   code: string;
+  status: "Placeholder Technical Blog — Draft Template" | "Planned Technical Article";
+  publishedDate: string;
+  readingTime: string;
+  author: string;
   discipline: string;
   title: string;
   summary: string;
   sections: Array<{
     heading: string;
-    body: string;
+    body: string[];
+    equation?: string;
   }>;
+  limitations: string[];
+  references: string[];
 }
 
-export const RESEARCH_NOTES: ResearchNote[] = [
-  {
-    slug: "reliable-navigation-without-gps",
-    code: "NOTE / 01",
-    discipline: "Visual-Inertial Navigation",
-    title: "Building Reliable Navigation Without GPS",
-    summary:
-      "Architectural trade-offs when transitioning from satellite-dependent positioning to onboard visual-inertial state estimation.",
-    sections: [
-      {
-        heading: "Why GNSS alone is brittle",
-        body: "Satellite positioning relies on weak radio signals arriving from orbit. Inside buildings, under dense tree canopy, alongside large metallic infrastructure, or in RF-contested environments, signals suffer multipath reflections or disappear entirely.",
-      },
-      {
-        heading: "Complementary onboard sensing",
-        body: "Cameras capture geometric structure and rich parallax across frames, while inertial measurement units sample high-frequency linear acceleration and angular velocity. Fusing both modalities lets a vehicle track short-term dynamics through rapid maneuvers while constraining inertial drift with visual observations.",
-      },
-      {
-        heading: "Engineering for failure modes",
-        body: "Reliable GPS-denied autonomy depends less on best-case benchmark scores and more on graceful behavior when visual texture drops, lighting shifts abruptly, or motion blur occurs. Explicit observability monitoring and deterministic fallback boundaries are central to field readiness.",
-      },
-    ],
-  },
-  {
-    slug: "camera-imu-synchronization",
-    code: "NOTE / 02",
-    discipline: "Sensor Fusion",
-    title: "Why Camera–IMU Synchronization Matters in Visual-Inertial Systems",
-    summary:
-      "How microsecond-scale clock alignment, exposure timing, and extrinsic calibration determine estimator stability.",
-    sections: [
-      {
-        heading: "Shared physical time",
-        body: "Visual-inertial estimators mathematically relate integrated IMU measurements to the exact instant an image frame captures the physical scene. Even modest unmodeled time offsets introduce artificial velocity errors during rotation.",
-      },
-      {
-        heading: "Rolling vs. global shutter behavior",
-        body: "Hardware-triggered global-shutter capture aligned to a common clock reference ensures every pixel corresponds to a well-defined pose timestamp, eliminating geometric skew under high-vibration UAV flight.",
-      },
-      {
-        heading: "Calibration across temperature and vibration",
-        body: "Rigid mechanical mounting and repeatable extrinsic calibration between camera optical centers and IMU axes prevent subtle frame misalignments from compounding into long-horizon trajectory drift.",
-      },
-    ],
-  },
-  {
-    slug: "visual-inertial-embedded-hardware",
-    code: "NOTE / 03",
-    discipline: "Edge Computing",
-    title: "Running Visual-Inertial Navigation on Embedded Hardware",
-    summary:
-      "Designing state estimation and perception pipelines to operate deterministically within onboard SWaP constraints.",
-    sections: [
-      {
-        heading: "Compute envelopes on real vehicles",
-        body: "Small UAVs and mobile robots cannot carry workstation GPUs or dissipate unrestricted thermal loads. State estimation must share embedded compute alongside perception, communications, and flight control.",
-      },
-      {
-        heading: "Bounded latency and memory discipline",
-        body: "Predictable frame processing times matter more than peak throughput. Fixed-size sliding windows, deterministic memory allocation, and careful parallelization keep motion estimation responsive under real-time flight loads.",
-      },
-      {
-        heading: "Clean integration boundaries",
-        body: "Decoupling sensing capture, estimation math, and flight-controller output transport makes it possible to validate algorithms across replay datasets before deploying onto embedded flight hardware.",
-      },
-    ],
-  },
-  {
-    slug: "autonomous-flight-gnss-denied",
-    code: "NOTE / 04",
-    discipline: "State Estimation",
-    title: "The Challenges of Autonomous Flight in GNSS-Denied Environments",
-    summary:
-      "Practical challenges across scale observability, low-texture surfaces, altitude changes, and closed-loop flight control.",
-    sections: [
-      {
-        heading: "Observability under uniform motion",
-        body: "Monocular visual-inertial systems rely on acceleration excitation to observe metric scale. Steady hover or constant-velocity cruise demands careful state formulation and auxiliary sensing support to keep scale consistent.",
-      },
-      {
-        heading: "Dynamic and low-feature environments",
-        body: "Moving foliage, water reflections, uniform concrete corridors, and low-light thresholds challenge naive feature matchers. Robust outlier rejection and multi-modal sensing help separate static world geometry from transient noise.",
-      },
-      {
-        heading: "Closing the control loop",
-        body: "An estimator that looks smooth offline can still destabilize a vehicle if output delays or frame jumps enter the flight controller. End-to-end validation under real flight dynamics is essential.",
-      },
-    ],
-  },
-];
+export const FEATURED_BLOG_POST: BlogArticle = {
+  slug: "camera-imu-synchronization-visual-inertial-navigation",
+  code: "BLOG / 01",
+  status: "Placeholder Technical Blog — Draft Template",
+  publishedDate: "2026-11-26",
+  readingTime: "6 min read",
+  author: "Ayushman Bansal · Perception Labs Engineering",
+  discipline: "Sensor Fusion & Timing",
+  title: "Why Camera–IMU Synchronization Governs Visual-Inertial Stability",
+  summary:
+    "Placeholder engineering blog post documenting the timing problem, sensor coupling equations, verification checklist, and open experimental placeholders for our ongoing VIO pipeline work.",
+  sections: [
+    {
+      heading: "1. The Engineering Problem",
+      body: [
+        "Visual-inertial odometry fuses high-frequency inertial measurements (angular rates and linear acceleration) with lower-frequency optical camera frames. While the IMU captures fast rotational dynamics between frames, visual observations constrain long-term inertial integration drift.",
+        "If image exposure timestamps and IMU sample clocks drift or carry an uncalibrated time offset δt, rotational motion occurring during that offset produces false linear velocity errors and degraded feature triangulation during agile UAV maneuvers.",
+      ],
+    },
+    {
+      heading: "2. Architecture & Temporal Coupling",
+      body: [
+        "Our sensing pipeline aligns camera frame midpoint timestamps against continuous IMU pre-integration windows before state updates enter the optimization or filter back-end. In hardware-triggered configurations, frame capture aligns to a shared clock reference; in loosely coupled payloads, online time-offset calibration estimates residual skew.",
+        "This placeholder template outlines the structural analysis; quantitative latency histograms and multi-trial replay curves from our Bhubaneswar testbeds will be published here once Phase 4 partner baselines are finalized.",
+      ],
+      equation: "p_cam(t) = R_imu(t + δt) · p_ext + t_imu(t + δt)",
+    },
+    {
+      heading: "3. Verification & Evaluation Protocol (Placeholder)",
+      body: [
+        "Placeholder slot for recorded multirotor flight logs, IMU Allan-variance characterization plots, and ground-truth trajectory comparison metrics across indoor and outdoor runs.",
+        "Before publishing numbers, each evaluation entry requires strict dataset provenance (hardware rig, sensor rates, clock sync mode, and trajectory window) rather than synthetic approximations.",
+      ],
+    },
+  ],
+  limitations: [
+    "Note: This article is currently a structured placeholder draft demonstrating our technical blog format.",
+    "Measured benchmark figures and recorded trajectory plots will replace placeholder notes only after multi-trial validation.",
+  ],
+  references: [
+    "PX4 & ROS 2 Navigation Integration Interfaces (/systems/pivo)",
+    "Layer 01 Sensing & Layer 03 State Estimation Architecture (/technology/state-estimation)",
+  ],
+};
 
-export const ENGINEERING_PRACTICES = [
+export const UPCOMING_BLOG_TOPICS = [
   {
-    code: "LAB / 01",
-    title: "Hardware & Sensor Rigs",
-    detail:
-      "Mechanical mounting, global-shutter optical assemblies, and synchronized inertial hardware tuned for real platforms.",
+    code: "UPCOMING / 02",
+    discipline: "Navigation Architecture",
+    title: "Coupling ~30 Hz Local VIO with ~1 Hz Global Visual Map Localization",
+    summary:
+      "Designing state fusion that preserves smooth high-rate local flight control while eliminating unbounded long-horizon drift when geo-referenced site maps are available.",
   },
   {
-    code: "LAB / 02",
-    title: "Synchronized Capture & Replay",
-    detail:
-      "Deterministic timestamping and dataset replay workflows to reproduce field anomalies and verify estimator updates.",
+    code: "UPCOMING / 03",
+    discipline: "Embedded Systems",
+    title: "Profiling Onboard Spatial Intelligence on Companion Compute",
+    summary:
+      "Memory layout, deterministic execution bounds, and health-status reporting for PX4 and ROS 2 UAS flight stacks.",
+  },
+] as const;
+
+export const FOUNDERS = [
+  {
+    name: "Ayushman Bansal",
+    role: "Co-Founder",
+    email: "ayushman@perceptionlab.com",
+    expertise: "Robotics, Sensor Fusion, and Autonomous Systems",
+    focus:
+      "Leads state estimation, visual-inertial odometry architecture, and onboard sensor fusion pipelines.",
   },
   {
-    code: "LAB / 03",
-    title: "Embedded Bring-Up",
-    detail:
-      "Profiling memory, thermal stability, and real-time loop latency directly on companion compute modules.",
-  },
-  {
-    code: "LAB / 04",
-    title: "Field Validation",
-    detail:
-      "Structured trials across indoor corridors, infrastructure sites, and GPS-degraded outdoor environments.",
+    name: "Lakshya Agrawal",
+    role: "Co-Founder",
+    email: "lakshya@perceptionlab.com",
+    expertise: "Project Management, Avionics, and Product Strategy",
+    focus:
+      "Leads avionics integration, UAV OEM partnerships, pilot deployments, and system productization.",
   },
 ] as const;

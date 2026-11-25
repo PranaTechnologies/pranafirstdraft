@@ -49,7 +49,7 @@ export function Navbar() {
           aria-label="Perception Labs home"
         >
           <PerceptionMark className="h-7 w-7 text-graphite" />
-          <span className="font-sans text-[13px] font-medium uppercase tracking-[0.14em] text-graphite">
+          <span className="font-sans text-sm font-medium uppercase tracking-[0.14em] text-graphite">
             {BRAND.name}
           </span>
         </Link>
@@ -62,7 +62,7 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`font-mono text-[11px] uppercase tracking-[0.12em] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite ${
+                className={`font-mono text-xs uppercase tracking-[0.12em] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite ${
                   active
                     ? "text-graphite underline decoration-signal decoration-2 underline-offset-8"
                     : "text-muted-ink hover:text-graphite"
@@ -75,7 +75,7 @@ export function Navbar() {
 
           <Link
             href="/contact"
-            className="inline-flex items-center gap-1.5 rounded-sm border border-graphite bg-graphite px-4 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-field transition-colors duration-150 hover:bg-signal hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+            className="inline-flex items-center gap-1.5 rounded-sm border border-graphite bg-graphite px-4 py-2 font-mono text-xs uppercase tracking-[0.12em] text-field transition-colors duration-150 hover:bg-signal hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
           >
             <span>Contact</span>
             <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -109,7 +109,7 @@ export function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpenedPath(null)}
-                className="py-3.5 font-mono text-xs uppercase tracking-[0.12em] text-graphite transition-colors hover:text-muted-ink"
+                className="py-3.5 font-mono text-sm uppercase tracking-[0.12em] text-graphite transition-colors hover:text-muted-ink"
               >
                 {item.label}
               </Link>
