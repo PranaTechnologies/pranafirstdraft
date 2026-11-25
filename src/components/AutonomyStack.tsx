@@ -7,7 +7,7 @@ import { TECHNOLOGY_LAYERS } from "@/data/site-content";
 
 export function AutonomyStack() {
   return (
-    <section className="border-b border-border-grey bg-field py-24 md:py-32">
+    <section className="border-b border-border-grey bg-surface py-24 md:py-32">
       <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="min-w-0 lg:col-span-7">
@@ -47,7 +47,7 @@ export function AutonomyStack() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.05 }}
               transition={{ duration: 0.25, delay: index * 0.03 }}
-              className="min-w-0 bg-surface"
+              className="min-w-0 bg-field"
             >
               <Link
                 href={`/technology/${layer.slug}`}

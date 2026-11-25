@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import {
   BRAND,
   CONTACT_INFO,
-  DEVELOPMENT_ROADMAP,
   FOUNDERS,
   SITE_URL,
 } from "@/data/site-content";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About | Perception Labs",
     description:
-      "Founding team, engineering background, and Phase 1–4 development journey.",
+      "Founding team and spatial intelligence engineering background at Perception Labs.",
     url: `${SITE_URL}/about`,
   },
 };
@@ -57,7 +57,7 @@ export default function AboutPage() {
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {FOUNDERS.map((founder) => (
               <article
-                key={founder.email}
+                key={founder.name}
                 className="flex flex-col justify-between rounded-card border border-border-grey bg-field p-8 sm:p-10"
               >
                 <div>
@@ -85,46 +85,15 @@ export default function AboutPage() {
                 </div>
 
                 <div className="mt-8 border-t border-border-grey pt-5">
-                  <a
-                    href={`mailto:${founder.email}`}
+                  <Link
+                    href="/contact"
                     className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] text-graphite underline decoration-border-grey underline-offset-4 hover:decoration-graphite"
                   >
-                    <span>{founder.email}</span>
+                    <span>{CONTACT_INFO.email}</span>
                     <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </a>
+                  </Link>
                 </div>
               </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Current Areas of Development */}
-      <section className="bg-field py-20 md:py-28">
-        <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-ink">
-            DEVELOPMENT TRAJECTORY
-          </p>
-          <h2 className="mt-4 font-display text-3xl font-normal tracking-[-0.02em] text-graphite sm:text-4xl">
-            From core estimation SDK to Phase 4 pilot deployments
-          </h2>
-
-          <div className="mt-10 divide-y divide-border-grey border-y border-border-grey">
-            {DEVELOPMENT_ROADMAP.map((item) => (
-              <div
-                key={item.phase}
-                className="grid gap-4 py-6 lg:grid-cols-12 lg:items-baseline"
-              >
-                <p className="font-mono text-xs uppercase tracking-[0.12em] text-muted-ink lg:col-span-3">
-                  {item.phase} · {item.window}
-                </p>
-                <h3 className="font-display text-xl font-medium text-graphite lg:col-span-4">
-                  {item.title}
-                </h3>
-                <p className="text-base leading-relaxed text-muted-ink lg:col-span-5">
-                  {item.deliverable} ({item.status})
-                </p>
-              </div>
             ))}
           </div>
         </div>

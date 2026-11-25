@@ -70,17 +70,10 @@ export default function PrivacyPage() {
             <p className="mt-3">
               To update or delete prior inquiry correspondence, contact{" "}
               <a
-                href={`mailto:${CONTACT_INFO.primaryEmail}`}
+                href={`mailto:${CONTACT_INFO.email}`}
                 className="text-graphite underline underline-offset-4"
               >
-                {CONTACT_INFO.primaryEmail}
-              </a>{" "}
-              or{" "}
-              <a
-                href={`mailto:${CONTACT_INFO.secondaryEmail}`}
-                className="text-graphite underline underline-offset-4"
-              >
-                {CONTACT_INFO.secondaryEmail}
+                {CONTACT_INFO.email}
               </a>
               .
             </p>

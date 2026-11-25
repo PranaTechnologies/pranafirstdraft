@@ -14,7 +14,7 @@ export function Navbar() {
   const mobileOpen = openedPath === pathname;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -29,14 +29,15 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [mobileOpen]);
 
-  const showSolidHeader = scrolled || mobileOpen || pathname !== "/";
+  // Over the dark full-bleed hero on `/` at top of page, keep navbar light-on-dark for clear contrast.
+  const isHeroOverlay = pathname === "/" && !scrolled && !mobileOpen;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-colors duration-200 ${
-        showSolidHeader
-          ? "border-b border-border-grey bg-field/95 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
+        isHeroOverlay
+          ? "border-b border-deep-border/60 bg-deep-field/70 backdrop-blur-md"
+          : "border-b border-border-grey bg-field/95 backdrop-blur-md"
       }`}
     >
       <nav
@@ -45,11 +46,21 @@ export function Navbar() {
       >
         <Link
           href="/"
-          className="inline-flex shrink-0 items-center gap-3 text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+          className={`inline-flex shrink-0 items-center gap-3 transition-colors focus-visible:outline-none focus-visible:ring-2 ${
+            isHeroOverlay
+              ? "text-field focus-visible:ring-signal"
+              : "text-graphite focus-visible:ring-graphite"
+          }`}
           aria-label="Perception Labs home"
         >
-          <PerceptionMark className="h-7 w-7 text-graphite" />
-          <span className="font-sans text-sm font-medium uppercase tracking-[0.14em] text-graphite">
+          <PerceptionMark
+            className={`h-7 w-7 ${isHeroOverlay ? "text-field" : "text-graphite"}`}
+          />
+          <span
+            className={`font-sans text-sm font-medium uppercase tracking-[0.14em] ${
+              isHeroOverlay ? "text-field" : "text-graphite"
+            }`}
+          >
             {BRAND.name}
           </span>
         </Link>
@@ -62,10 +73,12 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`font-mono text-xs uppercase tracking-[0.12em] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite ${
-                  active
-                    ? "text-graphite underline decoration-signal decoration-2 underline-offset-8"
-                    : "text-muted-ink hover:text-graphite"
+                className={`font-mono text-xs uppercase tracking-[0.12em] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 ${
+                  isHeroOverlay
+                    ? "text-field/85 hover:text-signal focus-visible:ring-signal"
+                    : active
+                      ? "text-graphite underline decoration-signal decoration-2 underline-offset-8 focus-visible:ring-graphite"
+                      : "text-muted-ink hover:text-graphite focus-visible:ring-graphite"
                 }`}
               >
                 {item.label}
@@ -75,7 +88,11 @@ export function Navbar() {
 
           <Link
             href="/contact"
-            className="inline-flex items-center gap-1.5 rounded-sm border border-graphite bg-graphite px-4 py-2 font-mono text-xs uppercase tracking-[0.12em] text-field transition-colors duration-150 hover:bg-signal hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+            className={`inline-flex items-center gap-1.5 rounded-sm px-4 py-2 font-mono text-xs uppercase tracking-[0.12em] transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 ${
+              isHeroOverlay
+                ? "border border-signal bg-signal text-graphite hover:bg-field focus-visible:ring-signal"
+                : "border border-graphite bg-graphite text-field hover:bg-signal hover:text-graphite focus-visible:ring-graphite"
+            }`}
           >
             <span>Contact</span>
             <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -84,7 +101,11 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-border-grey bg-surface text-graphite transition-colors hover:border-graphite md:hidden"
+          className={`inline-flex h-10 w-10 items-center justify-center rounded-sm border transition-colors md:hidden ${
+            isHeroOverlay
+              ? "border-deep-border bg-deep-surface text-field hover:border-signal"
+              : "border-border-grey bg-surface text-graphite hover:border-graphite"
+          }`}
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav-drawer"
           aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}

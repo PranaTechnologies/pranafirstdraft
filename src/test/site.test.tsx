@@ -3,6 +3,7 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import HomePage from "@/app/page";
 import PivoPage from "@/app/systems/pivo/page";
+import SystemsPage from "@/app/systems/page";
 import AboutPage from "@/app/about/page";
 import ContactPage from "@/app/contact/page";
 import ResearchPage from "@/app/research/page";
@@ -44,7 +45,7 @@ describe("Perception Labs website", () => {
     );
 
     const text = container.textContent ?? "";
-    expect(text).not.toMatch(/<5ms|99\.97%|L5 Autonomy|Cortex|pranatechnologies15/i);
+    expect(text).not.toMatch(/<5ms|99\.97%|L5 Autonomy|Cortex|pranatechnologies15|Phase 4/i);
   });
 
   it("renders dedicated PIVO technical specs and honest limitations", () => {
@@ -57,13 +58,17 @@ describe("Perception Labs website", () => {
     expect(screen.getByText(/PX4 and ROS 2 compatible interfaces/i)).toBeInTheDocument();
   });
 
-  it("renders founders and Bhubaneswar engineering origin on About page", () => {
-    render(<AboutPage />);
+  it("renders founders without development trajectory on About and Systems pages", () => {
+    const aboutView = render(<AboutPage />);
 
     expect(screen.getByText("Ayushman Bansal")).toBeInTheDocument();
     expect(screen.getByText("Lakshya Agrawal")).toBeInTheDocument();
-    expect(screen.getByText(/ayushman@perceptionlab\.com/i)).toBeInTheDocument();
-    expect(screen.getByText(/lakshya@perceptionlab\.com/i)).toBeInTheDocument();
+    expect(screen.getAllByText(CONTACT_INFO.email).length).toBeGreaterThanOrEqual(2);
+    expect(aboutView.container.textContent ?? "").not.toMatch(/DEVELOPMENT TRAJECTORY|Phase 01|Phase 4/i);
+
+    cleanup();
+    const systemsView = render(<SystemsPage />);
+    expect(systemsView.container.textContent ?? "").not.toMatch(/Four-phase engineering roadmap|Phase 01|Phase 4/i);
   });
 
   it("renders technical blog index and individual shareable article route without modal dialogs", async () => {
@@ -112,8 +117,8 @@ describe("Perception Labs website", () => {
 
     const dialog = screen.getByRole("dialog");
     expect(
-      within(dialog).getByRole("link", { name: new RegExp(CONTACT_INFO.primaryEmail) }),
-    ).toHaveAttribute("href", `mailto:${CONTACT_INFO.primaryEmail}`);
+      within(dialog).getByRole("link", { name: new RegExp(CONTACT_INFO.email.replace(".", "\\.")) }),
+    ).toHaveAttribute("href", `mailto:${CONTACT_INFO.email}`);
     expect(
       within(dialog).getByRole("link", { name: new RegExp(CONTACT_INFO.phone.replace("+", "\\+")) }),
     ).toHaveAttribute("href", CONTACT_INFO.phoneHref);

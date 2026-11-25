@@ -70,22 +70,12 @@ export default function ContactPage() {
 
               <div className="mt-6 divide-y divide-border-grey border-y border-border-grey">
                 <a
-                  href={`mailto:${CONTACT_INFO.primaryEmail}`}
+                  href={`mailto:${CONTACT_INFO.email}`}
                   className="flex items-center justify-between gap-4 py-4 text-base text-graphite transition-colors hover:text-muted-ink"
                 >
                   <span className="flex items-center gap-3">
                     <Mail className="h-4 w-4 text-muted-ink" aria-hidden="true" />
-                    <span>{CONTACT_INFO.primaryEmail}</span>
-                  </span>
-                  <ArrowUpRight className="h-4 w-4 text-muted-ink" aria-hidden="true" />
-                </a>
-                <a
-                  href={`mailto:${CONTACT_INFO.secondaryEmail}`}
-                  className="flex items-center justify-between gap-4 py-4 text-base text-graphite transition-colors hover:text-muted-ink"
-                >
-                  <span className="flex items-center gap-3">
-                    <Mail className="h-4 w-4 text-muted-ink" aria-hidden="true" />
-                    <span>{CONTACT_INFO.secondaryEmail}</span>
+                    <span>{CONTACT_INFO.email}</span>
                   </span>
                   <ArrowUpRight className="h-4 w-4 text-muted-ink" aria-hidden="true" />
                 </a>

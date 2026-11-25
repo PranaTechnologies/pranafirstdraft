@@ -14,8 +14,7 @@ export const BRAND = {
 export const CONTACT_INFO = {
   googleFormUrl:
     "https://docs.google.com/forms/d/e/1FAIpQLSda_XI8n_Why7Bb0ISG3kd0vG2EHEMOAcq1GkcoLdHicvT7TA/viewform",
-  primaryEmail: "ayushman@perceptionlab.com",
-  secondaryEmail: "lakshya@perceptionlab.com",
+  email: "connect@perceptionlab.in",
   phone: "+91-8280897228",
   phoneHref: "tel:+918280897228",
   location: "Bhubaneswar, Odisha, India",
@@ -313,7 +312,7 @@ export const SYSTEM_CATEGORIES = [
     code: "01 / CORE ENGINE",
     name: "PIVO",
     category: "Core Visual-Inertial Navigation Engine",
-    maturity: "Core Engine · Pilot Preparation",
+    maturity: "Core Estimation Engine",
     summary:
       "Single-machine parallel visual-inertial odometry engine transforming synchronized camera and IMU measurements into real-time 6-DoF motion estimation on onboard compute.",
     href: "/systems/pivo",
@@ -324,7 +323,7 @@ export const SYSTEM_CATEGORIES = [
     code: "02 / INTEGRATED STACK",
     name: "Navigation Systems",
     category: "Integrated Localization & Navigation Stack",
-    maturity: "Entering Phase 4 Pilot Integration",
+    maturity: "Onboard Flight Integration",
     summary:
       "Integrated UAS navigation module combining local VIO (~30 Hz) with optional global visual map matching (~1 Hz WGS84) and health-monitored state fusion for PX4 and ROS 2 platforms.",
     href: "/systems#navigation-systems",
@@ -443,9 +442,9 @@ export const PIVO_SPEC = {
       "Simulation and controlled lab evaluation workflows",
     ],
     inDevelopment: [
-      "Phase 4 pilot deployments with initial drone service partners",
       "Combined local VIO (~30 Hz) + global WGS84 visual localization (~1 Hz) field validation",
       "Embedded compute profiling across partner OEM airframes",
+      "Flight-stack closed-loop integration with drone service partners",
     ],
     planned: [
       "Expanded multi-rotor and ground robotics OEM platform profiles",
@@ -453,53 +452,6 @@ export const PIVO_SPEC = {
     ],
   },
 } as const;
-
-export const DEVELOPMENT_ROADMAP = [
-  {
-    phase: "Phase 01",
-    window: "Months 0–2",
-    title: "Foundation Setup",
-    status: "Completed",
-    activities: [
-      "Finalized core estimation and software architecture",
-      "Established simulation and dataset replay environment",
-    ],
-    deliverable: "Core SDK structure & documentation",
-  },
-  {
-    phase: "Phase 02",
-    window: "Months 3–5",
-    title: "Prototype Development",
-    status: "Completed",
-    activities: [
-      "Built visual-inertial sensor fusion pipeline",
-      "Developed operator health monitoring and diagnostics",
-    ],
-    deliverable: "Working prototype in controlled lab environment",
-  },
-  {
-    phase: "Phase 03",
-    window: "Months 6–8",
-    title: "Field Testing & Iteration",
-    status: "Completed / Ongoing Refinement",
-    activities: [
-      "Tested pipelines in real-world outdoor and constrained environments",
-      "Refined state estimation and edge compute execution",
-    ],
-    deliverable: "Field-evaluated module with operator telemetry",
-  },
-  {
-    phase: "Phase 04",
-    window: "Months 9–12",
-    title: "Pilot Deployment",
-    status: "Starting Now",
-    activities: [
-      "Integrating onboard navigation modules with initial drone service partners",
-      "Evaluating closed-loop flight performance across partner inspection missions",
-    ],
-    deliverable: "Partner pilot evaluations & integration baselines",
-  },
-] as const;
 
 export const COMMERCIAL_TIERS = [
   {
@@ -521,7 +473,7 @@ export const COMMERCIAL_TIERS = [
     price: "Custom",
     unit: "per OEM · One-time Engineering",
     detail:
-      "Custom payload integration, calibration workflows, PX4/ROS 2 bring-up, and pilot validation support.",
+      "Custom payload integration, calibration workflows, PX4/ROS 2 bring-up, and flight-stack validation support.",
   },
 ] as const;
 
@@ -532,7 +484,7 @@ export const APPLICATION_MATRIX = [
     badge: "Primary Beachhead Application",
     title: "UAV & Aerial Autonomy",
     environment: "Multirotor Inspection · Low-Altitude Flight · GNSS-Degraded Airspace",
-    maturity: "Entering Phase 4 Partner Pilots",
+    maturity: "Partner Flight-Stack Integration",
     summary:
       "Built initially for multirotor UAV inspection, mapping, and industrial drone operations where GNSS is obstructed near structures or degraded at low altitude.",
     rows: [
@@ -685,7 +637,7 @@ export const FEATURED_BLOG_POST: BlogArticle = {
       heading: "2. Architecture & Temporal Coupling",
       body: [
         "Our sensing pipeline aligns camera frame midpoint timestamps against continuous IMU pre-integration windows before state updates enter the optimization or filter back-end. In hardware-triggered configurations, frame capture aligns to a shared clock reference; in loosely coupled payloads, online time-offset calibration estimates residual skew.",
-        "This placeholder template outlines the structural analysis; quantitative latency histograms and multi-trial replay curves from our Bhubaneswar testbeds will be published here once Phase 4 partner baselines are finalized.",
+        "This placeholder template outlines the structural analysis; quantitative latency histograms and multi-trial replay curves from our testbeds will be published here once outdoor multi-trial logs are finalized.",
       ],
       equation: "p_cam(t) = R_imu(t + δt) · p_ext + t_imu(t + δt)",
     },
@@ -728,7 +680,6 @@ export const FOUNDERS = [
   {
     name: "Ayushman Bansal",
     role: "Co-Founder",
-    email: "ayushman@perceptionlab.com",
     expertise: "Robotics, Sensor Fusion, and Autonomous Systems",
     focus:
       "Leads state estimation, visual-inertial odometry architecture, and onboard sensor fusion pipelines.",
@@ -736,9 +687,8 @@ export const FOUNDERS = [
   {
     name: "Lakshya Agrawal",
     role: "Co-Founder",
-    email: "lakshya@perceptionlab.com",
     expertise: "Project Management, Avionics, and Product Strategy",
     focus:
-      "Leads avionics integration, UAV OEM partnerships, pilot deployments, and system productization.",
+      "Leads avionics integration, UAV OEM partnerships, flight deployments, and system productization.",
   },
 ] as const;

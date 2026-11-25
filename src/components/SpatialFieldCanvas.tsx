@@ -32,17 +32,17 @@ function SpatialFieldFallback() {
   ];
 
   const keyNodes = [
-    [165, 330],
-    [285, 272],
-    [415, 222],
-    [545, 176],
-    [680, 132],
+    [245, 305],
+    [365, 245],
+    [485, 198],
+    [605, 155],
+    [710, 122],
   ];
 
   return (
     <svg
       role="img"
-      aria-label="Three-dimensional spatial reconstruction grid and estimated trajectory"
+      aria-label="Illustrative three-dimensional spatial reconstruction grid and visual-inertial trajectory"
       viewBox="0 0 800 480"
       className="h-full w-full"
       preserveAspectRatio="xMidYMid slice"
@@ -58,7 +58,7 @@ function SpatialFieldFallback() {
         ))}
       </g>
       <path
-        d="M110 365C195 315 260 285 335 252C415 216 490 192 565 162C625 138 665 134 715 118"
+        d="M175 340C245 305 310 272 385 240C455 210 530 182 605 155C655 136 690 130 735 115"
         stroke="#F4F5F0"
         strokeWidth="1.75"
         fill="none"
@@ -75,7 +75,11 @@ function SpatialFieldFallback() {
   );
 }
 
-export function SpatialFieldCanvas() {
+interface SpatialFieldCanvasProps {
+  variant?: "background" | "framed";
+}
+
+export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasProps) {
   const mountRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -97,8 +101,8 @@ export function SpatialFieldCanvas() {
       return;
     }
 
-    const width = container.clientWidth || 640;
-    const height = container.clientHeight || 420;
+    const width = container.clientWidth || 1280;
+    const height = container.clientHeight || 720;
 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(width, height);
@@ -114,21 +118,24 @@ export function SpatialFieldCanvas() {
     container.appendChild(canvas);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog("#0B1110", 9.5, 20);
+    scene.fog = new THREE.Fog("#0B1110", 9.5, 21);
 
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 40);
-    camera.position.set(0.35, 2.25, 8.1);
-    camera.lookAt(0, 0.05, 0);
+    // Shift look-at slightly left when used as hero background so trajectory centerpiece sits cleanly to the right of left-aligned copy
+    const isBg = variant === "background";
+    camera.position.set(isBg ? -1.4 : 0.35, 2.25, isBg ? 8.3 : 8.1);
+    camera.lookAt(isBg ? -1.1 : 0, 0.05, 0);
 
     const worldGroup = new THREE.Group();
+    if (isBg) {
+      worldGroup.position.x = 1.15;
+    }
     scene.add(worldGroup);
 
-    // Spatial coordinate grid
-    const grid = new THREE.GridHelper(16, 22, 0x2c3a35, 0x1a2320);
+    const grid = new THREE.GridHelper(18, 24, 0x2c3a35, 0x1a2320);
     grid.position.y = -1.65;
     worldGroup.add(grid);
 
-    // Local XYZ coordinate axes triad
     const axesGeometry = new THREE.BufferGeometry();
     axesGeometry.setAttribute(
       "position",
@@ -159,9 +166,8 @@ export function SpatialFieldCanvas() {
     });
     worldGroup.add(new THREE.LineSegments(axesGeometry, axesMaterial));
 
-    // Sparse 3D corridor point cloud
     const rand = createSeededValue(42019);
-    const pointCount = 1200;
+    const pointCount = 1350;
     const positions = new Float32Array(pointCount * 3);
     const colors = new Float32Array(pointCount * 3);
     const curve = new THREE.CatmullRomCurve3(TRAJECTORY_WAYPOINTS);
@@ -182,16 +188,16 @@ export function SpatialFieldCanvas() {
       let pz: number;
 
       if (cluster < 0.7) {
-        const lateral = side * (1.15 + rand() * 2.85);
-        const vertical = -1.5 + rand() * 3.1;
-        const depthJitter = (rand() - 0.5) * 1.4;
+        const lateral = side * (1.15 + rand() * 3.1);
+        const vertical = -1.5 + rand() * 3.2;
+        const depthJitter = (rand() - 0.5) * 1.5;
         px = spine.x + lateral;
         py = vertical;
         pz = spine.z + depthJitter;
       } else {
-        px = spine.x + (rand() - 0.5) * 5.2;
-        py = rand() < 0.7 ? -1.55 + rand() * 0.4 : 0.7 + rand() * 1.25;
-        pz = spine.z + (rand() - 0.5) * 2.2;
+        px = spine.x + (rand() - 0.5) * 5.6;
+        py = rand() < 0.7 ? -1.55 + rand() * 0.4 : 0.7 + rand() * 1.3;
+        pz = spine.z + (rand() - 0.5) * 2.4;
       }
 
       positions[i * 3] = px;
@@ -218,7 +224,7 @@ export function SpatialFieldCanvas() {
     cloudGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
     const cloudMaterial = new THREE.PointsMaterial({
-      size: 0.08,
+      size: 0.085,
       vertexColors: true,
       transparent: true,
       opacity: 0.92,
@@ -226,7 +232,6 @@ export function SpatialFieldCanvas() {
     });
     worldGroup.add(new THREE.Points(cloudGeometry, cloudMaterial));
 
-    // Faint full reference trajectory path
     const curvePoints = curve.getPoints(200);
     const referenceGeo = new THREE.BufferGeometry().setFromPoints(curvePoints);
     const referenceMat = new THREE.LineBasicMaterial({
@@ -236,9 +241,10 @@ export function SpatialFieldCanvas() {
     });
     worldGroup.add(new THREE.Line(referenceGeo, referenceMat));
 
-    // Active estimated trajectory path drawing continuously
     const trajectoryGeometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
-    const initialSegmentCount = Math.floor(curvePoints.length * (prefersReducedMotion ? 0.85 : 0.65));
+    const initialSegmentCount = Math.floor(
+      curvePoints.length * (prefersReducedMotion ? 0.85 : 0.65),
+    );
     trajectoryGeometry.setDrawRange(0, initialSegmentCount);
     const trajectoryMaterial = new THREE.LineBasicMaterial({
       color: new THREE.Color("#F4F5F0"),
@@ -247,7 +253,6 @@ export function SpatialFieldCanvas() {
     });
     worldGroup.add(new THREE.Line(trajectoryGeometry, trajectoryMaterial));
 
-    // Keyframe markers along trajectory
     const keyframeCount = 7;
     const keyframePositions = new Float32Array(keyframeCount * 3);
     for (let k = 0; k < keyframeCount; k++) {
@@ -269,7 +274,6 @@ export function SpatialFieldCanvas() {
     });
     worldGroup.add(new THREE.Points(keyframeGeometry, keyframeMaterial));
 
-    // Wireframe sensor pose frustum
     const frustumGeo = new THREE.BufferGeometry();
     const f = 0.24;
     const d = 0.44;
@@ -297,7 +301,6 @@ export function SpatialFieldCanvas() {
     const sensorFrustum = new THREE.LineSegments(frustumGeo, frustumMaterial);
     worldGroup.add(sensorFrustum);
 
-    // Active feature-tracking rays connecting pose head to nearby 3D landmarks
     const rayCount = 8;
     const rayPositions = new Float32Array(rayCount * 2 * 3);
     const raysGeo = new THREE.BufferGeometry();
@@ -305,7 +308,7 @@ export function SpatialFieldCanvas() {
     const raysMat = new THREE.LineBasicMaterial({
       color: new THREE.Color("#B9E36A"),
       transparent: true,
-      opacity: 0.42,
+      opacity: 0.44,
     });
     const featureRays = new THREE.LineSegments(raysGeo, raysMat);
     worldGroup.add(featureRays);
@@ -317,7 +320,6 @@ export function SpatialFieldCanvas() {
       sensorFrustum.lookAt(headPos.clone().add(tangent));
       sensorFrustum.rotateY(-Math.PI / 2);
 
-      // Connect head to 8 nearest landmark points ahead/around
       const sorted = landmarkTargets
         .map((pt) => ({ pt, dist: pt.distanceToSquared(headPos) }))
         .sort((a, b) => a.dist - b.dist)
@@ -336,11 +338,15 @@ export function SpatialFieldCanvas() {
     const pointerTarget = { x: 0, y: 0 };
     const pointerCurrent = { x: 0, y: 0 };
 
-    const handlePointerMove = (event: PointerEvent) => {
+    // Track pointer across parent section when used as background so text overlay never blocks interaction
+    const pointerScope = isBg ? (container.parentElement ?? window) : container;
+
+    const handlePointerMove = (event: Event) => {
+      const pe = event as PointerEvent;
       const rect = container.getBoundingClientRect();
       if (!rect.width || !rect.height) return;
-      const nx = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-      const ny = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+      const nx = ((pe.clientX - rect.left) / rect.width) * 2 - 1;
+      const ny = ((pe.clientY - rect.top) / rect.height) * 2 - 1;
       pointerTarget.x = Math.max(-1, Math.min(1, nx));
       pointerTarget.y = Math.max(-1, Math.min(1, ny));
     };
@@ -350,8 +356,8 @@ export function SpatialFieldCanvas() {
       pointerTarget.y = 0;
     };
 
-    container.addEventListener("pointermove", handlePointerMove);
-    container.addEventListener("pointerleave", handlePointerLeave);
+    pointerScope.addEventListener("pointermove", handlePointerMove);
+    pointerScope.addEventListener("pointerleave", handlePointerLeave);
 
     const resizeObserver = new ResizeObserver((entries) => {
       const entry = entries[0];
@@ -368,12 +374,10 @@ export function SpatialFieldCanvas() {
     const startTime = performance.now();
     const cycleDurationMs = 8500;
 
-    // Render frame immediately on mount so initial paint is never empty
     renderer.render(scene, camera);
 
     if (!prefersReducedMotion) {
       const animate = (now: number) => {
-        // Start mid-reconstruction (0.58 -> 1.0) so viewport is always populated
         const cycle = ((now - startTime) % cycleDurationMs) / cycleDurationMs;
         const progress = Math.min(1, 0.35 + cycle * 0.75);
 
@@ -408,8 +412,8 @@ export function SpatialFieldCanvas() {
     return () => {
       if (frameId) cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
-      container.removeEventListener("pointermove", handlePointerMove);
-      container.removeEventListener("pointerleave", handlePointerLeave);
+      pointerScope.removeEventListener("pointermove", handlePointerMove);
+      pointerScope.removeEventListener("pointerleave", handlePointerLeave);
       axesGeometry.dispose();
       axesMaterial.dispose();
       cloudGeometry.dispose();
@@ -429,7 +433,19 @@ export function SpatialFieldCanvas() {
         container.removeChild(canvas);
       }
     };
-  }, []);
+  }, [variant]);
+
+  if (variant === "background") {
+    return (
+      <div
+        ref={mountRef}
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full bg-deep-field"
+      >
+        <SpatialFieldFallback />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full min-w-0 overflow-hidden rounded-card border border-deep-border bg-deep-field text-field">
