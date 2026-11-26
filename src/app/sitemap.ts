@@ -6,11 +6,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     "",
+    "/cortex",
     "/technology",
     "/solutions",
-    "/solutions/cortex",
+    "/company",
     "/research",
-    "/about",
     "/contact",
     "/privacy",
   ];
@@ -21,6 +21,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_URL}${path}`,
     lastModified: now,
     changeFrequency: path === "" ? "weekly" : "monthly",
-    priority: path === "" ? 1.0 : path === "/solutions/cortex" ? 0.9 : 0.8,
+    priority: path === "" ? 1.0 : path === "/cortex" ? 0.9 : 0.8,
   }));
 }

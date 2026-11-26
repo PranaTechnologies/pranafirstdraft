@@ -17,11 +17,11 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#F4F5F0",
+          backgroundColor: "#F3F3ED",
           color: "#171C19",
           padding: "72px",
           fontFamily: "sans-serif",
-          border: "1px solid #DDE1DA",
+          border: "1px solid #DCDFD6",
         }}
       >
         <div
@@ -84,17 +84,17 @@ export default function OpenGraphImage() {
               maxWidth: "960px",
             }}
           >
-            Machines that understand the world they move through.
+            Intelligence for machines in motion.
           </div>
           <div
             style={{
               fontSize: "26px",
-              color: "#5C645E",
+              color: "#56635B",
               maxWidth: "900px",
               lineHeight: 1.45,
             }}
           >
-            Onboard perception, spatial understanding, state estimation, and autonomous systems for UAVs and robotics.
+            Building onboard perception and spatial intelligence for autonomous machines.
           </div>
         </div>
 
@@ -103,14 +103,14 @@ export default function OpenGraphImage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderTop: "1px solid #DDE1DA",
+            borderTop: "1px solid #DCDFD6",
             paddingTop: "24px",
             fontSize: "18px",
             letterSpacing: "0.1em",
             color: "#171C19",
           }}
         >
-          <span>CORTEX UNIFIED ENGINE · PX4 / ROS 2 READY</span>
+          <span>CORTEX · ONBOARD PERCEPTION &amp; STATE ESTIMATION</span>
           <span
             style={{
               backgroundColor: "#0B1110",

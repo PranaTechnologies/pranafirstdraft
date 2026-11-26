@@ -5,7 +5,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #F4F5F0;
+    background-color: #F3F3ED;
     color: #171C19;
     font-size: 16px;
   }
@@ -17,7 +17,7 @@
   }
 
   body {
-    background-color: #F4F5F0;
+    background-color: #F3F3ED;
     color: #171C19;
     font-family: var(--font-manrope), system-ui, sans-serif;
     font-size: 1.125rem;

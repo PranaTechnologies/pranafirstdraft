@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 import { BRAND, CONTACT_INFO, NAV_LINKS } from "@/data/site-content";
 import { PerceptionMark } from "@/components/PerceptionMark";
-import { DirectContactDialog } from "@/components/DirectContactDialog";
 
 export function Footer() {
   return (
@@ -11,14 +10,9 @@ export function Footer() {
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
           <div className="flex items-center gap-3">
             <PerceptionMark className="h-6 w-6 text-field" />
-            <div>
-              <p className="font-sans text-sm font-medium uppercase tracking-[0.14em] text-field">
-                {BRAND.name}
-              </p>
-              <p className="mt-0.5 font-mono text-[11px] uppercase tracking-[0.12em] text-deep-muted">
-                {BRAND.tagline} · {CONTACT_INFO.location}
-              </p>
-            </div>
+            <span className="font-sans text-sm font-medium uppercase tracking-[0.14em] text-field">
+              {BRAND.name}
+            </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -32,6 +26,12 @@ export function Footer() {
                   {item.label}
                 </Link>
               ))}
+              <Link
+                href="/research"
+                className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted transition-colors hover:text-field"
+              >
+                Research
+              </Link>
               <Link
                 href="/contact"
                 className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted transition-colors hover:text-signal"
@@ -72,21 +72,15 @@ export function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col justify-between gap-4 border-t border-deep-border pt-6 text-xs text-deep-muted sm:flex-row sm:items-center">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <p className="font-mono uppercase tracking-[0.1em]">
-              © {new Date().getFullYear()} {BRAND.name}. All rights reserved.
-            </p>
-            <Link
-              href="/privacy"
-              className="font-mono uppercase tracking-[0.1em] text-deep-muted underline decoration-deep-border underline-offset-4 transition-colors hover:text-field"
-            >
-              Privacy Policy
-            </Link>
-          </div>
-          <DirectContactDialog
-            triggerLabel="Reach Us Directly"
-            triggerClassName="font-mono text-xs uppercase tracking-[0.1em] text-deep-muted underline decoration-deep-border underline-offset-4 transition-colors hover:text-signal"
-          />
+          <p className="font-mono uppercase tracking-[0.1em]">
+            © {new Date().getFullYear()} {BRAND.name}. All rights reserved.
+          </p>
+          <Link
+            href="/privacy"
+            className="font-mono uppercase tracking-[0.1em] text-deep-muted underline decoration-deep-border underline-offset-4 transition-colors hover:text-field"
+          >
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>
