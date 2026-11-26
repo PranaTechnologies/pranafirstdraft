@@ -230,7 +230,7 @@ export function SpatialSchematic({
       </svg>
 
       {caption && (
-        <figcaption className="border-t border-deep-border bg-deep-surface px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-deep-muted">
+        <figcaption className="border-t border-deep-border bg-deep-surface px-4 py-2.5 font-mono text-xs uppercase tracking-[0.1em] text-deep-muted">
           {caption}
         </figcaption>
       )}

@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { BRAND, CONTACT_INFO, SITE_URL } from "@/data/site-content";
+import { buildPageMetadata } from "@/lib/seo";
+import { BRAND, CONTACT_INFO } from "@/data/site-content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Privacy Policy",
   description:
-    "How Perception Labs collects and handles partner inquiry information submitted via our intake form and direct engineering contact channels.",
-  alternates: { canonical: "/privacy" },
-  openGraph: {
-    title: "Privacy Policy | Perception Labs",
-    description:
-      "Partner inquiry data handling and privacy practices for Perception Labs.",
-    url: `${SITE_URL}/privacy`,
-  },
-};
+    "How Perception Labs collects, stores, and handles partner inquiry information submitted via Google Forms and direct email channels.",
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (
@@ -28,9 +23,14 @@ export default function PrivacyPage() {
           <span>Back to Contact</span>
         </Link>
 
-        <p className="mt-8 font-mono text-xs uppercase tracking-[0.14em] text-muted-ink">
-          PL / PRIVACY POLICY
-        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-ink">
+            PL / PRIVACY POLICY
+          </p>
+          <p className="font-mono text-xs uppercase tracking-[0.12em] text-muted-green">
+            Last updated: 27 November 2026
+          </p>
+        </div>
         <h1 className="mt-4 font-display text-[2.25rem] font-light leading-[1.08] tracking-[-0.025em] text-graphite sm:text-[3.25rem]">
           Privacy &amp; Partner Inquiry Handling
         </h1>
@@ -38,10 +38,10 @@ export default function PrivacyPage() {
         <div className="mt-10 space-y-8 border-t border-border-grey pt-8 text-lg leading-relaxed text-muted-ink">
           <section>
             <h2 className="font-display text-2xl font-medium text-graphite">
-              1. Information we collect
+              1. Information we collect &amp; storage
             </h2>
             <p className="mt-3">
-              When you open our Partner Intake Form (hosted via Google Forms) or contact {BRAND.name} directly by email or telephone, we collect only the details you voluntarily provide—such as your name, organization, contact details, vehicle platform, and integration inquiry notes.
+              When you open our Partner Intake Form (hosted on Google Forms) or contact {BRAND.name} ({CONTACT_INFO.location}) directly by email or telephone, we collect only the details you voluntarily provide—such as your name, organization, contact details, vehicle platform, and integration inquiry notes. Form responses submitted via Google Forms are processed and stored on Google&apos;s infrastructure subject to Google&apos;s Privacy Policy before review by our team.
             </p>
           </section>
 
@@ -65,10 +65,10 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="font-display text-2xl font-medium text-graphite">
-              4. Data deletion &amp; contact
+              4. Data retention, deletion &amp; contact
             </h2>
             <p className="mt-3">
-              To update or delete prior inquiry correspondence, contact{" "}
+              Inquiry records are retained only as long as reasonably required to evaluate and follow up on your engineering or partnership conversation. To request access, correction, or deletion of prior inquiry data, contact{" "}
               <a
                 href={`mailto:${CONTACT_INFO.email}`}
                 className="text-graphite underline underline-offset-4"

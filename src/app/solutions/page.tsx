@@ -1,21 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { SITE_URL, SOLUTION_AREAS } from "@/data/site-content";
+import { buildPageMetadata } from "@/lib/seo";
+import { SOLUTION_AREAS } from "@/data/site-content";
 import { SpatialSchematic } from "@/components/SpatialSchematic";
 
-export const metadata: Metadata = {
-  title: "Solutions",
+export const metadata: Metadata = buildPageMetadata({
+  title: "GPS-Denied Drone & Robot Navigation Solutions",
   description:
-    "Focused spatial intelligence applications powered by Cortex: resilient aerial localization beyond reliable GNSS and robotic spatial perception.",
-  alternates: { canonical: "/solutions" },
-  openGraph: {
-    title: "Solutions | Perception Labs",
-    description:
-      "Technical architecture and deployment workflows for aerial autonomy and robotic spatial intelligence.",
-    url: `${SITE_URL}/solutions`,
-  },
-};
+    "Onboard spatial intelligence and GPS-denied navigation for drones, ground robots, industrial automation, subterranean, maritime, and inspection.",
+  path: "/solutions",
+});
 
 export default function SolutionsPage() {
   const [aerial, robotics] = SOLUTION_AREAS;

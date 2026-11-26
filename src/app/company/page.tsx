@@ -1,19 +1,14 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, Linkedin, Mail } from "lucide-react";
-import { BRAND, CONTACT_INFO, FOUNDERS, SITE_URL } from "@/data/site-content";
+import { buildPageMetadata } from "@/lib/seo";
+import { BRAND, CONTACT_INFO, FOUNDERS } from "@/data/site-content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Company",
   description:
-    "Perception Labs develops onboard spatial intelligence for autonomous machines, founded by Ayushman Bansal and Lakshya Agrawal in Bhubaneswar, Odisha.",
-  alternates: { canonical: "/company" },
-  openGraph: {
-    title: "Company | Perception Labs",
-    description:
-      "Onboard spatial intelligence for machines in motion. Based in Bhubaneswar, Odisha, India.",
-    url: `${SITE_URL}/company`,
-  },
-};
+    "Perception Labs develops onboard spatial intelligence and navigation software for autonomous drones and robots from Bhubaneswar, Odisha, India.",
+  path: "/company",
+});
 
 export default function CompanyPage() {
   return (

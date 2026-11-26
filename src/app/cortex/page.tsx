@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { CORTEX_PAGE, SITE_URL } from "@/data/site-content";
+import { buildPageMetadata } from "@/lib/seo";
+import { CORTEX_PAGE } from "@/data/site-content";
 import { CortexCapabilitySymbol } from "@/components/CortexHomeVisuals";
 import {
   CortexArchitectureDiagram,
@@ -9,18 +10,12 @@ import {
   CortexHeroGraphic,
 } from "@/components/CortexPageVisuals";
 
-export const metadata: Metadata = {
-  title: "Cortex",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Cortex — GPS-Denied Navigation Engine",
   description:
-    "Cortex — Core Navigation Engine. Unified onboard perception, visual-inertial navigation, and PX4 / ROS 2 integration for autonomous systems.",
-  alternates: { canonical: "/cortex" },
-  openGraph: {
-    title: "Cortex | Perception Labs",
-    description:
-      "Core Navigation Engine uniting local visual-inertial navigation, optional global alignment, and multi-source fusion onboard autonomous systems.",
-    url: `${SITE_URL}/cortex`,
-  },
-};
+    "Cortex Core Navigation Engine delivers ~30 Hz onboard visual-inertial odometry (VIO), optional global alignment, and PX4 / ROS 2 integration.",
+  path: "/cortex",
+});
 
 export default function CortexPage() {
   const { hero, capabilities, architecture, characteristics, specifications } =

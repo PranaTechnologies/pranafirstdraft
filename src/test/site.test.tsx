@@ -18,8 +18,13 @@ import {
   HOME_SOLUTIONS,
   HOME_TECHNOLOGY,
   RESEARCH_TRACKS,
+  SITE_URL,
   TECH_COUPLED_ENGINES,
+  TECHNOLOGY_LAYERS,
 } from "@/data/site-content";
+import { buildPageMetadata } from "@/lib/seo";
+import robots from "@/app/robots";
+import sitemap from "@/app/sitemap";
 
 vi.mock("next/navigation", () => ({
   usePathname: () => "/",
@@ -209,5 +214,31 @@ describe("Perception Labs website", () => {
       "href",
       CONTACT_INFO.googleFormUrl,
     );
+  });
+
+  it("enforces canonical production domain, sitemap, robots, and sub-155 char SEO metadata", () => {
+    expect(SITE_URL).toBe("https://www.perceptionlab.in");
+    expect(robots().sitemap).toBe("https://www.perceptionlab.in/sitemap.xml");
+
+    const sm = sitemap();
+    expect(sm.length).toBe(13);
+    for (const entry of sm) {
+      expect(entry.url.startsWith("https://www.perceptionlab.in")).toBe(true);
+    }
+
+    for (const layer of TECHNOLOGY_LAYERS) {
+      expect(layer.metaDescription.length).toBeLessThanOrEqual(155);
+    }
+
+    const meta = buildPageMetadata({
+      title: "Test Route",
+      description: "Concise test description.",
+      path: "/cortex",
+    });
+    expect(meta.alternates?.canonical).toBe("/cortex");
+    expect(meta.openGraph?.url).toBe("https://www.perceptionlab.in/cortex");
+    expect(meta.openGraph?.images).toEqual(["/opengraph-image"]);
+    expect(meta.twitter?.title).toBe("Test Route | Perception Labs");
+    expect(meta.twitter?.images).toEqual(["/opengraph-image"]);
   });
 });

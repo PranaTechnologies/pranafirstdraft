@@ -1,4 +1,4 @@
-export const SITE_URL = "https://pranafirstdraft.vercel.app";
+export const SITE_URL = "https://www.perceptionlab.in";
 
 export const BRAND = {
   name: "Perception Labs",
@@ -247,6 +247,7 @@ export interface TechnologySpec {
   shortTitle: string;
   stackSummary: string;
   summary: string;
+  metaDescription: string;
   overview: string;
   feedbackNote: string;
   graphic: "sensing" | "perception" | "estimation" | "spatial" | "autonomy";
@@ -266,6 +267,8 @@ export const TECHNOLOGY_LAYERS: TechnologySpec[] = [
     stackSummary: "Synchronized cameras, IMUs, and depth payloads.",
     summary:
       "Multi-modal cameras, inertial sensors, optional depth/LiDAR payloads, and hardware-aware timing.",
+    metaDescription:
+      "Hardware camera–IMU synchronization and calibration for drone and robot visual-inertial navigation, depth, and LiDAR sensing.",
     overview:
       "Reliable onboard autonomy begins with temporally coherent measurements. We synchronize optical camera exposures with high-rate IMU samples and optional auxiliary payloads under calibrated extrinsics.",
     feedbackNote:
@@ -298,6 +301,8 @@ export const TECHNOLOGY_LAYERS: TechnologySpec[] = [
     stackSummary: "Feature tracking, correspondence, and outlier filtering.",
     summary:
       "Persistent geometric feature tracking and visual observations across dynamic lighting and motion.",
+    metaDescription:
+      "Persistent visual landmark tracking, outlier filtering, and global map correspondence for autonomous drones and robots.",
     overview:
       "Extracts and tracks stable structural landmarks across consecutive frames while filtering glare, transient moving objects, and corrupted measurements before state updates.",
     feedbackNote:
@@ -330,6 +335,8 @@ export const TECHNOLOGY_LAYERS: TechnologySpec[] = [
     stackSummary: "Coupled ~30 Hz local estimation and ~1 Hz alignment.",
     summary:
       "Health-monitored visual-inertial fusion generating continuous 6-DoF motion and bounded localization.",
+    metaDescription:
+      "Real-time visual-inertial odometry (VIO) fusing IMU kinematics, tracked landmarks, and optional ~1 Hz geo-referenced alignment at ~30 Hz.",
     overview:
       "Fuses inertial pre-integration with tracked visual constraints and optional ~1 Hz geo-referenced alignment or barometer/GNSS inputs to output smooth ~30 Hz pose, velocity, and uncertainty.",
     feedbackNote:
@@ -362,6 +369,8 @@ export const TECHNOLOGY_LAYERS: TechnologySpec[] = [
     stackSummary: "Onboard local geometry and reference frames.",
     summary:
       "Real-time 3D local reconstruction, obstacle clearance context, and frame coherence.",
+    metaDescription:
+      "Onboard 3D local mapping, obstacle clearance context, and NED, ENU, and WGS84 coordinate frame alignment for autonomous machines.",
     overview:
       "Transforms estimated trajectories and triangulated points into structured local spatial representations—supporting corridor traversal and consistent sensor-to-world transforms onboard.",
     feedbackNote:
@@ -394,6 +403,8 @@ export const TECHNOLOGY_LAYERS: TechnologySpec[] = [
     stackSummary: "PX4 / ROS 2 integration and edge execution.",
     summary:
       "Deterministic companion-compute execution bridging estimation directly into vehicle controllers.",
+    metaDescription:
+      "Deterministic PX4 and ROS 2 middleware bridges streaming onboard visual-inertial state estimates and health telemetry on companion compute.",
     overview:
       "Connects perception and estimation outputs into PX4 flight controllers and ROS 2 mobility stacks alongside real-time health telemetry for safe fallback supervision.",
     feedbackNote:

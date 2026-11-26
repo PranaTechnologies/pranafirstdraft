@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Linkedin, Mail, MapPin, Phone } from "lucide-react";
-import { CONTACT_INFO, SITE_URL } from "@/data/site-content";
+import { buildPageMetadata } from "@/lib/seo";
+import { CONTACT_INFO } from "@/data/site-content";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Contact",
   description:
-    "Discuss integrating Cortex onboard perception and state estimation with Perception Labs engineering. Based in Bhubaneswar, Odisha, India.",
-  alternates: { canonical: "/contact" },
-  openGraph: {
-    title: "Contact | Perception Labs",
-    description:
-      "Start an engineering conversation with Perception Labs.",
-    url: `${SITE_URL}/contact`,
-  },
-};
+    "Discuss integrating Cortex onboard navigation for drones and mobile robots with Perception Labs engineering. Bhubaneswar, Odisha, India.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

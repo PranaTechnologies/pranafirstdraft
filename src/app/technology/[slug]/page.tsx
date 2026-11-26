@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { SITE_URL, TECHNOLOGY_LAYERS } from "@/data/site-content";
+import { buildPageMetadata } from "@/lib/seo";
+import { TECHNOLOGY_LAYERS } from "@/data/site-content";
 import { SpatialSchematic } from "@/components/SpatialSchematic";
 
 interface PageParams {
@@ -19,16 +20,11 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   if (!spec) {
     return { title: "Technology Layer" };
   }
-  return {
+  return buildPageMetadata({
     title: `Layer ${spec.layerNumber}: ${spec.shortTitle}`,
-    description: spec.overview,
-    alternates: { canonical: `/technology/${spec.slug}` },
-    openGraph: {
-      title: `Layer ${spec.layerNumber}: ${spec.shortTitle} | Perception Labs`,
-      description: spec.overview,
-      url: `${SITE_URL}/technology/${spec.slug}`,
-    },
-  };
+    description: spec.metaDescription,
+    path: `/technology/${spec.slug}`,
+  });
 }
 
 export default async function TechnologyDetailPage({ params }: PageParams) {

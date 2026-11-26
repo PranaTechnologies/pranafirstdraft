@@ -1,6 +1,8 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { buildPageMetadata } from "@/lib/seo";
 import { SpatialFieldCanvas } from "@/components/SpatialFieldCanvas";
 import {
   CortexCapabilitySymbol,
@@ -13,6 +15,14 @@ import {
   HOME_SOLUTIONS,
   HOME_TECHNOLOGY,
 } from "@/data/site-content";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: `${BRAND.name} | ${BRAND.tagline}`,
+  description:
+    "Spatial intelligence and onboard GPS-denied visual-inertial navigation for drones and robots. Integrated PX4 and ROS 2 autonomy.",
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function HomePage() {
   return (

@@ -1,27 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { buildPageMetadata } from "@/lib/seo";
 import { TechFieldCanvas } from "@/components/TechFieldCanvas";
 import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
 import {
   ENGINEERING_PRINCIPLES,
-  SITE_URL,
   TECH_COUPLED_ENGINES,
   TECHNOLOGY_LAYERS,
 } from "@/data/site-content";
 
-export const metadata: Metadata = {
-  title: "Technology",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Visual-Inertial & Spatial Autonomy Stack",
   description:
-    "Perception Labs' interconnected five-layer spatial intelligence stack, coupled perception engines, and edge-first engineering architecture.",
-  alternates: { canonical: "/technology" },
-  openGraph: {
-    title: "Technology | Perception Labs",
-    description:
-      "Five-layer onboard perception, local/global state estimation, spatial intelligence, and autonomy execution.",
-    url: `${SITE_URL}/technology`,
-  },
-};
+    "Hardware-synced camera–IMU sensing, visual-inertial odometry (VIO), spatial mapping, and real-time PX4 / ROS 2 execution inside Cortex.",
+  path: "/technology",
+});
 
 export default function TechnologyPage() {
   return (

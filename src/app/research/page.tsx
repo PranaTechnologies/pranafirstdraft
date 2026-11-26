@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { RESEARCH_TRACKS, SITE_URL } from "@/data/site-content";
+import { buildPageMetadata } from "@/lib/seo";
+import { RESEARCH_TRACKS } from "@/data/site-content";
 
-export const metadata: Metadata = {
-  title: "Research",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Drone Navigation & Sensor Fusion Research",
   description:
-    "Perception Labs engineering research tracks on camera–IMU synchronization, multi-rate state fusion, and companion edge profiling.",
-  alternates: { canonical: "/research" },
-  openGraph: {
-    title: "Research | Perception Labs",
-    description:
-      "Active engineering investigation tracks behind Cortex perception and state estimation.",
-    url: `${SITE_URL}/research`,
-  },
-};
+    "Engineering research on camera–IMU synchronization, multi-rate visual-inertial odometry (VIO), global map alignment, and onboard edge profiling.",
+  path: "/research",
+});
 
 export default function ResearchPage() {
   return (
