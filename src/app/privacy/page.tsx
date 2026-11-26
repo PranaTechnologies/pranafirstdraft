@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <section className="bg-field pb-28 pt-32 md:pb-36 md:pt-40">
-      <div className="mx-auto max-w-4xl px-6 md:px-10">
+    <section className="bg-field pb-16 pt-24 md:pb-20 md:pt-28">
+      <div className="mx-auto max-w-editorial px-6 md:px-10">
         <Link
           href="/contact"
           className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-muted-ink transition-colors hover:text-graphite"

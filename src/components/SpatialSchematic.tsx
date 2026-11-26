@@ -158,13 +158,28 @@ export function SpatialSchematic({
 
         {variant === "uav" && (
           <g>
-            {/* Low-altitude flight profile over terrain contours */}
-            <path d="M0 162C55 152 95 112 152 126C210 140 250 96 312 114C358 128 386 108 420 102" stroke="#4D5953" strokeWidth="1.2" />
-            <path d="M0 176C65 168 112 136 168 148C226 160 264 126 324 138C366 146 392 132 420 128" stroke="#2D3934" strokeWidth="1" />
-            <path d="M34 114C102 98 148 70 218 76C278 82 324 56 382 48" stroke="#F4F5F0" strokeWidth="1.6" />
-            <path d="M372 42l12 6-10 8" stroke="#B9E36A" strokeWidth="1.4" />
-            <circle cx="152" cy="84" r="3" fill="#B9E36A" />
-            <circle cx="272" cy="68" r="3" fill="#B9E36A" />
+            {/* Aerial Cortex architecture diagram: Sensors -> Local 30Hz / Global 1Hz -> PX4 */}
+            <path d="M0 164C55 154 95 128 152 138C210 148 250 116 312 128C358 136 386 122 420 118" stroke="#2D3D37" strokeWidth="1.1" />
+            <rect x="26" y="34" width="84" height="44" rx="3" fill="#111917" stroke="#68796F" strokeWidth="1.1" />
+            <text x="68" y="54" textAnchor="middle" fill="#B9E36A" fontSize="8" fontFamily="monospace">CAM + IMU</text>
+            <text x="68" y="67" textAnchor="middle" fill="#9AA59F" fontSize="7.5" fontFamily="monospace">SYNC INPUT</text>
+
+            <rect x="160" y="22" width="110" height="36" rx="3" fill="#15231D" stroke="#B9E36A" strokeWidth="1.3" />
+            <text x="215" y="38" textAnchor="middle" fill="#F3F3ED" fontSize="8" fontFamily="monospace">LOCAL ~30 HZ</text>
+            <text x="215" y="50" textAnchor="middle" fill="#B9E36A" fontSize="7" fontFamily="monospace">6-DOF ODOMETRY</text>
+
+            <rect x="160" y="72" width="110" height="36" rx="3" fill="#111917" stroke="#4D5953" strokeWidth="1.1" strokeDasharray="3 2" />
+            <text x="215" y="88" textAnchor="middle" fill="#D8E0DA" fontSize="8" fontFamily="monospace">MAP ~1 HZ</text>
+            <text x="215" y="100" textAnchor="middle" fill="#9AA59F" fontSize="7" fontFamily="monospace">OPTIONAL WGS84</text>
+
+            <rect x="314" y="46" width="82" height="44" rx="3" fill="#111917" stroke="#F3F3ED" strokeWidth="1.2" />
+            <text x="355" y="66" textAnchor="middle" fill="#F3F3ED" fontSize="8" fontFamily="monospace">PX4 / ROS 2</text>
+            <text x="355" y="79" textAnchor="middle" fill="#B9E36A" fontSize="7" fontFamily="monospace">HEALTH GATED</text>
+
+            <path d="M110 48H160M110 66L160 88M270 40L314 60M270 90L314 74" stroke="#B9E36A" strokeOpacity="0.8" strokeWidth="1.2" />
+            <path d="M36 146C106 138 158 118 228 122C288 126 334 108 386 104" stroke="#F3F3ED" strokeWidth="1.3" strokeOpacity="0.65" />
+            <circle cx="152" cy="126" r="2.5" fill="#B9E36A" />
+            <circle cx="294" cy="116" r="2.5" fill="#B9E36A" />
           </g>
         )}
 
@@ -181,13 +196,24 @@ export function SpatialSchematic({
 
         {variant === "robotics" && (
           <g>
-            {/* Indoor corridor structural walls + local path */}
-            <path d="M46 42H374M46 158H374" stroke="#9AA59F" strokeWidth="1.3" />
-            <path d="M126 42v42M126 116v42M264 42v32M264 128v30" stroke="#4D5953" strokeWidth="1.2" />
-            <path d="M74 100H174L214 78L298 118L354 100" stroke="#F4F5F0" strokeWidth="1.6" />
-            <circle cx="174" cy="100" r="3" fill="#B9E36A" />
-            <circle cx="214" cy="78" r="3" fill="#B9E36A" />
-            <circle cx="298" cy="118" r="3" fill="#B9E36A" />
+            {/* Robotic spatial perception: Multi-Sensor -> Local Reconstruction + Trajectory -> ROS 2 */}
+            <path d="M210 34H390M210 166H390" stroke="#303D38" strokeWidth="1.1" />
+            <path d="M268 34v34M268 132v34M342 34v28M342 138v28" stroke="#4D5953" strokeWidth="1.1" />
+            <path d="M214 100H278L310 78L356 116L388 100" stroke="#F3F3ED" strokeWidth="1.5" />
+            <circle cx="278" cy="100" r="3" fill="#B9E36A" />
+            <circle cx="310" cy="78" r="3" fill="#B9E36A" />
+            <circle cx="356" cy="116" r="3" fill="#B9E36A" />
+
+            <rect x="26" y="34" width="84" height="44" rx="3" fill="#111917" stroke="#68796F" strokeWidth="1.1" />
+            <text x="68" y="54" textAnchor="middle" fill="#B9E36A" fontSize="8" fontFamily="monospace">MULTI-SENSOR</text>
+            <text x="68" y="67" textAnchor="middle" fill="#9AA59F" fontSize="7" fontFamily="monospace">CAM · IMU · DEPTH</text>
+
+            <rect x="26" y="108" width="144" height="58" rx="3" fill="#15231D" stroke="#B9E36A" strokeWidth="1.2" />
+            <text x="98" y="128" textAnchor="middle" fill="#F3F3ED" fontSize="8" fontFamily="monospace">3D LOCAL MAPPING</text>
+            <text x="98" y="142" textAnchor="middle" fill="#9AA59F" fontSize="7" fontFamily="monospace">ODOMETRY + CLEARANCE</text>
+            <text x="98" y="155" textAnchor="middle" fill="#B9E36A" fontSize="7" fontFamily="monospace">ROS 2 MOBILITY BRIDGE</text>
+
+            <path d="M68 78V108M170 136L214 100" stroke="#B9E36A" strokeOpacity="0.8" strokeWidth="1.2" />
           </g>
         )}
 

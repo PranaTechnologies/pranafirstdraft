@@ -20,8 +20,8 @@
     background-color: #F3F3ED;
     color: #171C19;
     font-family: var(--font-manrope), system-ui, sans-serif;
-    font-size: 1.125rem;
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.6;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

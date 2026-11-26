@@ -21,25 +21,38 @@ export const metadata: Metadata = {
 export default function CortexPage() {
   return (
     <>
-      {/* 01 · Flagship Product Overview */}
-      <section className="border-b border-border-grey bg-field pb-24 pt-32 md:pb-32 md:pt-40">
-        <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+      {/* 01 · Hero Overview */}
+      <section className="border-b border-border-grey bg-field pb-12 pt-24 md:pb-16 md:pt-28">
+        <div className="mx-auto max-w-editorial px-6 md:px-10">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="min-w-0 lg:col-span-6">
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
-                CORTEX
+                FLAGSHIP ENGINE · CORTEX
               </p>
-              <h1 className="mt-4 font-display text-[3rem] font-light leading-[1.03] tracking-[-0.03em] text-graphite sm:text-[4.25rem]">
+              <h1 className="mt-3 font-display text-[2.75rem] font-light leading-[1.04] tracking-[-0.03em] text-graphite sm:text-[4rem]">
                 Cortex
               </h1>
-              <p className="mt-6 max-w-[46ch] text-xl leading-[1.6] text-muted-ink">
-                {CORTEX_SPEC.tagline}
+              <p className="mt-4 max-w-[48ch] text-lg leading-[1.6] text-muted-ink">
+                {CORTEX_SPEC.tagline} Connects synchronized cameras, IMUs, and auxiliary payloads into continuous spatial awareness, local mapping, and ~30 Hz flight/robot control readiness.
               </p>
 
-              <div className="mt-10">
+              <div className="mt-6 grid grid-cols-3 gap-4 border-y border-border-grey py-4">
+                {CORTEX_SPEC.metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <p className="font-display text-2xl font-normal text-graphite">
+                      {metric.value}
+                    </p>
+                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-green">
+                      {metric.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-sm bg-graphite px-6 py-4 font-mono text-xs uppercase tracking-[0.12em] text-field transition-colors hover:bg-signal hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+                  className="inline-flex items-center gap-2 rounded-sm bg-graphite px-5 py-3.5 font-mono text-xs uppercase tracking-[0.12em] text-field transition-colors hover:bg-signal hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
                 >
                   <span>Discuss an integration</span>
                   <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -51,47 +64,54 @@ export default function CortexPage() {
               <SpatialSchematic
                 variant="cortex"
                 label="Cortex spatial perception and state estimation profile"
-                caption="ILLUSTRATIVE ENGINE PIPELINE"
+                caption="ILLUSTRATIVE ENGINE PIPELINE · LOCAL ~30 HZ / OPTIONAL GLOBAL ~1 HZ"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 02 · What It Does */}
-      <section className="border-b border-deep-border bg-deep-field py-24 text-field md:py-32">
-        <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-signal">
-            WHAT IT DOES
-          </p>
-          <h2 className="mt-4 max-w-3xl font-display text-3xl font-light tracking-[-0.02em] text-field sm:text-4xl">
-            Continuous perception, mapping, and state estimation on the machine.
-          </h2>
+      {/* 02 · Capabilities + Local vs Global Alignment Modes */}
+      <section className="border-b border-deep-border bg-deep-field py-12 text-field md:py-16">
+        <div className="mx-auto max-w-editorial px-6 md:px-10">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-signal">
+                WHAT IT DOES
+              </p>
+              <h2 className="mt-2 font-display text-3xl font-light tracking-[-0.02em] text-field sm:text-4xl">
+                Multi-rate onboard estimation &amp; spatial mapping
+              </h2>
+            </div>
 
-          <div
-            aria-label="Cortex processing pipeline"
-            className="mt-10 flex flex-wrap items-center gap-3 border-y border-deep-border py-4 font-mono text-xs uppercase tracking-[0.12em] text-field"
-          >
-            {CORTEX_SPEC.pipeline.map((step, index) => (
-              <span key={step} className="inline-flex items-center gap-3">
-                <span>{step}</span>
-                {index < CORTEX_SPEC.pipeline.length - 1 && (
-                  <span aria-hidden="true" className="text-signal">
-                    →
-                  </span>
-                )}
-              </span>
-            ))}
+            <div
+              aria-label="Cortex processing pipeline"
+              className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] text-[#D8E0DA]"
+            >
+              {CORTEX_SPEC.pipeline.map((step, index) => (
+                <span key={step} className="inline-flex items-center gap-2">
+                  <span>{step}</span>
+                  {index < CORTEX_SPEC.pipeline.length - 1 && (
+                    <span aria-hidden="true" className="text-signal">
+                      →
+                    </span>
+                  )}
+                </span>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-12 grid gap-10 md:grid-cols-3">
-            {CORTEX_SPEC.capabilities.map((cap) => (
-              <div key={cap.title}>
-                <h3 className="font-display text-2xl font-normal text-field">
-                  {cap.title}
+          <div className="mt-8 grid gap-6 border-t border-deep-border pt-8 md:grid-cols-3 md:gap-8">
+            {CORTEX_SPEC.modes.map((mode) => (
+              <div key={mode.name}>
+                <p className="font-mono text-xs uppercase tracking-[0.12em] text-signal">
+                  {mode.cadence}
+                </p>
+                <h3 className="mt-2 font-display text-xl font-medium text-field">
+                  {mode.name}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-[#BCC7C0]">
-                  {cap.detail}
+                <p className="mt-2 text-base leading-relaxed text-[#BCC7C0]">
+                  {mode.detail}
                 </p>
               </div>
             ))}
@@ -99,21 +119,21 @@ export default function CortexPage() {
         </div>
       </section>
 
-      {/* 03 · Integration & Current Development Status */}
-      <section className="border-b border-border-grey bg-field py-24 text-graphite md:py-32">
-        <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
-          <div className="grid gap-14 lg:grid-cols-12">
+      {/* 03 · Technical Integration & Current Status */}
+      <section className="border-b border-border-grey bg-field py-12 text-graphite md:py-16">
+        <div className="mx-auto max-w-editorial px-6 md:px-10">
+          <div className="grid gap-10 lg:grid-cols-12">
             <div className="min-w-0 lg:col-span-6">
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
-                INTEGRATION
+                SPECIFICATIONS
               </p>
-              <h2 className="mt-4 font-display text-3xl font-normal tracking-[-0.02em] text-graphite">
-                Designed for vehicle integration
+              <h2 className="mt-2 font-display text-2xl font-normal tracking-[-0.02em] text-graphite sm:text-3xl">
+                Integration parameters &amp; interfaces
               </h2>
 
-              <dl className="mt-8 divide-y divide-border-grey border-y border-border-grey">
+              <dl className="mt-6 divide-y divide-border-grey border-y border-border-grey">
                 {CORTEX_SPEC.integration.map((row) => (
-                  <div key={row.label} className="grid gap-2 py-5 sm:grid-cols-12 sm:gap-4">
+                  <div key={row.label} className="grid gap-1.5 py-4 sm:grid-cols-12 sm:gap-4">
                     <dt className="font-mono text-xs uppercase tracking-[0.12em] text-muted-green sm:col-span-4">
                       {row.label}
                     </dt>
@@ -127,19 +147,19 @@ export default function CortexPage() {
 
             <div className="min-w-0 lg:col-span-6">
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
-                DEVELOPMENT STATUS
+                ENGINEERING MATURITY
               </p>
-              <h2 className="mt-4 font-display text-3xl font-normal tracking-[-0.02em] text-graphite">
+              <h2 className="mt-2 font-display text-2xl font-normal tracking-[-0.02em] text-graphite sm:text-3xl">
                 Current capabilities &amp; boundaries
               </h2>
 
-              <dl className="mt-8 divide-y divide-border-grey border-y border-border-grey">
+              <dl className="mt-6 divide-y divide-border-grey border-y border-border-grey">
                 {CORTEX_SPEC.status.map((item) => (
-                  <div key={item.stage} className="py-5">
+                  <div key={item.stage} className="py-4">
                     <dt className="font-mono text-xs uppercase tracking-[0.12em] text-graphite">
                       {item.stage}
                     </dt>
-                    <dd className="mt-2 text-base leading-relaxed text-muted-ink">
+                    <dd className="mt-1.5 text-base leading-relaxed text-muted-ink">
                       {item.detail}
                     </dd>
                   </div>
@@ -150,7 +170,7 @@ export default function CortexPage() {
         </div>
       </section>
 
-      <ClosingBand tone="dark" heading="Build with us." ctaLabel="Get in touch" />
+      <ClosingBand tone="dark" heading="Build with us." ctaLabel="Discuss an integration" />
     </>
   );
 }

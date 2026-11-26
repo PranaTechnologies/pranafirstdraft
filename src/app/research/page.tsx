@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { SITE_URL } from "@/data/site-content";
+import { RESEARCH_TRACKS, SITE_URL } from "@/data/site-content";
 import { ClosingBand } from "@/components/ClosingBand";
 
 export const metadata: Metadata = {
   title: "Research",
   description:
-    "Perception Labs engineering publications and empirical evaluation notes—published once multi-trial field verification is complete.",
+    "Perception Labs engineering research tracks on camera–IMU synchronization, multi-rate state fusion, and companion edge profiling.",
   alternates: { canonical: "/research" },
   openGraph: {
     title: "Research | Perception Labs",
     description:
-      "Empirical notes on onboard spatial perception, sensor timing, and state estimation.",
+      "Active engineering investigation tracks behind Cortex perception and state estimation.",
     url: `${SITE_URL}/research`,
   },
 };
@@ -20,22 +20,41 @@ export const metadata: Metadata = {
 export default function ResearchPage() {
   return (
     <>
-      <section className="border-b border-border-grey bg-field pb-24 pt-32 md:pb-32 md:pt-40">
-        <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
+      <section className="border-b border-border-grey bg-field pb-12 pt-24 md:pb-16 md:pt-28">
+        <div className="mx-auto max-w-editorial px-6 md:px-10">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
-            RESEARCH
+            RESEARCH &amp; ENGINEERING NOTES
           </p>
-          <h1 className="mt-5 max-w-3xl font-display text-[2.6rem] font-light leading-[1.06] tracking-[-0.025em] text-graphite sm:text-[3.75rem]">
-            Technical writing from our engineering work.
+          <h1 className="mt-4 max-w-3xl font-display text-[2.5rem] font-light leading-[1.06] tracking-[-0.025em] text-graphite sm:text-[3.5rem]">
+            Methodology and field evaluation.
           </h1>
-          <p className="mt-6 max-w-[56ch] text-lg leading-[1.68] text-muted-ink sm:text-xl">
-            Perception Labs documents methodology, sensor timing, and empirical validation across aerial and robotic hardware. Technical reports will be published here strictly as multi-trial field evaluations are finalized.
+          <p className="mt-4 max-w-[56ch] text-base leading-[1.68] text-muted-ink md:text-[18px]">
+            Perception Labs investigates temporal sensor alignment, multi-rate fusion stability, and edge execution guarantees. Full empirical papers and benchmark datasets are published here once multi-trial hardware validation is complete.
           </p>
 
-          <div className="mt-10">
+          <div className="mt-10 divide-y divide-border-grey border-y border-border-grey">
+            {RESEARCH_TRACKS.map((item) => (
+              <div
+                key={item.code}
+                className="grid gap-3 py-6 md:grid-cols-12 md:items-baseline md:gap-6"
+              >
+                <span className="font-mono text-xs uppercase tracking-[0.12em] text-muted-green md:col-span-2">
+                  TRACK {item.code}
+                </span>
+                <h2 className="font-display text-xl font-medium text-graphite md:col-span-4">
+                  {item.topic}
+                </h2>
+                <p className="text-base leading-relaxed text-muted-ink md:col-span-6">
+                  {item.summary}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8">
             <Link
               href="/technology"
-              className="inline-flex items-center gap-2 rounded-sm bg-graphite px-6 py-4 font-mono text-xs uppercase tracking-[0.12em] text-field transition-colors hover:bg-signal hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+              className="inline-flex items-center gap-2 rounded-sm bg-graphite px-5 py-3.5 font-mono text-xs uppercase tracking-[0.12em] text-field transition-colors hover:bg-signal hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
             >
               <span>Explore Technology</span>
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -44,7 +63,7 @@ export default function ResearchPage() {
         </div>
       </section>
 
-      <ClosingBand tone="dark" heading="Build with us." ctaLabel="Get in touch" />
+      <ClosingBand tone="dark" heading="Build with us." ctaLabel="Discuss an integration" />
     </>
   );
 }

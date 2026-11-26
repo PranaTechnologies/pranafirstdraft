@@ -44,31 +44,31 @@ export default async function TechnologyDetailPage({ params }: PageParams) {
 
   return (
     <>
-      <section className="border-b border-border-grey bg-field pb-20 pt-32 md:pb-28 md:pt-40">
-        <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
+      <section className="border-b border-border-grey bg-field pb-12 pt-24 md:pb-16 md:pt-28">
+        <div className="mx-auto max-w-editorial px-6 md:px-10">
           <Link
             href="/technology"
             className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-muted-ink transition-colors hover:text-graphite"
           >
             <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
-            <span>Back to Five-Layer Architecture</span>
+            <span>Back to Technology</span>
           </Link>
 
-          <div className="mt-8 grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="min-w-0 lg:col-span-6">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-ink">
-                PL / LAYER {spec.layerNumber} — {spec.shortTitle}
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
+                LAYER {spec.layerNumber} — {spec.shortTitle}
               </p>
-              <h1 className="mt-4 font-display text-[2.5rem] font-light leading-[1.06] tracking-[-0.025em] text-graphite sm:text-[3.5rem]">
+              <h1 className="mt-3 font-display text-[2.5rem] font-light leading-[1.06] tracking-[-0.025em] text-graphite sm:text-[3.5rem]">
                 {spec.shortTitle}
               </h1>
-              <p className="mt-5 text-xl leading-relaxed text-graphite sm:text-2xl">
+              <p className="mt-4 text-lg leading-relaxed text-graphite md:text-xl">
                 {spec.summary}
               </p>
-              <p className="mt-4 max-w-[56ch] text-lg leading-[1.68] text-muted-ink">
+              <p className="mt-3 max-w-[54ch] text-base leading-[1.65] text-muted-ink">
                 {spec.overview}
               </p>
-              <p className="mt-5 border-l-2 border-signal pl-4 font-mono text-xs uppercase leading-relaxed tracking-[0.08em] text-graphite">
+              <p className="mt-4 border-l-2 border-signal pl-4 font-mono text-xs uppercase leading-relaxed tracking-[0.08em] text-graphite">
                 COUPLED FEEDBACK: {spec.feedbackNote}
               </p>
             </div>
@@ -84,9 +84,9 @@ export default async function TechnologyDetailPage({ params }: PageParams) {
         </div>
       </section>
 
-      <section className="border-b border-border-grey bg-surface py-20 md:py-28">
-        <div className="mx-auto max-w-editorial px-6 md:px-12 lg:px-16">
-          <div className="grid gap-12 lg:grid-cols-12">
+      <section className="border-b border-border-grey bg-surface py-12 md:py-16">
+        <div className="mx-auto max-w-editorial px-6 md:px-10">
+          <div className="grid gap-8 lg:grid-cols-12">
             <div className="min-w-0 lg:col-span-7">
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-ink">
                 ENGINEERING FOCUS

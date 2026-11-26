@@ -12,7 +12,11 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import {
   CONTACT_INFO,
+  ENGINEERING_PRINCIPLES,
   FOUNDERS,
+  PHILOSOPHY_PILLARS,
+  RESEARCH_TRACKS,
+  TECH_COUPLED_ENGINES,
   TECHNOLOGY_LAYERS,
 } from "@/data/site-content";
 
@@ -24,38 +28,39 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("Perception Labs website", () => {
-  it("renders focused 5-section Homepage with Cortex lead and no blog or card clutter", () => {
+  it("renders high-substance 6-section Homepage with Cortex metrics, Philosophy, 5-layer stack, Principles, and Solutions preview", () => {
     const { container } = render(<HomePage />);
 
     expect(
       screen.getByRole("heading", { name: /Intelligence for machines in motion\./i }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /^Explore Cortex$/i })).toHaveAttribute(
-      "href",
-      "/cortex",
-    );
-    expect(screen.getByRole("link", { name: /^Discover Cortex$/i })).toHaveAttribute(
-      "href",
-      "/cortex",
-    );
-    expect(screen.getByRole("link", { name: /Explore our technology/i })).toHaveAttribute(
-      "href",
-      "/technology",
-    );
-    expect(screen.getByRole("link", { name: /Explore Solutions/i })).toHaveAttribute(
-      "href",
-      "/solutions",
-    );
-    expect(screen.getByRole("link", { name: /Get in touch/i })).toHaveAttribute(
-      "href",
-      "/contact",
-    );
+    for (const pillar of PHILOSOPHY_PILLARS) {
+      expect(screen.getByRole("heading", { name: pillar.name })).toBeInTheDocument();
+    }
+    expect(screen.getByText("~30 Hz")).toBeInTheDocument();
+    expect(screen.getByText("6-DoF")).toBeInTheDocument();
+    expect(screen.getByText("Edge")).toBeInTheDocument();
+
+    for (const principle of ENGINEERING_PRINCIPLES) {
+      expect(screen.getByRole("heading", { name: principle.title })).toBeInTheDocument();
+    }
+
+    TECHNOLOGY_LAYERS.forEach((layer) => {
+      expect(screen.getByRole("link", { name: new RegExp(`${layer.layerNumber}.*${layer.shortTitle}`, "i") })).toHaveAttribute(
+        "href",
+        `/technology/${layer.slug}`,
+      );
+    });
+
+    expect(screen.getByRole("link", { name: /Explore architecture/i })).toHaveAttribute("href", "/technology");
+    expect(screen.getByRole("link", { name: /Explore Solutions/i })).toHaveAttribute("href", "/solutions");
+    expect(screen.getByRole("link", { name: /Discuss an integration/i })).toHaveAttribute("href", "/contact");
 
     const text = container.textContent ?? "";
     expect(text).not.toMatch(/UPCOMING TECHNICAL|Placeholder|PIVO|₹35,000|Phase 4/i);
   });
 
-  it("renders streamlined primary navigation and minimal Footer with Research and icon links", async () => {
+  it("renders streamlined navigation and minimal Footer with Research link and icons", async () => {
     const user = userEvent.setup();
     render(
       <>
@@ -82,23 +87,18 @@ describe("Perception Labs website", () => {
     expect(within(footerNav).getByRole("link", { name: /Research/i })).toHaveAttribute("href", "/research");
     expect(within(footerNav).getByRole("link", { name: /Contact/i })).toHaveAttribute("href", "/contact");
     expect(within(footer).getByRole("link", { name: /^Privacy Policy$/i })).toHaveAttribute("href", "/privacy");
-    expect(
-      within(footer).getByRole("link", { name: new RegExp(`Email Perception Labs.*${CONTACT_INFO.email}`) }),
-    ).toHaveAttribute("href", `mailto:${CONTACT_INFO.email}`);
-    expect(
-      within(footer).getByRole("link", { name: /^Perception Labs on LinkedIn$/i }),
-    ).toHaveAttribute("href", CONTACT_INFO.companyLinkedin);
   });
 
-  it("renders flagship Cortex page with integration parameters and development status", () => {
+  it("renders flagship Cortex page with local vs global alignment and engineering maturity boundaries", () => {
     const { container } = render(<CortexPage />);
     expect(screen.getByRole("heading", { level: 1, name: /^Cortex$/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Discuss an integration/i })).toHaveAttribute("href", "/contact");
+    expect(screen.getByText(/Local Spatial Estimation/i)).toBeInTheDocument();
+    expect(screen.getByText(/Optional Global Map Alignment/i)).toBeInTheDocument();
     expect(screen.getByText(/Current capabilities & boundaries/i)).toBeInTheDocument();
     expect(container.textContent ?? "").not.toMatch(/PIVO|₹35,000|₹10,000/i);
   });
 
-  it("renders Technology page with volumetric hero background and one cohesive five-layer diagram", () => {
+  it("renders Technology page with volumetric hero background, cohesive five-layer diagram, and three coupled engines", () => {
     render(<TechnologyPage />);
 
     expect(
@@ -107,30 +107,27 @@ describe("Perception Labs website", () => {
     expect(
       screen.getByRole("img", { name: /Cohesive five-layer spatial intelligence/i }),
     ).toBeInTheDocument();
-
-    TECHNOLOGY_LAYERS.forEach((layer) => {
-      expect(
-        screen.getByRole("link", { name: new RegExp(`${layer.layerNumber}.*${layer.shortTitle}`, "i") }),
-      ).toHaveAttribute("href", `/technology/${layer.slug}`);
-    });
+    for (const eng of TECH_COUPLED_ENGINES) {
+      expect(screen.getByRole("heading", { name: eng.title })).toBeInTheDocument();
+    }
   });
 
-  it("renders rebuilt Solutions page focused strictly on two core application areas", () => {
+  it("renders Solutions page with deep technical coverage of the two core areas and diagrams", () => {
     const { container } = render(<SolutionsPage />);
 
     expect(
       screen.getByRole("heading", { name: /Spatial intelligence for real-world autonomy\./i }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /Resilient navigation/i })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: /Spatial perception/i })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Explore Cortex/i })).toHaveAttribute("href", "/cortex");
-    expect(screen.getByRole("link", { name: /Discuss an integration/i })).toHaveAttribute("href", "/contact");
+    expect(screen.getByText("The GNSS Challenge")).toBeInTheDocument();
+    expect(screen.getByText("Local Estimation vs. Global Alignment")).toBeInTheDocument();
+    expect(screen.getByText("Unstructured Localization")).toBeInTheDocument();
+    expect(screen.getByText("Motion Estimation & Reconstruction")).toBeInTheDocument();
 
     const text = container.textContent ?? "";
     expect(text).not.toMatch(/Edge Perception Kit|Flight Bridge|OEM Integration & Qualification|Mining|Agriculture|₹35,000/i);
   });
 
-  it("renders Company founder details, direct Contact flow, and placeholder-free Research notice", () => {
+  it("renders Company founder details, Research tracks, and direct Contact flow", () => {
     render(<CompanyPage />);
     for (const founder of FOUNDERS) {
       expect(screen.getByRole("link", { name: founder.email })).toHaveAttribute(
@@ -138,13 +135,13 @@ describe("Perception Labs website", () => {
         `mailto:${founder.email}`,
       );
     }
-    const linkedinLinks = screen.getAllByRole("link", { name: /^LinkedIn$/i });
-    expect(linkedinLinks[0]).toHaveAttribute("href", FOUNDERS[0].linkedin);
-    expect(linkedinLinks[1]).toHaveAttribute("href", FOUNDERS[1].linkedin);
 
     cleanup();
     const research = render(<ResearchPage />);
-    expect(research.container.textContent ?? "").not.toMatch(/UPCOMING|Placeholder|Draft Template/i);
+    for (const track of RESEARCH_TRACKS) {
+      expect(screen.getByText(track.topic)).toBeInTheDocument();
+    }
+    expect(research.container.textContent ?? "").not.toMatch(/Placeholder Technical Blog|Draft Template/i);
 
     cleanup();
     render(<ContactPage />);

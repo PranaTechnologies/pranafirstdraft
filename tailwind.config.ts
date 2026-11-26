@@ -25,7 +25,7 @@ const config: Config = {
         "deep-muted": "#9AA59F",
       },
       maxWidth: {
-        editorial: "1360px",
+        editorial: "1280px",
       },
       borderRadius: {
         card: "6px",
