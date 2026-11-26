@@ -47,13 +47,13 @@ function SpatialFieldFallback({ isBackground = false }: { isBackground?: boolean
       className="h-full w-full"
       preserveAspectRatio="xMidYMid slice"
     >
-      <rect width="800" height="480" fill="#0B1110" />
-      <g stroke={isBackground ? "#192521" : "#202A27"} strokeWidth="1">
+      <rect width="800" height="480" fill="#101211" />
+      <g stroke={isBackground ? "#1E2421" : "#252826"} strokeWidth="1">
         <path d="M0 390H800M0 340H800M0 290H800M0 240H800M0 190H800M0 140H800" />
         <path d="M90 480L400 100L710 480M210 480L400 100L590 480M320 480L400 100L480 480" />
       </g>
       <g
-        fill={isBackground ? "#3E6352" : "#9AA59F"}
+        fill={isBackground ? "#3E6352" : "#858B86"}
         opacity={isBackground ? "0.45" : "0.65"}
       >
         {staticPoints.map(([x, y]) => (
@@ -62,7 +62,7 @@ function SpatialFieldFallback({ isBackground = false }: { isBackground?: boolean
       </g>
       <path
         d="M175 340C245 305 310 272 385 240C455 210 530 182 605 155C655 136 690 130 735 115"
-        stroke={isBackground ? "#7CA854" : "#F4F5F0"}
+        stroke={isBackground ? "#7CA854" : "#F5F5F2"}
         strokeOpacity={isBackground ? "0.7" : "1"}
         strokeWidth="1.75"
         fill="none"
@@ -70,8 +70,8 @@ function SpatialFieldFallback({ isBackground = false }: { isBackground?: boolean
       <g opacity={isBackground ? "0.8" : "1"}>
         {keyNodes.map(([x, y]) => (
           <g key={`k-${x}-${y}`}>
-            <circle cx={x} cy={y} r="4.5" fill="#0B1110" stroke="#B9E36A" strokeWidth="1.5" />
-            <circle cx={x} cy={y} r="1.5" fill="#B9E36A" />
+            <circle cx={x} cy={y} r="4.5" fill="#101211" stroke="#C5F36B" strokeWidth="1.5" />
+            <circle cx={x} cy={y} r="1.5" fill="#C5F36B" />
           </g>
         ))}
       </g>
@@ -110,7 +110,7 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(width, height);
-    renderer.setClearColor(new THREE.Color("#0B1110"), 1);
+    renderer.setClearColor(new THREE.Color("#101211"), 1);
 
     const canvas = renderer.domElement;
     canvas.style.position = "absolute";
@@ -122,7 +122,7 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     container.appendChild(canvas);
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.Fog("#0B1110", 9.5, 21);
+    scene.fog = new THREE.Fog("#101211", 9.5, 21);
 
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 40);
     // Keep focal trajectory cluster shifted clearly into the right viewport zone when used as hero background
@@ -189,9 +189,9 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     const landmarkTargets: THREE.Vector3[] = [];
 
     // Separate background cloud hues (deep teal-sage & olive-green) cleanly from bright white foreground typography
-    const slateColor = new THREE.Color(isBg ? "#294137" : "#7D8A83");
+    const slateColor = new THREE.Color(isBg ? "#294137" : "#858B86");
     const brightColor = new THREE.Color(isBg ? "#446D59" : "#E8EBE4");
-    const signalColor = new THREE.Color(isBg ? "#7DAA4B" : "#B9E36A");
+    const signalColor = new THREE.Color(isBg ? "#84B354" : "#C5F36B");
 
     for (let i = 0; i < pointCount; i++) {
       const t = i / pointCount;
@@ -284,7 +284,7 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     );
     keyframeGeometry.setDrawRange(0, prefersReducedMotion ? keyframeCount : 5);
     const keyframeMaterial = new THREE.PointsMaterial({
-      color: new THREE.Color("#B9E36A"),
+      color: new THREE.Color("#C5F36B"),
       size: 0.22,
       sizeAttenuation: true,
     });
@@ -310,7 +310,7 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
       ),
     );
     const frustumMaterial = new THREE.LineBasicMaterial({
-      color: new THREE.Color("#B9E36A"),
+      color: new THREE.Color("#C5F36B"),
       transparent: true,
       opacity: 0.95,
     });
@@ -322,7 +322,7 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
     const raysGeo = new THREE.BufferGeometry();
     raysGeo.setAttribute("position", new THREE.BufferAttribute(rayPositions, 3));
     const raysMat = new THREE.LineBasicMaterial({
-      color: new THREE.Color("#B9E36A"),
+      color: new THREE.Color("#C5F36B"),
       transparent: true,
       opacity: 0.44,
     });

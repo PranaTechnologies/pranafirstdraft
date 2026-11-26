@@ -5,8 +5,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #F3F3ED;
-    color: #171C19;
+    background-color: #F5F5F2;
+    color: #101211;
     font-size: 16px;
   }
 
@@ -17,8 +17,8 @@
   }
 
   body {
-    background-color: #F3F3ED;
-    color: #171C19;
+    background-color: #F5F5F2;
+    color: #101211;
     font-family: var(--font-manrope), system-ui, sans-serif;
     font-size: 1rem;
     line-height: 1.6;
@@ -29,8 +29,8 @@
   }
 
   ::selection {
-    background-color: #B9E36A;
-    color: #171C19;
+    background-color: #C5F36B;
+    color: #101211;
   }
 }
 

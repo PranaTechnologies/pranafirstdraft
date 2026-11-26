@@ -40,7 +40,7 @@ export function PerceptionMark({
         cx="18"
         cy="18"
         r="2.4"
-        fill={accentPoint ? "#B9E36A" : "currentColor"}
+        fill={accentPoint ? "#C5F36B" : "currentColor"}
         stroke="currentColor"
         strokeWidth="0.9"
       />

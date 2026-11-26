@@ -3,10 +3,10 @@ export const SITE_URL = "https://pranafirstdraft.vercel.app";
 export const BRAND = {
   name: "Perception Labs",
   shortCode: "PL",
-  tagline: "Spatial intelligence for autonomous machines.",
-  headline: "Intelligence for machines in motion.",
+  tagline: "Intelligence for the physical world.",
+  headline: "Intelligence for the physical world.",
   heroSupporting:
-    "Onboard perception, spatial understanding and state estimation for autonomous machines.",
+    "Enabling machines to understand and navigate the world around them.",
   location: "Bhubaneswar, Odisha, India",
 } as const;
 
@@ -26,6 +26,155 @@ export const NAV_LINKS = [
   { label: "Solutions", href: "/solutions" },
   { label: "Company", href: "/company" },
 ] as const;
+
+export const HOME_PURPOSE = {
+  eyebrow: "02 / OUR PURPOSE",
+  heading: "Autonomy begins with understanding.",
+  supporting:
+    "Reliable autonomy requires machines to understand their surroundings, know where they are and adapt as conditions change.",
+  pillars: [
+    {
+      number: "01",
+      name: "Perceive",
+      detail: "Observe the physical world.",
+    },
+    {
+      number: "02",
+      name: "Understand",
+      detail: "Interpret space, position and motion.",
+    },
+    {
+      number: "03",
+      name: "Act",
+      detail: "Enable informed, adaptive movement.",
+    },
+  ],
+} as const;
+
+export const HOME_CORTEX = {
+  eyebrow: "FLAGSHIP PRODUCT",
+  title: "Cortex",
+  descriptor: "Core Navigation Engine",
+  supporting: "Unified onboard navigation for autonomous systems.",
+  ctaLabel: "Explore Cortex",
+  capabilities: [
+    {
+      number: "01",
+      name: "Independent Navigation",
+      kind: "independent" as const,
+    },
+    {
+      number: "02",
+      name: "Unified Positioning",
+      kind: "unified" as const,
+    },
+    {
+      number: "03",
+      name: "Adaptive Sensor Fusion",
+      kind: "adaptive" as const,
+    },
+    {
+      number: "04",
+      name: "Operational Resilience",
+      kind: "resilience" as const,
+    },
+  ],
+} as const;
+
+export const HOME_TECHNOLOGY = {
+  eyebrow: "TECHNOLOGY",
+  heading: "Technologies that enable autonomy.",
+  supporting:
+    "Developing the core technologies machines need to perceive their surroundings, understand motion and navigate the physical world.",
+  ctaLabel: "Explore our technology",
+  domains: [
+    {
+      number: "01",
+      title: "Spatial Perception",
+      description:
+        "Transforming visual and spatial measurements into meaningful representations of the physical environment.",
+    },
+    {
+      number: "02",
+      title: "Positioning & Navigation",
+      description:
+        "Combining complementary positioning methods to establish where machines are and how they move.",
+    },
+    {
+      number: "03",
+      title: "Sensor Fusion & Calibration",
+      description:
+        "Integrating synchronized sensor measurements through precise calibration, fusion and reliability-aware processing.",
+    },
+    {
+      number: "04",
+      title: "Real-Time Systems",
+      description:
+        "Engineering efficient, scalable software for onboard execution within constrained computing environments.",
+    },
+  ],
+} as const;
+
+export const HOME_SOLUTIONS = {
+  eyebrow: "SOLUTIONS",
+  heading: "Autonomy across environments.",
+  supporting:
+    "Navigation and spatial understanding for machines operating across diverse physical environments.",
+  ctaLabel: "Explore solutions",
+  disclosure:
+    "Reference imagery illustrates representative operating environments only — not actual Perception Labs deployments or commercialized products.",
+  domains: [
+    {
+      title: "Aerial Systems",
+      description: "Navigation beyond reliable satellite coverage.",
+      stage: "Primary focus",
+      image: "/images/solutions/aerial-systems.jpg",
+      alt: "Reference photograph of a multirotor aerial quadcopter flying in an outdoor field environment (not a Perception Labs deployment)",
+    },
+    {
+      title: "Ground Robotics",
+      description: "Spatial awareness in complex and unstructured environments.",
+      stage: "Expansion",
+      image: "/images/solutions/ground-robotics.jpg",
+      alt: "Reference photograph of a legged mobile ground robot in an outdoor demonstration (not a Perception Labs deployment)",
+    },
+    {
+      title: "Industrial Automation",
+      description: "Infrastructure-independent localization for industrial mobile machines.",
+      stage: "Expansion",
+      image: "/images/solutions/industrial-automation.jpg",
+      alt: "Reference photograph of an automated guided vehicle operating at an industrial logistics terminal (not a Perception Labs deployment)",
+    },
+    {
+      title: "Subterranean Operations",
+      description: "Navigation in tunnels, mines and enclosed environments.",
+      stage: "Potential market",
+      image: "/images/solutions/subterranean-operations.jpg",
+      alt: "Reference photograph inside a dim enclosed underground rail tunnel (not a Perception Labs deployment)",
+    },
+    {
+      title: "Maritime Systems",
+      description: "Complementary navigation for autonomous surface vessels.",
+      stage: "Exploratory",
+      image: "/images/solutions/maritime-systems.jpg",
+      alt: "Reference photograph of an autonomous surface vessel navigating open ocean waters (not a Perception Labs deployment)",
+    },
+    {
+      title: "Infrastructure Inspection",
+      description: "Spatial tracking in confined and difficult-to-access structures.",
+      stage: "Potential market",
+      image: "/images/solutions/infrastructure-inspection.jpg",
+      alt: "Reference photograph of a structural steel bridge during inspection operations (not a Perception Labs deployment)",
+    },
+  ],
+} as const;
+
+export const HOME_CLOSING = {
+  heading: "Build with us.",
+  supporting:
+    "Let's explore how our technology can enable your autonomous systems.",
+  ctaLabel: "Get in touch",
+} as const;
 
 export const PHILOSOPHY_PILLARS = [
   {

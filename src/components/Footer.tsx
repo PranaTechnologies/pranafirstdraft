@@ -1,83 +1,124 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
-import { BRAND, CONTACT_INFO, NAV_LINKS } from "@/data/site-content";
+import { BRAND, CONTACT_INFO } from "@/data/site-content";
 import { PerceptionMark } from "@/components/PerceptionMark";
 
 export function Footer() {
   return (
     <footer className="border-t border-deep-border bg-deep-field text-field">
-      <div className="mx-auto max-w-editorial px-6 py-12 md:px-12 lg:px-16">
-        <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
-          <div className="flex items-center gap-3">
-            <PerceptionMark className="h-6 w-6 text-field" />
-            <span className="font-sans text-sm font-medium uppercase tracking-[0.14em] text-field">
-              {BRAND.name}
-            </span>
+      <div className="mx-auto max-w-editorial px-6 py-12 md:px-10 md:py-16">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-3">
+              <PerceptionMark className="h-6 w-6 text-field" />
+              <span className="font-display text-lg font-medium tracking-[-0.01em] text-field">
+                {BRAND.name}
+              </span>
+            </div>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-deep-muted">
+              {BRAND.tagline}
+            </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            <nav aria-label="Footer navigation" className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              {NAV_LINKS.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted transition-colors hover:text-field"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <Link
-                href="/research"
-                className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted transition-colors hover:text-field"
-              >
-                Research
-              </Link>
-              <Link
-                href="/contact"
-                className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted transition-colors hover:text-signal"
-              >
-                Contact
-              </Link>
+          <div className="grid gap-8 sm:grid-cols-3 lg:col-span-7">
+            <nav aria-label="Footer navigation" className="contents">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted">
+                  PRODUCT
+                </p>
+                <ul className="mt-3 space-y-2.5 text-sm">
+                  <li>
+                    <Link
+                      href="/cortex"
+                      className="text-field transition-colors hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                    >
+                      Cortex
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/technology"
+                      className="text-field transition-colors hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                    >
+                      Technology
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/solutions"
+                      className="text-field transition-colors hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                    >
+                      Solutions
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted">
+                  COMPANY
+                </p>
+                <ul className="mt-3 space-y-2.5 text-sm">
+                  <li>
+                    <Link
+                      href="/company"
+                      className="text-field transition-colors hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                    >
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/research"
+                      className="text-field transition-colors hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                    >
+                      Research
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/contact"
+                      className="text-field transition-colors hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </nav>
 
-            <div className="flex items-center gap-2.5 border-l border-deep-border pl-5">
-              <a
-                href={`mailto:${CONTACT_INFO.email}`}
-                aria-label={`Email Perception Labs (${CONTACT_INFO.email})`}
-                title={CONTACT_INFO.email}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-deep-border bg-deep-surface text-deep-muted transition-colors hover:border-signal hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
-              >
-                <Mail className="h-4 w-4" aria-hidden="true" />
-              </a>
-
-              <a
-                href={CONTACT_INFO.companyLinkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Perception Labs on LinkedIn"
-                title="Perception Labs on LinkedIn"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-sm border border-deep-border bg-deep-surface text-deep-muted transition-colors hover:border-signal hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
-              >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="h-4 w-4"
-                >
-                  <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
-                </svg>
-              </a>
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.12em] text-deep-muted">
+                CONNECT
+              </p>
+              <ul className="mt-3 space-y-2.5 text-sm">
+                <li>
+                  <a
+                    href={CONTACT_INFO.companyLinkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-field transition-colors hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${CONTACT_INFO.email}`}
+                    className="text-field transition-colors hover:text-signal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
+                  >
+                    Email
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
 
         <div className="mt-10 flex flex-col justify-between gap-4 border-t border-deep-border pt-6 text-xs text-deep-muted sm:flex-row sm:items-center">
-          <p className="font-mono uppercase tracking-[0.1em]">
-            © {new Date().getFullYear()} {BRAND.name}. All rights reserved.
-          </p>
+          <p>© {new Date().getFullYear()} {BRAND.name}.</p>
           <Link
             href="/privacy"
-            className="font-mono uppercase tracking-[0.1em] text-deep-muted underline decoration-deep-border underline-offset-4 transition-colors hover:text-field"
+            className="text-deep-muted underline decoration-deep-border underline-offset-4 transition-colors hover:text-field focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
           >
             Privacy Policy
           </Link>

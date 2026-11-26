@@ -12,12 +12,14 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import {
   CONTACT_INFO,
-  ENGINEERING_PRINCIPLES,
   FOUNDERS,
-  PHILOSOPHY_PILLARS,
+  HOME_CLOSING,
+  HOME_CORTEX,
+  HOME_PURPOSE,
+  HOME_SOLUTIONS,
+  HOME_TECHNOLOGY,
   RESEARCH_TRACKS,
   TECH_COUPLED_ENGINES,
-  TECHNOLOGY_LAYERS,
 } from "@/data/site-content";
 
 vi.mock("next/navigation", () => ({
@@ -28,39 +30,77 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("Perception Labs website", () => {
-  it("renders high-substance 6-section Homepage with Cortex metrics, Philosophy, 5-layer stack, Principles, and Solutions preview", () => {
+  it("renders approved 6-section Homepage matching Chapter 12 V1.1 structure and copy", () => {
     const { container } = render(<HomePage />);
 
+    // 01 · Landing
     expect(
-      screen.getByRole("heading", { name: /Intelligence for machines in motion\./i }),
+      screen.getByRole("heading", { name: /Intelligence for the physical world\./i }),
     ).toBeInTheDocument();
-    for (const pillar of PHILOSOPHY_PILLARS) {
+    expect(
+      screen.getByText(/Enabling machines to understand and navigate the world around them\./i),
+    ).toBeInTheDocument();
+
+    // 02 · Our Purpose
+    expect(
+      screen.getByRole("heading", { name: HOME_PURPOSE.heading }),
+    ).toBeInTheDocument();
+    for (const pillar of HOME_PURPOSE.pillars) {
       expect(screen.getByRole("heading", { name: pillar.name })).toBeInTheDocument();
     }
-    expect(screen.getByText("~30 Hz")).toBeInTheDocument();
-    expect(screen.getByText("6-DoF")).toBeInTheDocument();
-    expect(screen.getByText("Edge")).toBeInTheDocument();
 
-    for (const principle of ENGINEERING_PRINCIPLES) {
-      expect(screen.getByRole("heading", { name: principle.title })).toBeInTheDocument();
+    // 03 · Cortex introduction (compact indicators only, no spec strip on Home)
+    expect(
+      screen.getByRole("heading", { level: 2, name: HOME_CORTEX.title }),
+    ).toBeInTheDocument();
+    for (const cap of HOME_CORTEX.capabilities) {
+      expect(screen.getByText(cap.name)).toBeInTheDocument();
     }
+    expect(screen.queryByText("~30 Hz")).not.toBeInTheDocument();
 
-    TECHNOLOGY_LAYERS.forEach((layer) => {
-      expect(screen.getByRole("link", { name: new RegExp(`${layer.layerNumber}.*${layer.shortTitle}`, "i") })).toHaveAttribute(
-        "href",
-        `/technology/${layer.slug}`,
-      );
-    });
+    // 04 · Technology (4 editorial domains)
+    expect(
+      screen.getByRole("heading", { name: HOME_TECHNOLOGY.heading }),
+    ).toBeInTheDocument();
+    for (const domain of HOME_TECHNOLOGY.domains) {
+      expect(screen.getByRole("heading", { name: domain.title })).toBeInTheDocument();
+    }
+    expect(screen.getByRole("link", { name: /Explore our technology/i })).toHaveAttribute(
+      "href",
+      "/technology",
+    );
 
-    expect(screen.getByRole("link", { name: /Explore architecture/i })).toHaveAttribute("href", "/technology");
-    expect(screen.getByRole("link", { name: /Explore Solutions/i })).toHaveAttribute("href", "/solutions");
-    expect(screen.getByRole("link", { name: /Discuss an integration/i })).toHaveAttribute("href", "/contact");
+    // 05 · Solutions (6 application domains + reference disclosure)
+    expect(
+      screen.getByRole("heading", { name: HOME_SOLUTIONS.heading }),
+    ).toBeInTheDocument();
+    for (const domain of HOME_SOLUTIONS.domains) {
+      expect(screen.getByRole("heading", { name: domain.title })).toBeInTheDocument();
+    }
+    expect(screen.getByRole("link", { name: /Explore solutions/i })).toHaveAttribute(
+      "href",
+      "/solutions",
+    );
+
+    // 06 · Closing CTA
+    expect(
+      screen.getByRole("heading", { name: HOME_CLOSING.heading }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Get in touch/i })).toHaveAttribute(
+      "href",
+      "/contact",
+    );
+
+    // No standalone engineering-principles section on Home
+    expect(
+      screen.queryByRole("heading", { name: /Engineered for physical systems\./i }),
+    ).not.toBeInTheDocument();
 
     const text = container.textContent ?? "";
     expect(text).not.toMatch(/UPCOMING TECHNICAL|Placeholder|PIVO|₹35,000|Phase 4/i);
   });
 
-  it("renders streamlined navigation and minimal Footer with Research link and icons", async () => {
+  it("renders single-color Navbar and 3-column Footer with Research and About links", async () => {
     const user = userEvent.setup();
     render(
       <>
@@ -84,8 +124,9 @@ describe("Perception Labs website", () => {
 
     const footer = screen.getByRole("contentinfo");
     const footerNav = within(footer).getByRole("navigation", { name: /Footer navigation/i });
-    expect(within(footerNav).getByRole("link", { name: /Research/i })).toHaveAttribute("href", "/research");
-    expect(within(footerNav).getByRole("link", { name: /Contact/i })).toHaveAttribute("href", "/contact");
+    expect(within(footerNav).getByRole("link", { name: /^About$/i })).toHaveAttribute("href", "/company");
+    expect(within(footerNav).getByRole("link", { name: /^Research$/i })).toHaveAttribute("href", "/research");
+    expect(within(footerNav).getByRole("link", { name: /^Contact$/i })).toHaveAttribute("href", "/contact");
     expect(within(footer).getByRole("link", { name: /^Privacy Policy$/i })).toHaveAttribute("href", "/privacy");
   });
 

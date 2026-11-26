@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
+import { BRAND } from "@/data/site-content";
 
-export const alt = "Perception Labs — Intelligence for Autonomous Machines";
+export const alt = "Perception Labs — Intelligence for the physical world.";
 export const size = {
   width: 1200,
   height: 630,
@@ -17,11 +18,11 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#F3F3ED",
-          color: "#171C19",
+          backgroundColor: "#F5F5F2",
+          color: "#101211",
           padding: "72px",
           fontFamily: "sans-serif",
-          border: "1px solid #DCDFD6",
+          border: "1px solid #DFE2DD",
         }}
       >
         <div
@@ -36,7 +37,7 @@ export default function OpenGraphImage() {
               style={{
                 width: "40px",
                 height: "40px",
-                backgroundColor: "#0B1110",
+                backgroundColor: "#101211",
                 borderRadius: "4px",
                 display: "flex",
                 alignItems: "center",
@@ -48,7 +49,7 @@ export default function OpenGraphImage() {
                   width: "10px",
                   height: "10px",
                   borderRadius: "9999px",
-                  backgroundColor: "#B9E36A",
+                  backgroundColor: "#C5F36B",
                 }}
               />
             </div>
@@ -84,7 +85,7 @@ export default function OpenGraphImage() {
               maxWidth: "960px",
             }}
           >
-            Intelligence for machines in motion.
+            {BRAND.headline}
           </div>
           <div
             style={{
@@ -94,7 +95,7 @@ export default function OpenGraphImage() {
               lineHeight: 1.45,
             }}
           >
-            Building onboard perception and spatial intelligence for autonomous machines.
+            {BRAND.heroSupporting}
           </div>
         </div>
 
@@ -103,23 +104,23 @@ export default function OpenGraphImage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderTop: "1px solid #DCDFD6",
+            borderTop: "1px solid #DFE2DD",
             paddingTop: "24px",
             fontSize: "18px",
             letterSpacing: "0.1em",
-            color: "#171C19",
+            color: "#101211",
           }}
         >
-          <span>CORTEX · ONBOARD PERCEPTION &amp; STATE ESTIMATION</span>
+          <span>CORTEX · CORE NAVIGATION ENGINE</span>
           <span
             style={{
-              backgroundColor: "#0B1110",
-              color: "#B9E36A",
+              backgroundColor: "#101211",
+              color: "#C5F36B",
               padding: "8px 18px",
               borderRadius: "4px",
             }}
           >
-            THE PERCEPTION FIELD
+            SIGNAL MONOCHROME
           </span>
         </div>
       </div>
