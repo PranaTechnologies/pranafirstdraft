@@ -28,7 +28,7 @@ export const NAV_LINKS = [
 ] as const;
 
 export const HOME_PURPOSE = {
-  eyebrow: "02 / OUR PURPOSE",
+  eyebrow: "OUR PURPOSE",
   heading: "Autonomy begins with understanding.",
   supporting:
     "Reliable autonomy requires machines to understand their surroundings, know where they are and adapt as conditions change.",

@@ -456,7 +456,7 @@ export function SpatialFieldCanvas({ variant = "framed" }: SpatialFieldCanvasPro
       <div
         ref={mountRef}
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full bg-deep-field opacity-55 md:opacity-100"
+        className="pointer-events-none absolute inset-0 h-full w-full bg-deep-field opacity-55 md:opacity-100"
       >
         <SpatialFieldFallback isBackground />
       </div>

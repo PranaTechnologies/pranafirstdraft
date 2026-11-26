@@ -22,23 +22,23 @@ export function Navbar() {
   }, [mobileOpen]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-border-grey bg-field/95 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-graphite bg-field/95 backdrop-blur-md">
       <nav
         aria-label="Primary navigation"
-        className="mx-auto flex h-16 max-w-editorial items-center justify-between gap-6 px-6 md:h-20 md:px-12 lg:px-16"
+        className="mx-auto flex h-16 max-w-editorial items-center justify-between gap-4 px-5 md:h-20 md:px-8 lg:gap-6 lg:px-12 xl:px-16"
       >
         <Link
           href="/"
-          className="inline-flex shrink-0 items-center gap-3.5 text-graphite transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+          className="inline-flex shrink-0 items-center gap-2.5 text-graphite transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite lg:gap-3.5"
           aria-label="Perception Labs home"
         >
-          <PerceptionMark className="h-7 w-7 text-graphite sm:h-8 sm:w-8" />
-          <span className="font-display text-base font-bold uppercase leading-none tracking-[0.14em] text-graphite sm:text-xl">
+          <PerceptionMark className="h-7 w-7 text-graphite lg:h-8 lg:w-8" />
+          <span className="font-display text-base font-bold uppercase leading-none tracking-[0.12em] text-graphite lg:text-xl lg:tracking-[0.14em]">
             {BRAND.name}
           </span>
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-4 md:flex lg:gap-7 xl:gap-8">
           {NAV_LINKS.map((item) => {
             const active =
               pathname === item.href || pathname.startsWith(`${item.href}/`);

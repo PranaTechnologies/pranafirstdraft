@@ -8,19 +8,18 @@ const GRID_7X7 = [24, 46, 68, 90, 112, 134, 156];
 const GRID_Y_7X7 = [18, 38, 58, 78, 98, 118, 138];
 
 /**
- * Shared 2D geometric capability indicator matching Chapter 03 & Chapter 05 rules:
- * flat 7x7 dot grid, Carbon (#101211) field, off-white reference lines (1.2),
- * Ash (#858B86) secondary elements, and Signal (#C5F36B) active estimate (1.6, r=3.1).
+ * Compact 2D geometric capability indicator using Chapter 05 rules:
+ * transparent over Carbon (#101211), 7x7 Ash dot grid, off-white reference
+ * geometry (1.2), and Signal (#C5F36B) active estimate (1.6, r=3.1).
  */
 export function CortexCapabilitySymbol({ kind }: { kind: CortexCapabilityKind }) {
   return (
     <svg
       aria-hidden="true"
       viewBox="0 0 180 160"
-      className="h-16 w-[72px] shrink-0 bg-carbon"
+      className="h-24 w-28 shrink-0 sm:h-28 sm:w-32 lg:h-32 lg:w-36"
     >
-      <rect width="180" height="160" fill="#101211" />
-      <g fill="#858B86" opacity="0.45">
+      <g fill="#858B86" opacity="0.35">
         {GRID_7X7.map((gx) =>
           GRID_Y_7X7.map((gy) => (
             <circle key={`${gx}-${gy}`} cx={gx} cy={gy} r="1.1" />
@@ -75,7 +74,6 @@ export function CortexCapabilitySymbol({ kind }: { kind: CortexCapabilityKind })
 
       {kind === "resilience" && (
         <g fill="none">
-          {/* Missed observations indicated cleanly by neutral crossed markers */}
           <g stroke="#858B86" strokeWidth="1.2">
             <circle cx="62" cy="64" r="7" />
             <line x1="57" y1="59" x2="67" y2="69" />
@@ -100,124 +98,122 @@ export function CortexCapabilitySymbol({ kind }: { kind: CortexCapabilityKind })
 }
 
 /**
- * Heroic 2D navigation reference grid for Home Section 03 (Cortex introduction).
- * Flat 2D geometry following Chapter 03 & Chapter 12 rules: reference rings,
- * local trajectory, observation points, uncertainty ellipses, and active Signal Green estimate.
+ * Full-bleed subtle 2D navigation reference background integrated behind the Cortex section.
+ * Non-interactive so pointer/scroll events pass cleanly to foreground UI.
  */
-export function CortexNavigationGrid() {
-  const cols = Array.from({ length: 19 }, (_, i) => 32 + i * 38);
-  const rows = Array.from({ length: 11 }, (_, i) => 28 + i * 38);
+export function CortexNavigationBackground() {
+  const cols = Array.from({ length: 24 }, (_, i) => 40 + i * 56);
+  const rows = Array.from({ length: 14 }, (_, i) => 36 + i * 54);
 
   const rings = [
-    { cx: 196, cy: 298, outer: 54, mid: 36, inner: 18 },
-    { cx: 368, cy: 214, outer: 62, mid: 42, inner: 22 },
-    { cx: 562, cy: 118, outer: 72, mid: 48, inner: 24 },
+    { cx: 280, cy: 520, outer: 112, mid: 72, inner: 36 },
+    { cx: 700, cy: 360, outer: 148, mid: 96, inner: 48 },
+    { cx: 1110, cy: 205, outer: 124, mid: 82, inner: 42 },
   ];
 
   const inactiveObservations = [
-    [108, 174],
-    [154, 136],
-    [248, 352],
-    [296, 128],
-    [438, 326],
-    [514, 294],
-    [640, 246],
-    [684, 184],
+    [160, 290],
+    [235, 195],
+    [410, 585],
+    [520, 175],
+    [840, 560],
+    [980, 495],
+    [1190, 430],
+    [1290, 295],
   ];
 
   return (
-    <figure className="mx-auto w-full max-w-[780px]">
-      <div className="aspect-[16/10] w-full bg-carbon p-0 sm:aspect-[16/9]">
-        <svg
-          role="img"
-          aria-label="Conceptual 2D navigation reference grid showing reference rings, uncertainty contours, tracked observation points, and Signal Green trajectory estimate"
-          viewBox="0 0 760 436"
-          className="h-full w-full"
-        >
-          <rect width="760" height="436" fill="#101211" />
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+    >
+      <svg
+        viewBox="0 0 1440 760"
+        preserveAspectRatio="xMidYMid slice"
+        className="h-full w-full"
+      >
+        <rect width="1440" height="760" fill="#101211" />
 
-          {/* Subtle dot grid */}
-          <g fill="#858B86" opacity="0.45">
-            {cols.map((x) =>
-              rows.map((y) => (
-                <circle key={`${x}-${y}`} cx={x} cy={y} r="1.25" />
-              )),
-            )}
-          </g>
+        {/* Subtle reference dot matrix */}
+        <g fill="#858B86" opacity="0.28">
+          {cols.map((x) =>
+            rows.map((y) => (
+              <circle key={`${x}-${y}`} cx={x} cy={y} r="1.3" />
+            )),
+          )}
+        </g>
 
-          {/* Local frame reference axes */}
-          <g stroke="#252826" strokeWidth="1.2">
-            <line x1="32" y1="218" x2="728" y2="218" />
-            <line x1="368" y1="28" x2="368" y2="408" />
-          </g>
+        {/* Coordinate frame axes */}
+        <g stroke="#252826" strokeWidth="1" opacity="0.85">
+          <line x1="0" y1="360" x2="1440" y2="360" />
+          <line x1="700" y1="0" x2="700" y2="760" />
+        </g>
 
-          {/* Reference rings anchored along estimated keyframes */}
-          <g fill="none">
-            {rings.map((ring) => (
-              <g key={`${ring.cx}-${ring.cy}`}>
-                <circle cx={ring.cx} cy={ring.cy} r={ring.outer} stroke="#858B86" strokeWidth="1.2" opacity="0.65" />
-                <circle cx={ring.cx} cy={ring.cy} r={ring.mid} stroke="#F5F5F2" strokeWidth="1.2" opacity="0.85" />
-                <circle cx={ring.cx} cy={ring.cy} r={ring.inner} stroke="#858B86" strokeWidth="1.2" />
-              </g>
-            ))}
+        {/* Reference rings */}
+        <g fill="none">
+          {rings.map((ring) => (
+            <g key={`${ring.cx}-${ring.cy}`}>
+              <circle cx={ring.cx} cy={ring.cy} r={ring.outer} stroke="#858B86" strokeWidth="1.2" opacity="0.28" />
+              <circle cx={ring.cx} cy={ring.cy} r={ring.mid} stroke="#F5F5F2" strokeWidth="1.2" opacity="0.24" />
+              <circle cx={ring.cx} cy={ring.cy} r={ring.inner} stroke="#858B86" strokeWidth="1.2" opacity="0.32" />
+            </g>
+          ))}
 
-            {/* Uncertainty contour tilted around active frontier estimate */}
-            <ellipse
-              cx="562"
-              cy="118"
-              rx="92"
-              ry="44"
-              transform="rotate(-24 562 118)"
-              stroke="#858B86"
-              strokeWidth="1.2"
-              strokeDasharray="4 5"
-            />
-          </g>
-
-          {/* Inactive / background observations and baseline tie lines */}
-          <g stroke="#858B86" strokeWidth="1.1" opacity="0.55">
-            <line x1="196" y1="298" x2="154" y2="136" />
-            <line x1="368" y1="214" x2="296" y2="128" />
-            <line x1="368" y1="214" x2="438" y2="326" />
-            <line x1="562" y1="118" x2="640" y2="246" />
-          </g>
-          <g fill="#858B86">
-            {inactiveObservations.map(([cx, cy]) => (
-              <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="2.6" />
-            ))}
-          </g>
-
-          {/* Reference segments connecting accepted observations */}
-          <g stroke="#F5F5F2" strokeWidth="1.2" opacity="0.75">
-            <line x1="562" y1="118" x2="514" y2="294" />
-            <line x1="196" y1="298" x2="248" y2="352" />
-          </g>
-
-          {/* Signal Green active local navigation trajectory */}
-          <polyline
-            points="58,368 124,334 196,298 282,258 368,214 468,188 562,118 706,66"
-            fill="none"
-            stroke="#C5F36B"
-            strokeWidth="2.2"
+          {/* Uncertainty ellipse around active frontier estimate */}
+          <ellipse
+            cx="1110"
+            cy="205"
+            rx="165"
+            ry="76"
+            transform="rotate(-22 1110 205)"
+            stroke="#858B86"
+            strokeWidth="1.2"
+            strokeDasharray="6 7"
+            opacity="0.32"
           />
+        </g>
 
-          {/* Trajectory nodes and active estimate marker */}
-          <g>
-            <circle cx="58" cy="368" r="3.4" fill="#C5F36B" />
-            <circle cx="124" cy="334" r="3.1" fill="#F5F5F2" />
-            <circle cx="196" cy="298" r="4" fill="#C5F36B" />
-            <circle cx="282" cy="258" r="3.1" fill="#F5F5F2" />
-            <circle cx="368" cy="214" r="4" fill="#C5F36B" />
-            <circle cx="468" cy="188" r="3.4" fill="#C5F36B" />
-            <circle cx="562" cy="118" r="5" fill="#C5F36B" />
-            <circle cx="706" cy="66" r="3.4" fill="#C5F36B" />
-          </g>
-        </svg>
-      </div>
-      <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-2 font-mono text-xs uppercase tracking-[0.1em] text-muted-ink">
-        <span>CONCEPTUAL 2D NAVIGATION REFERENCE GRID</span>
-        <span>REFERENCE GEOMETRY · ACTIVE LOCAL ESTIMATE</span>
-      </figcaption>
-    </figure>
+        {/* Observation baselines & nodes */}
+        <g stroke="#858B86" strokeWidth="1.1" opacity="0.26">
+          <line x1="280" y1="520" x2="235" y2="195" />
+          <line x1="700" y1="360" x2="520" y2="175" />
+          <line x1="700" y1="360" x2="840" y2="560" />
+          <line x1="1110" y1="205" x2="1190" y2="430" />
+        </g>
+        <g fill="#858B86" opacity="0.42">
+          {inactiveObservations.map(([cx, cy]) => (
+            <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="2.8" />
+          ))}
+        </g>
+
+        {/* Subtle Signal Green local trajectory across field */}
+        <polyline
+          points="75,645 180,582 280,520 490,442 700,360 910,305 1110,205 1355,112"
+          fill="none"
+          stroke="#C5F36B"
+          strokeWidth="2"
+          opacity="0.4"
+        />
+
+        <g opacity="0.52">
+          <circle cx="180" cy="582" r="3.4" fill="#F5F5F2" />
+          <circle cx="280" cy="520" r="4.2" fill="#C5F36B" />
+          <circle cx="490" cy="442" r="3.4" fill="#F5F5F2" />
+          <circle cx="700" cy="360" r="4.2" fill="#C5F36B" />
+          <circle cx="910" cy="305" r="3.6" fill="#C5F36B" />
+          <circle cx="1110" cy="205" r="5.2" fill="#C5F36B" />
+          <circle cx="1355" cy="112" r="3.6" fill="#C5F36B" />
+        </g>
+      </svg>
+
+      {/* Center and edge Carbon vignette preserving foreground typography legibility */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 66% 58% at 50% 48%, rgba(16,18,17,0.85) 0%, rgba(16,18,17,0.52) 56%, rgba(16,18,17,0.82) 100%)",
+        }}
+      />
+    </div>
   );
 }
