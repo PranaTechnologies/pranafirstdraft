@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { TechFieldCanvas } from "@/components/TechFieldCanvas";
 import { ArchitectureDiagram } from "@/components/ArchitectureDiagram";
-import { ClosingBand } from "@/components/ClosingBand";
 import {
   ENGINEERING_PRINCIPLES,
   SITE_URL,
@@ -161,8 +160,6 @@ export default function TechnologyPage() {
           </div>
         </div>
       </section>
-
-      <ClosingBand tone="light" heading="Build with us." ctaLabel="Discuss an integration" />
     </>
   );
 }

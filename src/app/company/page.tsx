@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowUpRight, Linkedin, Mail } from "lucide-react";
 import { BRAND, CONTACT_INFO, FOUNDERS, SITE_URL } from "@/data/site-content";
-import { ClosingBand } from "@/components/ClosingBand";
 
 export const metadata: Metadata = {
   title: "Company",
@@ -52,7 +51,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      <section className="border-b border-border-grey bg-surface py-12 md:py-16">
+      <section className="bg-surface py-12 md:py-16">
         <div className="mx-auto max-w-editorial px-6 md:px-10">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
             FOUNDING TEAM
@@ -107,8 +106,6 @@ export default function CompanyPage() {
           </div>
         </div>
       </section>
-
-      <ClosingBand tone="dark" heading="Build with us." ctaLabel="Discuss an integration" />
     </>
   );
 }

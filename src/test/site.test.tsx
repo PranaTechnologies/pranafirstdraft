@@ -130,13 +130,32 @@ describe("Perception Labs website", () => {
     expect(within(footer).getByRole("link", { name: /^Privacy Policy$/i })).toHaveAttribute("href", "/privacy");
   });
 
-  it("renders flagship Cortex page with local vs global alignment and engineering maturity boundaries", () => {
+  it("renders streamlined Cortex page with hero, capabilities, architecture diagram, characteristics, and specifications", () => {
     const { container } = render(<CortexPage />);
     expect(screen.getByRole("heading", { level: 1, name: /^Cortex$/i })).toBeInTheDocument();
-    expect(screen.getByText(/Local Spatial Estimation/i)).toBeInTheDocument();
-    expect(screen.getByText(/Optional Global Map Alignment/i)).toBeInTheDocument();
-    expect(screen.getByText(/Current capabilities & boundaries/i)).toBeInTheDocument();
-    expect(container.textContent ?? "").not.toMatch(/PIVO|₹35,000|₹10,000/i);
+    expect(screen.getByText(/^Core Navigation Engine$/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^Independent Navigation$/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^Unified Positioning$/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^Adaptive Sensor Fusion$/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /^Operational Resilience$/i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Unified by design\./i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Engineered for autonomous systems\./i })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Designed to integrate\./i })).toBeInTheDocument();
+
+    // Removed sections must stay absent
+    expect(
+      screen.queryByRole("heading", { name: /One engine\. Multiple navigation sources\./i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /Validation and integration/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /Build with Cortex\./i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /^Local navigation$/i }),
+    ).not.toBeInTheDocument();
+    expect(container.textContent ?? "").not.toMatch(/PIVO|₹35,000|₹10,000|Build with Cortex|Build with us/i);
   });
 
   it("renders Technology page with volumetric hero background, cohesive five-layer diagram, and three coupled engines", () => {

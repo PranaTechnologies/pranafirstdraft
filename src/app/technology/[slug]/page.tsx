@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { SITE_URL, TECHNOLOGY_LAYERS } from "@/data/site-content";
 import { SpatialSchematic } from "@/components/SpatialSchematic";
-import { ClosingBand } from "@/components/ClosingBand";
 
 interface PageParams {
   params: Promise<{ slug: string }>;
@@ -84,7 +83,7 @@ export default async function TechnologyDetailPage({ params }: PageParams) {
         </div>
       </section>
 
-      <section className="border-b border-border-grey bg-surface py-12 md:py-16">
+      <section className="bg-surface py-12 md:py-16">
         <div className="mx-auto max-w-editorial px-6 md:px-10">
           <div className="grid gap-8 lg:grid-cols-12">
             <div className="min-w-0 lg:col-span-7">
@@ -154,8 +153,6 @@ export default async function TechnologyDetailPage({ params }: PageParams) {
           </div>
         </div>
       </section>
-
-      <ClosingBand />
     </>
   );
 }

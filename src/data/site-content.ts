@@ -121,8 +121,8 @@ export const HOME_SOLUTIONS = {
   supporting:
     "Navigation and spatial understanding for machines operating across diverse physical environments.",
   ctaLabel: "Explore solutions",
-  disclosure:
-    "Reference imagery illustrates representative operating environments only — not actual Perception Labs deployments or commercialized products.",
+    disclosure:
+      "Reference imagery illustrates representative operating environments only — not actual Perception Labs deployments or commercialized products.",
   domains: [
     {
       title: "Aerial Systems",
@@ -167,13 +167,6 @@ export const HOME_SOLUTIONS = {
       alt: "Reference photograph of a structural steel bridge during inspection operations (not a Perception Labs deployment)",
     },
   ],
-} as const;
-
-export const HOME_CLOSING = {
-  heading: "Build with us.",
-  supporting:
-    "Let's explore how our technology can enable your autonomous systems.",
-  ctaLabel: "Get in touch",
 } as const;
 
 export const PHILOSOPHY_PILLARS = [
@@ -427,6 +420,145 @@ export const TECHNOLOGY_LAYERS: TechnologySpec[] = [
     outputs: ["PX4 / ROS 2 Pose Streams", "GCS Health Telemetry", "Fallback Readiness"],
   },
 ];
+
+export const CORTEX_PAGE = {
+  hero: {
+    eyebrow: "PERCEPTION LABS",
+    title: "Cortex",
+    descriptor: "Core Navigation Engine",
+    supporting: "Unified onboard navigation for autonomous systems.",
+    ctaLabel: "Discuss an integration",
+  },
+  capabilities: {
+    eyebrow: "CORE CAPABILITIES",
+    heading: "Four capabilities in one architecture.",
+    note: "Conceptual illustrations from our 2D visual system, not measured performance plots. Operational resilience denotes continuous state estimation across degraded inputs, not obstacle avoidance or route replanning.",
+    items: [
+      {
+        title: "Independent Navigation",
+        kind: "independent" as const,
+        description:
+          "Enable continuous onboard localization without relying on uninterrupted satellite signals or external positioning infrastructure.",
+      },
+      {
+        title: "Unified Positioning",
+        kind: "unified" as const,
+        description:
+          "Connect local motion estimates with absolute geographic references through complementary positioning sources.",
+      },
+      {
+        title: "Adaptive Sensor Fusion",
+        kind: "adaptive" as const,
+        description:
+          "Combine multiple sensor and navigation sources into a coherent solution, accounting for measurement quality and availability.",
+      },
+      {
+        title: "Operational Resilience",
+        kind: "resilience" as const,
+        description:
+          "Designed to maintain useful navigation information through degraded signals, sensor interruptions and changing operating conditions.",
+      },
+    ],
+  },
+  architecture: {
+    eyebrow: "SYSTEM ARCHITECTURE",
+    heading: "Unified by design.",
+    supporting:
+      "Local navigation, global positioning and complementary measurements working within a single onboard architecture.",
+    caption:
+      "Conceptual target functional architecture; optional inputs and recovery paths are configuration- and maturity-dependent. Not a literal software execution graph.",
+  },
+  characteristics: {
+    eyebrow: "SYSTEM CHARACTERISTICS",
+    heading: "Engineered for autonomous systems.",
+    items: [
+      {
+        title: "Edge-native architecture",
+        kind: "edge" as const,
+        description:
+          "Onboard execution within the computing, power and resource constraints of autonomous platforms.",
+      },
+      {
+        title: "Modular sensor architecture",
+        kind: "modular" as const,
+        description:
+          "A common navigation architecture designed to accommodate different sensor configurations and reference sources.",
+      },
+      {
+        title: "Platform interoperability",
+        kind: "interop" as const,
+        description:
+          "Integration with existing flight controllers, robotics middleware and OEM systems.",
+      },
+      {
+        title: "Multi-rate processing",
+        kind: "multirate" as const,
+        description:
+          "Frequent local motion estimates combined with intermittent global positioning and auxiliary measurements.",
+      },
+    ],
+  },
+  specifications: {
+    eyebrow: "TECHNICAL SPECIFICATIONS",
+    heading: "Designed to integrate.",
+    supporting:
+      "Cortex is designed to complement existing autonomous systems without requiring a complete replacement of their vehicle stack.",
+    summaryMetrics: [
+      { value: "~30 Hz", label: "Local navigation design target" },
+      { value: "~1 Hz", label: "Optional global alignment target" },
+      { value: "6-DoF", label: "Pose, velocity & attitude" },
+    ],
+    groups: [
+      {
+        title: "Sensing & Reference Data",
+        rows: [
+          { parameter: "Primary sensors", value: "Synchronized camera and IMU" },
+          {
+            parameter: "Auxiliary sensors",
+            value: "GNSS, barometer, depth and LiDAR — configuration dependent",
+          },
+          {
+            parameter: "Reference data",
+            value: "Geo-referenced imagery and site maps (WGS84)",
+          },
+        ],
+      },
+      {
+        title: "Navigation Outputs & Health",
+        rows: [
+          { parameter: "Position & motion", value: "6-DoF pose, velocity and attitude" },
+          {
+            parameter: "Global position",
+            value: "Geographic position when reliable alignment is available",
+          },
+          { parameter: "Spatial information", value: "Local environmental representation" },
+          {
+            parameter: "Relative height",
+            value: "AGL estimate where supported by sensor configuration",
+          },
+          { parameter: "Diagnostics", value: "Covariance and navigation health" },
+        ],
+      },
+      {
+        title: "Cadence, Compute & Interfaces",
+        rows: [
+          { parameter: "Local navigation", value: "~30 Hz design target" },
+          { parameter: "Global visual alignment", value: "~1 Hz design target, optional" },
+          {
+            parameter: "Compute and interfaces",
+            value: "Onboard edge companion compute; PX4 and ROS 2",
+          },
+          {
+            parameter: "Architecture",
+            value: "Modular, multi-rate navigation processing",
+          },
+        ],
+      },
+    ],
+    footnote:
+      "Design targets and optional sensor configurations vary by platform hardware and integration stage.",
+  },
+} as const;
 
 export const CORTEX_SPEC = {
   tagline: "Unified onboard perception and state estimation engine.",

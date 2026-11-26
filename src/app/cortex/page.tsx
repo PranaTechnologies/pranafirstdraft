@@ -1,117 +1,153 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { CORTEX_SPEC, SITE_URL } from "@/data/site-content";
-import { SpatialSchematic } from "@/components/SpatialSchematic";
-import { ClosingBand } from "@/components/ClosingBand";
+import { CORTEX_PAGE, SITE_URL } from "@/data/site-content";
+import { CortexCapabilitySymbol } from "@/components/CortexHomeVisuals";
+import {
+  CortexArchitectureDiagram,
+  CortexCharacteristicIcon,
+  CortexHeroGraphic,
+} from "@/components/CortexPageVisuals";
 
 export const metadata: Metadata = {
   title: "Cortex",
   description:
-    "Cortex is Perception Labs' flagship onboard engine for spatial perception and state estimation across aerial and robotic platforms.",
+    "Cortex — Core Navigation Engine. Unified onboard perception, visual-inertial navigation, and PX4 / ROS 2 integration for autonomous systems.",
   alternates: { canonical: "/cortex" },
   openGraph: {
     title: "Cortex | Perception Labs",
     description:
-      "Unified onboard spatial perception and state estimation engine for autonomous machines.",
+      "Core Navigation Engine uniting local visual-inertial navigation, optional global alignment, and multi-source fusion onboard autonomous systems.",
     url: `${SITE_URL}/cortex`,
   },
 };
 
 export default function CortexPage() {
+  const { hero, capabilities, architecture, characteristics, specifications } =
+    CORTEX_PAGE;
+
   return (
     <>
-      {/* 01 · Hero Overview */}
-      <section className="border-b border-border-grey bg-field pb-12 pt-24 md:pb-16 md:pt-28">
-        <div className="mx-auto max-w-editorial px-6 md:px-10">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-            <div className="min-w-0 lg:col-span-6">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
-                FLAGSHIP ENGINE · CORTEX
+      {/* 01 · Product Hero (Carbon, 40/60 Split, 80–90% Desktop Viewport Height) */}
+      <section className="flex w-full flex-col justify-center border-b border-deep-border bg-deep-field pb-12 pt-28 text-field md:pb-16 md:pt-32 lg:min-h-[85svh]">
+        <div className="mx-auto w-full max-w-editorial px-6 md:px-10">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+            <div className="min-w-0 lg:col-span-5">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-deep-muted">
+                {hero.eyebrow}
               </p>
-              <h1 className="mt-3 font-display text-[2.75rem] font-light leading-[1.04] tracking-[-0.03em] text-graphite sm:text-[4rem]">
-                Cortex
+              <h1 className="mt-3 font-display text-[3.5rem] font-medium leading-none tracking-[-0.03em] text-white sm:text-[4.75rem] lg:text-[6.25rem]">
+                {hero.title}
               </h1>
-              <p className="mt-4 max-w-[48ch] text-lg leading-[1.6] text-muted-ink">
-                {CORTEX_SPEC.tagline} Connects synchronized cameras, IMUs, and auxiliary payloads into continuous spatial awareness, local mapping, and ~30 Hz flight/robot control readiness.
+              <p className="mt-4 font-display text-2xl font-normal leading-tight text-[#EBF0EC] sm:text-3xl lg:text-[2.125rem]">
+                {hero.descriptor}
+              </p>
+              <p className="mt-4 max-w-[42ch] text-base leading-[1.6] text-[#C9D2CC] md:text-[20px]">
+                {hero.supporting}
               </p>
 
-              <div className="mt-6 grid grid-cols-3 gap-4 border-y border-border-grey py-4">
-                {CORTEX_SPEC.metrics.map((metric) => (
-                  <div key={metric.label}>
-                    <p className="font-display text-2xl font-normal text-graphite">
-                      {metric.value}
-                    </p>
-                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-green">
-                      {metric.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-6">
+              <div className="mt-8">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-sm bg-graphite px-5 py-3.5 font-mono text-xs uppercase tracking-[0.12em] text-field transition-colors hover:bg-signal hover:text-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite"
+                  className="inline-flex min-h-[44px] items-center gap-2 rounded-sm bg-signal px-5 py-3 font-mono text-xs font-medium uppercase tracking-[0.12em] text-graphite transition-colors duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-signal"
                 >
-                  <span>Discuss an integration</span>
+                  <span>{hero.ctaLabel}</span>
                   <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
             </div>
 
-            <div className="min-w-0 lg:col-span-6">
-              <SpatialSchematic
-                variant="cortex"
-                label="Cortex spatial perception and state estimation profile"
-                caption="ILLUSTRATIVE ENGINE PIPELINE · LOCAL ~30 HZ / OPTIONAL GLOBAL ~1 HZ"
-              />
+            <div className="min-w-0 lg:col-span-7">
+              <CortexHeroGraphic />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 02 · Capabilities + Local vs Global Alignment Modes */}
-      <section className="border-b border-deep-border bg-deep-field py-12 text-field md:py-16">
+      {/* 02 · Core Capabilities (Canvas Section with 4 Equal Carbon Cards) */}
+      <section className="w-full bg-field py-16 text-graphite lg:py-24">
         <div className="mx-auto max-w-editorial px-6 md:px-10">
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-signal">
-                WHAT IT DOES
-              </p>
-              <h2 className="mt-2 font-display text-3xl font-light tracking-[-0.02em] text-field sm:text-4xl">
-                Multi-rate onboard estimation &amp; spatial mapping
-              </h2>
-            </div>
-
-            <div
-              aria-label="Cortex processing pipeline"
-              className="flex flex-wrap items-center gap-2 font-mono text-xs uppercase tracking-[0.1em] text-[#D8E0DA]"
-            >
-              {CORTEX_SPEC.pipeline.map((step, index) => (
-                <span key={step} className="inline-flex items-center gap-2">
-                  <span>{step}</span>
-                  {index < CORTEX_SPEC.pipeline.length - 1 && (
-                    <span aria-hidden="true" className="text-signal">
-                      →
-                    </span>
-                  )}
-                </span>
-              ))}
-            </div>
+          <div className="max-w-2xl">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
+              {capabilities.eyebrow}
+            </p>
+            <h2 className="mt-3 font-display text-[2rem] font-semibold leading-[1.08] tracking-[-0.025em] text-graphite sm:text-[2.75rem]">
+              {capabilities.heading}
+            </h2>
           </div>
 
-          <div className="mt-8 grid gap-6 border-t border-deep-border pt-8 md:grid-cols-3 md:gap-8">
-            {CORTEX_SPEC.modes.map((mode) => (
-              <div key={mode.name}>
-                <p className="font-mono text-xs uppercase tracking-[0.12em] text-signal">
-                  {mode.cadence}
-                </p>
-                <h3 className="mt-2 font-display text-xl font-medium text-field">
-                  {mode.name}
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {capabilities.items.map((cap) => (
+              <article
+                key={cap.title}
+                className="flex flex-col justify-between rounded-none bg-deep-field p-6 text-white md:p-7"
+              >
+                <h3 className="font-display text-xl font-semibold leading-snug text-white lg:text-2xl">
+                  {cap.title}
                 </h3>
-                <p className="mt-2 text-base leading-relaxed text-[#BCC7C0]">
-                  {mode.detail}
+
+                <div className="my-6 flex justify-center">
+                  <CortexCapabilitySymbol
+                    kind={cap.kind}
+                    className="h-40 w-[180px] shrink-0"
+                  />
+                </div>
+
+                <p className="text-sm leading-relaxed text-[#C7D0CA] md:text-[15px]">
+                  {cap.description}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <p className="mt-6 max-w-4xl text-xs leading-relaxed text-muted-ink">
+            {capabilities.note}
+          </p>
+        </div>
+      </section>
+
+      {/* 03 · System Architecture (Carbon, Unified Functional Block Diagram) */}
+      <section className="w-full border-b border-deep-border bg-deep-field py-16 text-field lg:py-24">
+        <div className="mx-auto max-w-editorial px-6 md:px-10">
+          <div className="max-w-3xl">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-signal">
+              {architecture.eyebrow}
+            </p>
+            <h2 className="mt-3 font-display text-[2rem] font-semibold leading-[1.08] tracking-[-0.025em] text-white sm:text-[2.75rem]">
+              {architecture.heading}
+            </h2>
+            <p className="mt-4 text-base leading-[1.65] text-[#D2DAD5] md:text-[18px]">
+              {architecture.supporting}
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <CortexArchitectureDiagram caption={architecture.caption} />
+          </div>
+        </div>
+      </section>
+
+      {/* 04 · System Characteristics (Canvas, 4 Open Columns with Rules & Small Icons) */}
+      <section className="w-full bg-field py-16 text-graphite lg:py-24">
+        <div className="mx-auto max-w-editorial px-6 md:px-10">
+          <div className="max-w-2xl">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
+              {characteristics.eyebrow}
+            </p>
+            <h2 className="mt-3 font-display text-[2rem] font-semibold leading-[1.08] tracking-[-0.025em] text-graphite sm:text-[2.75rem]">
+              {characteristics.heading}
+            </h2>
+          </div>
+
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            {characteristics.items.map((item) => (
+              <div key={item.title} className="border-t border-border-grey pt-5">
+                <CortexCharacteristicIcon kind={item.kind} />
+                <h3 className="mt-4 font-display text-xl font-semibold leading-snug text-graphite">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-base leading-relaxed text-muted-ink">
+                  {item.description}
                 </p>
               </div>
             ))}
@@ -119,58 +155,65 @@ export default function CortexPage() {
         </div>
       </section>
 
-      {/* 03 · Technical Integration & Current Status */}
-      <section className="border-b border-border-grey bg-field py-12 text-graphite md:py-16">
+      {/* 05 · Technical Specifications (Carbon Band above Canvas Footer) */}
+      <section className="w-full border-b border-deep-border bg-deep-field py-16 text-field lg:py-24">
         <div className="mx-auto max-w-editorial px-6 md:px-10">
-          <div className="grid gap-10 lg:grid-cols-12">
-            <div className="min-w-0 lg:col-span-6">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
-                SPECIFICATIONS
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
+            <div className="lg:col-span-5">
+              <p className="font-mono text-xs uppercase tracking-[0.14em] text-signal">
+                {specifications.eyebrow}
               </p>
-              <h2 className="mt-2 font-display text-2xl font-normal tracking-[-0.02em] text-graphite sm:text-3xl">
-                Integration parameters &amp; interfaces
+              <h2 className="mt-3 font-display text-[2rem] font-semibold leading-[1.08] tracking-[-0.025em] text-white sm:text-[2.75rem]">
+                {specifications.heading}
               </h2>
+              <p className="mt-4 max-w-[44ch] text-base leading-[1.65] text-[#D2DAD5] md:text-[17px]">
+                {specifications.supporting}
+              </p>
 
-              <dl className="mt-6 divide-y divide-border-grey border-y border-border-grey">
-                {CORTEX_SPEC.integration.map((row) => (
-                  <div key={row.label} className="grid gap-1.5 py-4 sm:grid-cols-12 sm:gap-4">
-                    <dt className="font-mono text-xs uppercase tracking-[0.12em] text-muted-green sm:col-span-4">
-                      {row.label}
-                    </dt>
-                    <dd className="text-base leading-relaxed text-graphite sm:col-span-8">
-                      {row.value}
-                    </dd>
+              <div className="mt-8 grid grid-cols-3 gap-4 border-y border-deep-border py-5">
+                {specifications.summaryMetrics.map((m) => (
+                  <div key={m.label}>
+                    <p className="font-display text-2xl font-medium text-signal sm:text-3xl">
+                      {m.value}
+                    </p>
+                    <p className="mt-1 font-mono text-xs leading-snug text-deep-muted">
+                      {m.label}
+                    </p>
                   </div>
                 ))}
-              </dl>
+              </div>
+              <p className="mt-4 text-xs leading-relaxed text-deep-muted">
+                {specifications.footnote}
+              </p>
             </div>
 
-            <div className="min-w-0 lg:col-span-6">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
-                ENGINEERING MATURITY
-              </p>
-              <h2 className="mt-2 font-display text-2xl font-normal tracking-[-0.02em] text-graphite sm:text-3xl">
-                Current capabilities &amp; boundaries
-              </h2>
-
-              <dl className="mt-6 divide-y divide-border-grey border-y border-border-grey">
-                {CORTEX_SPEC.status.map((item) => (
-                  <div key={item.stage} className="py-4">
-                    <dt className="font-mono text-xs uppercase tracking-[0.12em] text-graphite">
-                      {item.stage}
-                    </dt>
-                    <dd className="mt-1.5 text-base leading-relaxed text-muted-ink">
-                      {item.detail}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+            <div className="space-y-8 lg:col-span-7">
+              {specifications.groups.map((group) => (
+                <div key={group.title}>
+                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-signal">
+                    {group.title}
+                  </p>
+                  <dl className="mt-3 divide-y divide-deep-border border-y border-deep-border">
+                    {group.rows.map((row) => (
+                      <div
+                        key={row.parameter}
+                        className="grid gap-1.5 py-3.5 sm:grid-cols-12 sm:items-baseline sm:gap-4"
+                      >
+                        <dt className="font-mono text-xs uppercase tracking-[0.1em] text-deep-muted sm:col-span-4">
+                          {row.parameter}
+                        </dt>
+                        <dd className="text-base leading-relaxed text-white sm:col-span-8">
+                          {row.value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
-
-      <ClosingBand tone="dark" heading="Build with us." ctaLabel="Discuss an integration" />
     </>
   );
 }

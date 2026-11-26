@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SITE_URL, SOLUTION_AREAS } from "@/data/site-content";
 import { SpatialSchematic } from "@/components/SpatialSchematic";
-import { ClosingBand } from "@/components/ClosingBand";
 
 export const metadata: Metadata = {
   title: "Solutions",
@@ -132,14 +131,6 @@ export default function SolutionsPage() {
           </div>
         </div>
       </section>
-
-      {/* 04 · Closing Partnership */}
-      <ClosingBand
-        tone="light"
-        heading="Integrate with your platform."
-        subtitle="Work with our engineering team to evaluate Cortex for your aerial or robotic system."
-        ctaLabel="Discuss an integration"
-      />
     </>
   );
 }

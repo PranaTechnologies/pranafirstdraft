@@ -12,12 +12,18 @@ const GRID_Y_7X7 = [18, 38, 58, 78, 98, 118, 138];
  * transparent over Carbon (#101211), 7x7 Ash dot grid, off-white reference
  * geometry (1.2), and Signal (#C5F36B) active estimate (1.6, r=3.1).
  */
-export function CortexCapabilitySymbol({ kind }: { kind: CortexCapabilityKind }) {
+export function CortexCapabilitySymbol({
+  kind,
+  className = "h-24 w-28 shrink-0 sm:h-28 sm:w-32 lg:h-32 lg:w-36",
+}: {
+  kind: CortexCapabilityKind;
+  className?: string;
+}) {
   return (
     <svg
       aria-hidden="true"
       viewBox="0 0 180 160"
-      className="h-24 w-28 shrink-0 sm:h-28 sm:w-32 lg:h-32 lg:w-36"
+      className={className}
     >
       <g fill="#858B86" opacity="0.35">
         {GRID_7X7.map((gx) =>

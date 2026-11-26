@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { RESEARCH_TRACKS, SITE_URL } from "@/data/site-content";
-import { ClosingBand } from "@/components/ClosingBand";
 
 export const metadata: Metadata = {
   title: "Research",
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
 export default function ResearchPage() {
   return (
     <>
-      <section className="border-b border-border-grey bg-field pb-12 pt-24 md:pb-16 md:pt-28">
+      <section className="bg-field pb-12 pt-24 md:pb-16 md:pt-28">
         <div className="mx-auto max-w-editorial px-6 md:px-10">
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-green">
             RESEARCH &amp; ENGINEERING NOTES
@@ -62,8 +61,6 @@ export default function ResearchPage() {
           </div>
         </div>
       </section>
-
-      <ClosingBand tone="dark" heading="Build with us." ctaLabel="Discuss an integration" />
     </>
   );
 }
